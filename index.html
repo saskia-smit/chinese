@@ -117,11 +117,55 @@
     @media(hover:hover) and (pointer:fine){.sentence-review:hover{border-color:var(--purple)}}
     .sentence-review:active{border-color:var(--purple)}
     
+    /* Study Center Card */
+    .study-card{border-color:rgba(100,255,218,.15);background:linear-gradient(165deg,rgba(26,26,46,.9),rgba(10,15,20,.95))}
+    @media(hover:hover) and (pointer:fine){.study-card:hover{border-color:var(--ok);box-shadow:inset 0 1px 0 rgba(255,255,255,.1),inset 0 -4px 12px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.4),0 0 20px rgba(100,255,218,.2)}}
+    .study-card:active{border-color:var(--ok);box-shadow:inset 0 1px 0 rgba(255,255,255,.1),inset 0 -4px 12px rgba(0,0,0,.3),0 4px 16px rgba(0,0,0,.4),0 0 15px rgba(100,255,218,.2)}
+    .study-card .category-name{color:var(--ok)}
+    .study-card .study-icon{margin-right:.3rem}
+    
     .review-buttons{display:flex;gap:.5rem;margin-top:1rem}
     
     .clear-btn{background:transparent;border:1px solid rgba(255,217,61,.4);color:var(--warn);padding:.35rem .7rem;font-family:inherit;font-size:.55rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;border-radius:4px;transition:all .3s}
     .clear-btn:hover{background:var(--warn);color:var(--bg);box-shadow:0 0 20px rgba(255,217,61,.4)}
     
+    /* Study Center Session */
+    .study-session{display:none;flex-direction:column;flex:1;position:relative}
+    .study-session.active{display:flex}
+    
+    .study-header{text-align:center;margin-bottom:1rem}
+    .study-header h1{font-size:1.1rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ok);text-shadow:0 0 30px rgba(100,255,218,.4)}
+    .study-progress{font-size:.7rem;color:var(--muted);margin-top:.5rem}
+    .study-controls{display:flex;justify-content:center;gap:1rem;margin-top:.75rem}
+    .shuffle-btn{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);color:var(--muted);padding:.4rem .8rem;font-family:inherit;font-size:.6rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;border-radius:6px;transition:all .15s}
+    .shuffle-btn:active,.shuffle-btn.active{border-color:var(--ok);color:var(--ok)}
+    
+    .study-card-container{flex:1;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;touch-action:pan-y;margin:1rem 0}
+    
+    .study-flashcard{position:absolute;width:90%;max-width:400px;background:linear-gradient(165deg,rgba(26,26,46,.95),rgba(10,10,15,.98));border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:2rem 1.5rem;text-align:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 15px 50px rgba(0,0,0,.5);transition:transform .3s ease-out,opacity .3s ease-out;cursor:pointer}
+    .study-flashcard.current{transform:translateX(0);opacity:1;z-index:2}
+    .study-flashcard.prev{transform:translateX(-120%);opacity:0;z-index:1}
+    .study-flashcard.next{transform:translateX(120%);opacity:0;z-index:1}
+    .study-flashcard.swiping{transition:none}
+    
+    .study-flashcard .card-type{font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:.15em;margin-bottom:1.5rem}
+    .study-flashcard .card-type.example{color:var(--purple)}
+    
+    .study-flashcard .study-pinyin{font-size:2.2rem;font-weight:700;color:#fff;margin-bottom:.75rem;line-height:1.3}
+    .study-flashcard .study-chinese{font-family:'Noto Sans SC',sans-serif;font-size:1.4rem;color:var(--accent);margin-bottom:.75rem}
+    .study-flashcard .study-english{font-size:1rem;color:var(--muted);line-height:1.5}
+    .study-flashcard .study-pinyin .highlight{color:var(--ok);text-shadow:0 0 10px rgba(100,255,218,.3)}
+    .study-flashcard .study-chinese .highlight{color:var(--ok);text-shadow:0 0 10px rgba(100,255,218,.3)}
+    
+    .study-flashcard .tap-hint{font-size:.55rem;color:var(--muted);opacity:.5;margin-top:1.5rem;display:flex;align-items:center;justify-content:center;gap:.3rem}
+    
+    .study-nav{display:flex;justify-content:center;gap:1rem;padding:1rem 0}
+    .study-nav-btn{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);color:var(--light);width:50px;height:50px;border-radius:50%;font-size:1.2rem;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center}
+    .study-nav-btn:active{border-color:var(--ok);color:var(--ok);transform:scale(.95)}
+    .study-nav-btn:disabled{opacity:.3;cursor:default}
+    
+    .swipe-hint{text-align:center;font-size:.6rem;color:var(--muted);opacity:.6;margin-bottom:1rem}
+
     /* Quiz Session */
     .quiz-session{display:none;flex-direction:column;flex:1}
     .quiz-session.active{display:flex}
@@ -303,6 +347,35 @@
           </button>
         </div>
         <button type="button" class="modal-close" id="modal-close">Close</button>
+      </div>
+    </div>
+    
+    <!-- Study Center Session -->
+    <div class="study-session" id="study-session">
+      <button type="button" class="back-btn" id="study-back-btn">← Menu</button>
+      <div class="study-header">
+        <h1 id="study-title">Study Center</h1>
+        <div class="study-progress" id="study-progress">Card 1 of 50</div>
+        <div class="study-controls">
+          <button type="button" class="shuffle-btn" id="shuffle-btn">Shuffle</button>
+        </div>
+      </div>
+      
+      <div class="swipe-hint">← Swipe or use arrows →</div>
+      
+      <div class="study-card-container" id="study-card-container">
+        <div class="study-flashcard current" id="study-flashcard">
+          <div class="card-type" id="study-card-type">Word</div>
+          <div class="study-pinyin" id="study-pinyin">nǐ hǎo</div>
+          <div class="study-chinese" id="study-chinese">你好</div>
+          <div class="study-english" id="study-english">hello</div>
+          <div class="tap-hint">Tap card to replay audio</div>
+        </div>
+      </div>
+      
+      <div class="study-nav">
+        <button type="button" class="study-nav-btn" id="study-prev-btn">←</button>
+        <button type="button" class="study-nav-btn" id="study-next-btn">→</button>
       </div>
     </div>
     
@@ -1293,6 +1366,10 @@ function renderMenu() {
         </div>
       </div>
       <div class="category-grid" id="level-${level}-grid">
+        <div class="category-card study-card" data-level="${level}" data-study="true">
+          <div class="category-name">Study Center</div>
+          <div class="category-count">Learn words before quizzing</div>
+        </div>
         ${categories.map((cat, idx) => {
           const catProg = getCategoryProgress(level, cat);
           const isMastered = catProg.percent === 100;
@@ -1338,9 +1415,9 @@ function renderMenu() {
       toggleLevel(levelNum);
     });
     
-    // Add click listeners for category cards (vocab)
+    // Add click listeners for category cards (vocab) - exclude study card and sentence card
     const levelCategories = categories.slice(); // Copy array for this level
-    const categoryCards = levelSection.querySelectorAll('.category-card:not(.sentence-card)');
+    const categoryCards = levelSection.querySelectorAll('.category-card:not(.sentence-card):not(.study-card)');
     for (let i = 0; i < categoryCards.length; i++) {
       const card = categoryCards[i];
       const catName = levelCategories[i];
@@ -1349,6 +1426,13 @@ function renderMenu() {
         startCategory(levelNum, catName);
       });
     }
+    
+    // Add click listener for study center card
+    const studyCard = levelSection.querySelector('.study-card');
+    studyCard.addEventListener('click', function(e) {
+      e.stopPropagation();
+      startStudyCenter(levelNum);
+    });
     
     // Add click listener for sentence practice card
     const sentenceCard = levelSection.querySelector('.sentence-card');
@@ -1520,6 +1604,357 @@ function startReview() {
   
   currentWordIndex = 0;
   showQuizSession();
+}
+
+// ============ STUDY CENTER ============
+// Example sentences for Level 1 words
+const EXAMPLE_SENTENCES = {
+  // Common Adjectives
+  "大": {p: "Zhège píngguǒ hěn dà.", c: "这个苹果很大。", e: "This apple is very big."},
+  "小": {p: "Wǒ de fángjiān hěn xiǎo.", c: "我的房间很小。", e: "My room is very small."},
+  "好": {p: "Jīntiān tiānqì hěn hǎo.", c: "今天天气很好。", e: "The weather is very nice today."},
+  "多": {p: "Tā yǒu hěn duō péngyou.", c: "他有很多朋友。", e: "He has many friends."},
+  "少": {p: "Wǒ de qián hěn shǎo.", c: "我的钱很少。", e: "I have very little money."},
+  "高": {p: "Nà zuò shān hěn gāo.", c: "那座山很高。", e: "That mountain is very tall."},
+  "漂亮": {p: "Nǐ jīntiān hěn piàoliang.", c: "你今天很漂亮。", e: "You look beautiful today."},
+  "帅": {p: "Tā zhēn shuài!", c: "他真帅！", e: "He's really handsome!"},
+  "冷": {p: "Jīntiān hěn lěng.", c: "今天很冷。", e: "It's cold today."},
+  "热": {p: "Běijīng xiàtiān hěn rè.", c: "北京夏天很热。", e: "Beijing is very hot in summer."},
+  "新": {p: "Zhè shì wǒ de xīn shǒujī.", c: "这是我的新手机。", e: "This is my new phone."},
+  "快": {p: "Tā pǎo de hěn kuài.", c: "他跑得很快。", e: "He runs very fast."},
+  "慢": {p: "Qǐng shuō màn yìdiǎn.", c: "请说慢一点。", e: "Please speak more slowly."},
+  "贵": {p: "Zhège tài guì le!", c: "这个太贵了！", e: "This is too expensive!"},
+  "便宜": {p: "Zhège hěn piányi.", c: "这个很便宜。", e: "This is very cheap."},
+  "近": {p: "Xuéxiào lí wǒ jiā hěn jìn.", c: "学校离我家很近。", e: "The school is close to my home."},
+  "远": {p: "Jīchǎng lí zhèlǐ hěn yuǎn.", c: "机场离这里很远。", e: "The airport is far from here."},
+  "难": {p: "Zhōngwén hěn nán.", c: "中文很难。", e: "Chinese is difficult."},
+  "容易": {p: "Zhège wèntí hěn róngyì.", c: "这个问题很容易。", e: "This question is easy."},
+  "高兴": {p: "Wǒ hěn gāoxìng rènshi nǐ.", c: "我很高兴认识你。", e: "I'm happy to meet you."},
+  "好吃": {p: "Zhège cài hěn hǎochī.", c: "这个菜很好吃。", e: "This dish is delicious."},
+  // Common Verbs
+  "吃": {p: "Wǒ xiǎng chī miàntiáo.", c: "我想吃面条。", e: "I want to eat noodles."},
+  "喝": {p: "Nǐ xiǎng hē shénme?", c: "你想喝什么？", e: "What would you like to drink?"},
+  "去": {p: "Wǒ míngtiān qù Běijīng.", c: "我明天去北京。", e: "I'm going to Beijing tomorrow."},
+  "来": {p: "Nǐ shénme shíhou lái?", c: "你什么时候来？", e: "When will you come?"},
+  "看": {p: "Wǒmen yìqǐ kàn diànyǐng.", c: "我们一起看电影。", e: "Let's watch a movie together."},
+  "听": {p: "Wǒ xǐhuan tīng yīnyuè.", c: "我喜欢听音乐。", e: "I like listening to music."},
+  "想": {p: "Wǒ xiǎng nǐ le.", c: "我想你了。", e: "I miss you."},
+  "要": {p: "Wǒ yào yì bēi kāfēi.", c: "我要一杯咖啡。", e: "I want a cup of coffee."},
+  "喜欢": {p: "Wǒ xǐhuan Zhōngguó cài.", c: "我喜欢中国菜。", e: "I like Chinese food."},
+  "爱": {p: "Wǒ ài wǒ de jiārén.", c: "我爱我的家人。", e: "I love my family."},
+  "知道": {p: "Wǒ bù zhīdào.", c: "我不知道。", e: "I don't know."},
+  "觉得": {p: "Nǐ juéde zěnmeyàng?", c: "你觉得怎么样？", e: "What do you think?"},
+  "说": {p: "Nǐ huì shuō Zhōngwén ma?", c: "你会说中文吗？", e: "Can you speak Chinese?"},
+  "坐": {p: "Qǐng zuò.", c: "请坐。", e: "Please sit down."},
+  "站": {p: "Qǐng zhàn qǐlái.", c: "请站起来。", e: "Please stand up."},
+  "走": {p: "Wǒmen zǒu ba!", c: "我们走吧！", e: "Let's go!"},
+  "是": {p: "Wǒ shì xuéshēng.", c: "我是学生。", e: "I am a student."},
+  "有": {p: "Nǐ yǒu shíjiān ma?", c: "你有时间吗？", e: "Do you have time?"},
+  "没有": {p: "Wǒ méi yǒu qián.", c: "我没有钱。", e: "I don't have money."},
+  "在": {p: "Tā zài jiā.", c: "他在家。", e: "He's at home."},
+  "给": {p: "Qǐng gěi wǒ yì bēi shuǐ.", c: "请给我一杯水。", e: "Please give me a glass of water."},
+  "买": {p: "Wǒ yào mǎi yīfu.", c: "我要买衣服。", e: "I want to buy clothes."},
+  "卖": {p: "Zhèlǐ mài shénme?", c: "这里卖什么？", e: "What do they sell here?"},
+  "等": {p: "Qǐng děng yíxià.", c: "请等一下。", e: "Please wait a moment."},
+  "问": {p: "Wǒ kěyǐ wèn nǐ ma?", c: "我可以问你吗？", e: "Can I ask you?"},
+  "回": {p: "Wǒ yào huí jiā.", c: "我要回家。", e: "I need to go home."},
+  "开": {p: "Qǐng kāi mén.", c: "请开门。", e: "Please open the door."},
+  "关": {p: "Qǐng guān chuānghù.", c: "请关窗户。", e: "Please close the window."},
+  "睡觉": {p: "Wǒ yào shuì jiào le.", c: "我要睡觉了。", e: "I'm going to sleep now."},
+  "起床": {p: "Wǒ měitiān liù diǎn qǐ chuáng.", c: "我每天六点起床。", e: "I get up at 6 every day."},
+  "学习": {p: "Wǒ zài xuéxí Zhōngwén.", c: "我在学习中文。", e: "I'm studying Chinese."},
+  "工作": {p: "Tā zài yínháng gōngzuò.", c: "他在银行工作。", e: "He works at a bank."},
+  // Degree Adverbs
+  "很": {p: "Wǒ hěn hǎo.", c: "我很好。", e: "I'm very good."},
+  "也": {p: "Wǒ yě shì Měiguó rén.", c: "我也是美国人。", e: "I'm also American."},
+  "都": {p: "Wǒmen dōu xǐhuan chī.", c: "我们都喜欢吃。", e: "We all like to eat."},
+  "非常": {p: "Fēicháng gǎnxiè!", c: "非常感谢！", e: "Thank you very much!"},
+  "太...了": {p: "Tài hǎo le!", c: "太好了！", e: "That's great!"},
+  "有点": {p: "Wǒ yǒu diǎn lèi.", c: "我有点累。", e: "I'm a little tired."},
+  "不太": {p: "Wǒ bù tài máng.", c: "我不太忙。", e: "I'm not very busy."},
+  "真": {p: "Nǐ zhēn cōngming!", c: "你真聪明！", e: "You're really smart!"},
+  "最": {p: "Zhè shì zuì hǎo de.", c: "这是最好的。", e: "This is the best."},
+  "还": {p: "Tā hái zài shuì jiào.", c: "他还在睡觉。", e: "He's still sleeping."},
+  "更": {p: "Zhège gèng piányi.", c: "这个更便宜。", e: "This one is cheaper."},
+  // Numbers & Time
+  "一": {p: "Wǒ yǒu yí gè wèntí.", c: "我有一个问题。", e: "I have a question."},
+  "二": {p: "Wǒ yào liǎng gè.", c: "我要两个。", e: "I want two."},
+  "三": {p: "Sān gè rén.", c: "三个人。", e: "Three people."},
+  "十": {p: "Shí kuài qián.", c: "十块钱。", e: "Ten yuan."},
+  "百": {p: "Yì bǎi gè xuéshēng.", c: "一百个学生。", e: "One hundred students."},
+  "今天": {p: "Jīntiān xīngqī jǐ?", c: "今天星期几？", e: "What day is today?"},
+  "明天": {p: "Míngtiān jiàn!", c: "明天见！", e: "See you tomorrow!"},
+  "昨天": {p: "Zuótiān wǒ hěn máng.", c: "昨天我很忙。", e: "I was busy yesterday."},
+  "现在": {p: "Xiànzài jǐ diǎn?", c: "现在几点？", e: "What time is it now?"},
+  "点": {p: "Xiànzài sān diǎn.", c: "现在三点。", e: "It's 3 o'clock now."},
+  "分": {p: "Hái yǒu wǔ fēn zhōng.", c: "还有五分钟。", e: "Five more minutes."},
+  // Basic Pronouns & Particles
+  "我": {p: "Wǒ jiào Xiǎomíng.", c: "我叫小明。", e: "My name is Xiaoming."},
+  "你": {p: "Nǐ hǎo!", c: "你好！", e: "Hello!"},
+  "他": {p: "Tā shì wǒ péngyou.", c: "他是我朋友。", e: "He is my friend."},
+  "她": {p: "Tā hěn piàoliang.", c: "她很漂亮。", e: "She is beautiful."},
+  "我们": {p: "Wǒmen shì tóngxué.", c: "我们是同学。", e: "We are classmates."},
+  "这": {p: "Zhè shì shénme?", c: "这是什么？", e: "What is this?"},
+  "那": {p: "Nà shì wǒ de.", c: "那是我的。", e: "That is mine."},
+  "的": {p: "Zhè shì wǒ de shū.", c: "这是我的书。", e: "This is my book."},
+  "吗": {p: "Nǐ shì Zhōngguó rén ma?", c: "你是中国人吗？", e: "Are you Chinese?"},
+  "什么": {p: "Nǐ zài zuò shénme?", c: "你在做什么？", e: "What are you doing?"},
+  "哪里": {p: "Nǐ zhù zài nǎlǐ?", c: "你住在哪里？", e: "Where do you live?"},
+  "谁": {p: "Tā shì shéi?", c: "他是谁？", e: "Who is he?"}
+};
+
+let studySession = null;
+let studyCardIndex = 0;
+let studyCards = [];
+let touchStartX = 0;
+let touchEndX = 0;
+
+function getStudyProgress(level) {
+  const key = `studyProgress_${level}`;
+  return parseInt(localStorage.getItem(key)) || 0;
+}
+
+function saveStudyProgress(level, index) {
+  const key = `studyProgress_${level}`;
+  localStorage.setItem(key, index);
+}
+
+function buildStudyCards(level) {
+  // Use structured order for Level 1, otherwise use default order
+  const words = level === 1 ? getStructuredLevel1Words() : getAllWordsInLevel(level);
+  const cards = [];
+  
+  words.forEach(word => {
+    // Add word card
+    cards.push({
+      type: 'word',
+      pinyin: word.p,
+      chinese: word.c,
+      english: word.e
+    });
+    
+    // Add example sentence(s) if available
+    const examples = EXAMPLE_SENTENCES[word.c];
+    if (examples) {
+      // Handle both single example and array of examples
+      const exampleList = Array.isArray(examples) ? examples : [examples];
+      exampleList.forEach(example => {
+        cards.push({
+          type: 'example',
+          pinyin: example.p,
+          chinese: example.c,
+          english: example.e,
+          highlightPinyin: word.p,
+          highlightChinese: word.c
+        });
+      });
+    }
+  });
+  
+  return cards;
+}
+
+// Structured order for Level 1 - words build upon each other
+function getStructuredLevel1Words() {
+  const structuredOrder = [
+    // Start with basic greetings
+    "你", "好", "我", "是",
+    // Basic questions
+    "吗", "什么", "谁", "哪里",
+    // Family of pronouns
+    "他", "她", "我们", "这", "那",
+    // Essential particles
+    "的", "很", "也", "都",
+    // Basic verbs - existence/location
+    "有", "没有", "在",
+    // Basic verbs - actions
+    "去", "来", "看", "听", "说",
+    // Basic verbs - desires
+    "想", "要", "喜欢", "爱",
+    // Basic verbs - knowledge
+    "知道", "觉得",
+    // Basic verbs - physical
+    "吃", "喝", "坐", "站", "走",
+    // Basic verbs - daily life
+    "给", "买", "卖", "等", "问", "回",
+    // Basic verbs - doors/windows
+    "开", "关",
+    // Daily routines
+    "睡觉", "起床", "学习", "工作",
+    // Adjectives - size
+    "大", "小", "多", "少", "高",
+    // Adjectives - appearance
+    "漂亮", "帅",
+    // Adjectives - temperature
+    "冷", "热",
+    // Adjectives - quality
+    "新", "快", "慢", "贵", "便宜",
+    // Adjectives - distance/difficulty
+    "近", "远", "难", "容易",
+    // Adjectives - emotions/taste
+    "高兴", "好吃",
+    // Degree adverbs
+    "非常", "太...了", "有点", "不太", "真", "最", "还", "更",
+    // Numbers
+    "一", "二", "三", "四", "五", "六", "七", "八", "九", "十",
+    "百", "千", "两", "零", "几",
+    // Time words
+    "今天", "明天", "昨天", "现在", "点", "分", "半",
+    "早上", "上午", "中午", "下午", "晚上",
+    "星期", "月", "年", "号"
+  ];
+  
+  const allWords = getAllWordsInLevel(1);
+  const orderedWords = [];
+  const usedIds = new Set();
+  
+  // First add words in structured order
+  structuredOrder.forEach(chinese => {
+    const word = allWords.find(w => w.c === chinese);
+    if (word && !usedIds.has(getWordId(word))) {
+      orderedWords.push(word);
+      usedIds.add(getWordId(word));
+    }
+  });
+  
+  // Then add any remaining words not in the structured order
+  allWords.forEach(word => {
+    if (!usedIds.has(getWordId(word))) {
+      orderedWords.push(word);
+      usedIds.add(getWordId(word));
+    }
+  });
+  
+  return orderedWords;
+}
+
+function startStudyCenter(level) {
+  studySession = { level };
+  studyCards = buildStudyCards(level);
+  studyCardIndex = getStudyProgress(level);
+  
+  // Make sure index is valid
+  if (studyCardIndex >= studyCards.length) {
+    studyCardIndex = 0;
+  }
+  
+  // Show study session
+  $('main-menu').classList.add('hidden');
+  $('study-session').classList.add('active');
+  $('study-title').textContent = `Level ${level} Study Center`;
+  
+  renderStudyCard();
+  setupSwipeGestures();
+}
+
+function renderStudyCard() {
+  const card = studyCards[studyCardIndex];
+  if (!card) return;
+  
+  const isExample = card.type === 'example';
+  
+  $('study-card-type').textContent = isExample ? 'Example Sentence' : 'Word';
+  $('study-card-type').className = 'card-type' + (isExample ? ' example' : '');
+  
+  // For example sentences, highlight the word being studied
+  if (isExample && card.highlightChinese) {
+    const highlightedPinyin = highlightWord(card.pinyin, card.highlightPinyin);
+    const highlightedChinese = highlightWord(card.chinese, card.highlightChinese);
+    $('study-pinyin').innerHTML = highlightedPinyin;
+    $('study-chinese').innerHTML = highlightedChinese;
+  } else {
+    $('study-pinyin').textContent = card.pinyin;
+    $('study-chinese').textContent = card.chinese;
+  }
+  
+  $('study-english').textContent = card.english;
+  $('study-progress').textContent = `Card ${studyCardIndex + 1} of ${studyCards.length}`;
+  
+  // Update nav buttons
+  $('study-prev-btn').disabled = studyCardIndex === 0;
+  $('study-next-btn').disabled = studyCardIndex === studyCards.length - 1;
+  
+  // Auto-play audio
+  setTimeout(() => speak(card.chinese), 300);
+  
+  // Save progress
+  saveStudyProgress(studySession.level, studyCardIndex);
+}
+
+// Highlight a word within a sentence
+function highlightWord(sentence, word) {
+  if (!word || !sentence.includes(word)) return sentence;
+  return sentence.replace(word, `<span class="highlight">${word}</span>`);
+}
+
+function nextStudyCard() {
+  if (studyCardIndex < studyCards.length - 1) {
+    animateCardTransition('next');
+    studyCardIndex++;
+    setTimeout(renderStudyCard, 150);
+  }
+}
+
+function prevStudyCard() {
+  if (studyCardIndex > 0) {
+    animateCardTransition('prev');
+    studyCardIndex--;
+    setTimeout(renderStudyCard, 150);
+  }
+}
+
+function animateCardTransition(direction) {
+  const card = $('study-flashcard');
+  card.classList.add(direction === 'next' ? 'prev' : 'next');
+  setTimeout(() => {
+    card.classList.remove('prev', 'next');
+    card.classList.add('current');
+  }, 150);
+}
+
+function shuffleStudyCards() {
+  studyCards = shuffle(studyCards);
+  studyCardIndex = 0;
+  renderStudyCard();
+  
+  // Visual feedback
+  const btn = $('shuffle-btn');
+  btn.classList.add('active');
+  setTimeout(() => btn.classList.remove('active'), 300);
+}
+
+function setupSwipeGestures() {
+  const container = $('study-card-container');
+  
+  container.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+  
+  container.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  }, { passive: true });
+}
+
+function handleSwipe() {
+  const threshold = 50;
+  const diff = touchStartX - touchEndX;
+  
+  if (Math.abs(diff) > threshold) {
+    if (diff > 0) {
+      // Swipe left - next card
+      nextStudyCard();
+    } else {
+      // Swipe right - previous card
+      prevStudyCard();
+    }
+  }
+}
+
+function exitStudyCenter() {
+  $('study-session').classList.remove('active');
+  $('main-menu').classList.remove('hidden');
+  renderMenu();
 }
 
 function startSentencePractice(level) {
@@ -1997,6 +2432,17 @@ $('audio-btn').onclick = () => {
 };
 $('study-review-btn').onclick = () => {
   startReview();
+};
+
+// Study Center controls
+$('study-back-btn').onclick = exitStudyCenter;
+$('study-prev-btn').onclick = prevStudyCard;
+$('study-next-btn').onclick = nextStudyCard;
+$('shuffle-btn').onclick = shuffleStudyCards;
+$('study-flashcard').onclick = () => {
+  if (studyCards[studyCardIndex]) {
+    speak(studyCards[studyCardIndex].chinese);
+  }
 };
 
 // Settings modal
