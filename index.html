@@ -136,17 +136,22 @@
     .study-header{text-align:center;margin-bottom:1rem}
     .study-header h1{font-size:1.1rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ok);text-shadow:0 0 30px rgba(100,255,218,.4)}
     .study-progress{font-size:.7rem;color:var(--muted);margin-top:.5rem}
-    .study-controls{display:flex;justify-content:center;gap:1rem;margin-top:.75rem}
-    .shuffle-btn{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);color:var(--muted);padding:.4rem .8rem;font-family:inherit;font-size:.6rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;border-radius:6px;transition:all .15s}
-    .shuffle-btn:active,.shuffle-btn.active{border-color:var(--ok);color:var(--ok)}
+    .study-controls{display:flex;justify-content:center;gap:.75rem;margin-top:.75rem}
+    .shuffle-btn,.organize-btn{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);color:var(--muted);padding:.4rem .8rem;font-family:inherit;font-size:.6rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;border-radius:6px;transition:all .15s}
+    .shuffle-btn:active,.shuffle-btn.active{border-color:var(--warn);color:var(--warn)}
+    .organize-btn:active,.organize-btn.active{border-color:var(--ok);color:var(--ok)}
+    .organize-btn{display:none}
+    .organize-btn.show{display:block}
     
-    .study-card-container{flex:1;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;touch-action:pan-y;margin:1rem 0}
+    .study-card-container{flex:1;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;touch-action:none;margin:1rem 0}
     
-    .study-flashcard{position:absolute;width:90%;max-width:400px;background:linear-gradient(165deg,rgba(26,26,46,.95),rgba(10,10,15,.98));border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:2rem 1.5rem;text-align:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 15px 50px rgba(0,0,0,.5);transition:transform .3s ease-out,opacity .3s ease-out;cursor:pointer}
-    .study-flashcard.current{transform:translateX(0);opacity:1;z-index:2}
-    .study-flashcard.prev{transform:translateX(-120%);opacity:0;z-index:1}
-    .study-flashcard.next{transform:translateX(120%);opacity:0;z-index:1}
-    .study-flashcard.swiping{transition:none}
+    .study-flashcard{position:absolute;width:90%;max-width:400px;background:linear-gradient(165deg,rgba(26,26,46,.95),rgba(10,10,15,.98));border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:2rem 1.5rem;text-align:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 15px 50px rgba(0,0,0,.5);cursor:pointer;will-change:transform,opacity}
+    .study-flashcard.animating{transition:transform .35s cubic-bezier(.4,.0,.2,1),opacity .35s cubic-bezier(.4,.0,.2,1)}
+    .study-flashcard.current{transform:translateX(0) scale(1);opacity:1;z-index:2}
+    .study-flashcard.exit-left{transform:translateX(-120%) scale(.85);opacity:0;z-index:1}
+    .study-flashcard.exit-right{transform:translateX(120%) scale(.85);opacity:0;z-index:1}
+    .study-flashcard.enter-left{transform:translateX(-120%) scale(.85);opacity:0;z-index:1}
+    .study-flashcard.enter-right{transform:translateX(120%) scale(.85);opacity:0;z-index:1}
     
     .study-flashcard .card-type{font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:.15em;margin-bottom:1.5rem}
     .study-flashcard .card-type.example{color:var(--purple)}
@@ -358,6 +363,7 @@
         <div class="study-progress" id="study-progress">Card 1 of 50</div>
         <div class="study-controls">
           <button type="button" class="shuffle-btn" id="shuffle-btn">Shuffle</button>
+          <button type="button" class="organize-btn" id="organize-btn">Organize</button>
         </div>
       </div>
       
@@ -1706,8 +1712,6 @@ const EXAMPLE_SENTENCES = {
 let studySession = null;
 let studyCardIndex = 0;
 let studyCards = [];
-let touchStartX = 0;
-let touchEndX = 0;
 
 function getStudyProgress(level) {
   const key = `studyProgress_${level}`;
@@ -1838,6 +1842,10 @@ function startStudyCenter(level) {
     studyCardIndex = 0;
   }
   
+  // Reset shuffle state
+  isShuffled = false;
+  $('organize-btn').classList.remove('show');
+  
   // Show study session
   $('main-menu').classList.add('hidden');
   $('study-session').classList.add('active');
@@ -1874,6 +1882,11 @@ function renderStudyCard() {
   $('study-prev-btn').disabled = studyCardIndex === 0;
   $('study-next-btn').disabled = studyCardIndex === studyCards.length - 1;
   
+  // Reset card position
+  const flashcard = $('study-flashcard');
+  flashcard.classList.remove('exit-left', 'exit-right', 'enter-left', 'enter-right', 'animating');
+  flashcard.classList.add('current');
+  
   // Auto-play audio
   setTimeout(() => speak(card.chinese), 300);
   
@@ -1888,33 +1901,109 @@ function highlightWord(sentence, word) {
 }
 
 function nextStudyCard() {
-  if (studyCardIndex < studyCards.length - 1) {
+  if (studyCardIndex < studyCards.length - 1 && !isAnimating) {
     animateCardTransition('next');
-    studyCardIndex++;
-    setTimeout(renderStudyCard, 150);
   }
 }
 
 function prevStudyCard() {
-  if (studyCardIndex > 0) {
+  if (studyCardIndex > 0 && !isAnimating) {
     animateCardTransition('prev');
-    studyCardIndex--;
-    setTimeout(renderStudyCard, 150);
   }
 }
 
+let isAnimating = false;
+
 function animateCardTransition(direction) {
+  if (isAnimating) return;
+  isAnimating = true;
+  
   const card = $('study-flashcard');
-  card.classList.add(direction === 'next' ? 'prev' : 'next');
+  card.classList.add('animating');
+  
+  // Exit current card in opposite direction of swipe
+  if (direction === 'next') {
+    card.classList.remove('current');
+    card.classList.add('exit-left');
+    studyCardIndex++;
+  } else {
+    card.classList.remove('current');
+    card.classList.add('exit-right');
+    studyCardIndex--;
+  }
+  
+  // After exit animation, update content and enter from other side
   setTimeout(() => {
-    card.classList.remove('prev', 'next');
-    card.classList.add('current');
-  }, 150);
+    renderStudyCardContent();
+    
+    // Position for entry
+    card.classList.remove('exit-left', 'exit-right', 'animating');
+    if (direction === 'next') {
+      card.classList.add('enter-right');
+    } else {
+      card.classList.add('enter-left');
+    }
+    
+    // Force reflow
+    card.offsetHeight;
+    
+    // Animate to center
+    card.classList.add('animating');
+    requestAnimationFrame(() => {
+      card.classList.remove('enter-left', 'enter-right');
+      card.classList.add('current');
+    });
+    
+    // Auto-play audio after animation
+    setTimeout(() => {
+      const currentCard = studyCards[studyCardIndex];
+      if (currentCard) speak(currentCard.chinese);
+      isAnimating = false;
+    }, 350);
+  }, 350);
 }
+
+// Separate content render from full render (for animations)
+function renderStudyCardContent() {
+  const card = studyCards[studyCardIndex];
+  if (!card) return;
+  
+  const isExample = card.type === 'example';
+  
+  $('study-card-type').textContent = isExample ? 'Example Sentence' : 'Word';
+  $('study-card-type').className = 'card-type' + (isExample ? ' example' : '');
+  
+  if (isExample && card.highlightChinese) {
+    const highlightedPinyin = highlightWord(card.pinyin, card.highlightPinyin);
+    const highlightedChinese = highlightWord(card.chinese, card.highlightChinese);
+    $('study-pinyin').innerHTML = highlightedPinyin;
+    $('study-chinese').innerHTML = highlightedChinese;
+  } else {
+    $('study-pinyin').textContent = card.pinyin;
+    $('study-chinese').textContent = card.chinese;
+  }
+  
+  $('study-english').textContent = card.english;
+  $('study-progress').textContent = `Card ${studyCardIndex + 1} of ${studyCards.length}`;
+  
+  // Update nav buttons
+  $('study-prev-btn').disabled = studyCardIndex === 0;
+  $('study-next-btn').disabled = studyCardIndex === studyCards.length - 1;
+  
+  // Save progress
+  saveStudyProgress(studySession.level, studyCardIndex);
+}
+
+let isShuffled = false;
 
 function shuffleStudyCards() {
   studyCards = shuffle(studyCards);
   studyCardIndex = 0;
+  isShuffled = true;
+  
+  // Show organize button
+  $('organize-btn').classList.add('show');
+  
   renderStudyCard();
   
   // Visual feedback
@@ -1923,32 +2012,129 @@ function shuffleStudyCards() {
   setTimeout(() => btn.classList.remove('active'), 300);
 }
 
-function setupSwipeGestures() {
-  const container = $('study-card-container');
+function organizeStudyCards() {
+  studyCards = buildStudyCards(studySession.level);
+  studyCardIndex = 0;
+  isShuffled = false;
   
-  container.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-  }, { passive: true });
+  // Hide organize button
+  $('organize-btn').classList.remove('show');
   
-  container.addEventListener('touchend', (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
-  }, { passive: true });
+  renderStudyCard();
+  
+  // Visual feedback
+  const btn = $('organize-btn');
+  btn.classList.add('active');
+  setTimeout(() => btn.classList.remove('active'), 300);
 }
 
-function handleSwipe() {
-  const threshold = 50;
-  const diff = touchStartX - touchEndX;
+// Touch tracking variables
+let touchStartX = 0;
+let touchStartY = 0;
+let touchCurrentX = 0;
+let isSwiping = false;
+let containerWidth = 0;
+
+function setupSwipeGestures() {
+  const container = $('study-card-container');
+  const card = $('study-flashcard');
   
-  if (Math.abs(diff) > threshold) {
-    if (diff > 0) {
-      // Swipe left - next card
-      nextStudyCard();
-    } else {
-      // Swipe right - previous card
-      prevStudyCard();
+  container.addEventListener('touchstart', (e) => {
+    if (isAnimating) return;
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+    touchCurrentX = touchStartX;
+    containerWidth = container.offsetWidth;
+    isSwiping = false;
+  }, { passive: true });
+  
+  container.addEventListener('touchmove', (e) => {
+    if (isAnimating) return;
+    
+    const currentX = e.touches[0].clientX;
+    const currentY = e.touches[0].clientY;
+    const diffX = currentX - touchStartX;
+    const diffY = currentY - touchStartY;
+    
+    // Determine if horizontal swipe (only on first significant movement)
+    if (!isSwiping && (Math.abs(diffX) > 10 || Math.abs(diffY) > 10)) {
+      isSwiping = Math.abs(diffX) > Math.abs(diffY);
+      if (!isSwiping) return;
     }
-  }
+    
+    if (!isSwiping) return;
+    
+    // Prevent vertical scroll while swiping horizontally
+    e.preventDefault();
+    
+    touchCurrentX = currentX;
+    
+    // Calculate scale based on distance (min 0.85 at edges)
+    const maxDist = containerWidth * 0.4;
+    const dist = Math.min(Math.abs(diffX), maxDist);
+    const scale = 1 - (dist / maxDist) * 0.15;
+    
+    // Calculate opacity
+    const opacity = 1 - (dist / maxDist) * 0.3;
+    
+    // Apply transform - follow finger with scale
+    card.style.transition = 'none';
+    card.style.transform = `translateX(${diffX}px) scale(${scale})`;
+    card.style.opacity = opacity;
+  }, { passive: false });
+  
+  container.addEventListener('touchend', (e) => {
+    if (isAnimating || !isSwiping) {
+      // Reset if wasn't swiping
+      card.style.transition = '';
+      card.style.transform = '';
+      card.style.opacity = '';
+      return;
+    }
+    
+    const diffX = touchCurrentX - touchStartX;
+    const threshold = containerWidth * 0.2;
+    
+    // Reset inline styles
+    card.style.transition = '';
+    card.style.transform = '';
+    card.style.opacity = '';
+    
+    if (Math.abs(diffX) > threshold) {
+      if (diffX < 0 && studyCardIndex < studyCards.length - 1) {
+        // Swipe left - next card
+        animateCardTransition('next');
+      } else if (diffX > 0 && studyCardIndex > 0) {
+        // Swipe right - previous card
+        animateCardTransition('prev');
+      } else {
+        // Bounce back - at end of deck
+        bounceBack();
+      }
+    } else {
+      // Not enough swipe distance - bounce back
+      bounceBack();
+    }
+    
+    isSwiping = false;
+  }, { passive: true });
+  
+  // Handle tap to replay audio
+  card.addEventListener('click', () => {
+    if (!isAnimating && !isSwiping) {
+      const currentCard = studyCards[studyCardIndex];
+      if (currentCard) speak(currentCard.chinese);
+    }
+  });
+}
+
+function bounceBack() {
+  const card = $('study-flashcard');
+  card.classList.add('animating');
+  card.classList.add('current');
+  setTimeout(() => {
+    card.classList.remove('animating');
+  }, 350);
 }
 
 function exitStudyCenter() {
@@ -2439,11 +2625,7 @@ $('study-back-btn').onclick = exitStudyCenter;
 $('study-prev-btn').onclick = prevStudyCard;
 $('study-next-btn').onclick = nextStudyCard;
 $('shuffle-btn').onclick = shuffleStudyCards;
-$('study-flashcard').onclick = () => {
-  if (studyCards[studyCardIndex]) {
-    speak(studyCards[studyCardIndex].chinese);
-  }
-};
+$('organize-btn').onclick = organizeStudyCards;
 
 // Settings modal
 $('settings-btn').onclick = openSettings;
