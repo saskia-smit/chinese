@@ -1706,7 +1706,102 @@ const EXAMPLE_SENTENCES = {
   "吗": {p: "Nǐ shì Zhōngguó rén ma?", c: "你是中国人吗？", e: "Are you Chinese?"},
   "什么": {p: "Nǐ zài zuò shénme?", c: "你在做什么？", e: "What are you doing?"},
   "哪里": {p: "Nǐ zhù zài nǎlǐ?", c: "你住在哪里？", e: "Where do you live?"},
-  "谁": {p: "Tā shì shéi?", c: "他是谁？", e: "Who is he?"}
+  "谁": {p: "Tā shì shéi?", c: "他是谁？", e: "Who is he?"},
+  // Additional Level 1 examples - Adjectives
+  "忙": {p: "Zuìjìn gōngzuò tài máng le.", c: "最近工作太忙了。", e: "Work has been so busy lately."},
+  "累": {p: "Jīntiān shàngbān lèi sǐ le.", c: "今天上班累死了。", e: "I'm exhausted from work today."},
+  "饿": {p: "Wǒ è le, wǒmen qù chīfàn ba.", c: "我饿了，我们去吃饭吧。", e: "I'm hungry, let's go eat."},
+  "渴": {p: "Wǒ kě le, yǒu shuǐ ma?", c: "我渴了，有水吗？", e: "I'm thirsty, is there water?"},
+  "困": {p: "Wǒ hǎo kùn, xiǎng shuì jiào.", c: "我好困，想睡觉。", e: "I'm so sleepy, I want to sleep."},
+  "懒": {p: "Jīntiān tài lǎn le, bù xiǎng chūmén.", c: "今天太懒了，不想出门。", e: "I'm too lazy today, don't want to go out."},
+  "早": {p: "Nǐ lái de hěn zǎo!", c: "你来得很早！", e: "You came very early!"},
+  "晚": {p: "Bù hǎo yìsi, wǒ lái wǎn le.", c: "不好意思，我来晚了。", e: "Sorry, I'm late."},
+  // Adverbs
+  "就": {p: "Wǒ mǎshàng jiù lái.", c: "我马上就来。", e: "I'll be right there."},
+  "才": {p: "Tā gāngcái cái zǒu.", c: "他刚才才走。", e: "He just left a moment ago."},
+  // Verbs
+  "答": {p: "Nǐ néng dá wǒ de wèntí ma?", c: "你能答我的问题吗？", e: "Can you answer my question?"},
+  "回答": {p: "Qǐng huídá zhège wèntí.", c: "请回答这个问题。", e: "Please answer this question."},
+  "打电话": {p: "Wǒ dǎ diànhuà gěi nǐ.", c: "我打电话给你。", e: "I'll call you."},
+  "学": {p: "Wǒ zài xué kāi chē.", c: "我在学开车。", e: "I'm learning to drive."},
+  "休息": {p: "Nǐ yīnggāi xiūxi yíxià.", c: "你应该休息一下。", e: "You should take a break."},
+  "玩": {p: "Zhōumò wǒmen qù wán ba!", c: "周末我们去玩吧！", e: "Let's go have fun this weekend!"},
+  // Question words
+  "哪": {p: "Nǐ shì nǎ guó rén?", c: "你是哪国人？", e: "Which country are you from?"},
+  "呢": {p: "Wǒ hěn hǎo, nǐ ne?", c: "我很好，你呢？", e: "I'm good, and you?"},
+  "为什么": {p: "Wèishénme nǐ bù lái?", c: "为什么你不来？", e: "Why aren't you coming?"},
+  "怎么": {p: "Qù chēzhàn zěnme zǒu?", c: "去车站怎么走？", e: "How do I get to the station?"},
+  "多少": {p: "Zhège duōshao qián?", c: "这个多少钱？", e: "How much is this?"},
+  "几": {p: "Nǐ jiā yǒu jǐ kǒu rén?", c: "你家有几口人？", e: "How many people are in your family?"},
+  // Family
+  "爸爸": {p: "Wǒ bàba shì lǎoshī.", c: "我爸爸是老师。", e: "My dad is a teacher."},
+  "妈妈": {p: "Māma zuò de fàn zuì hǎochī.", c: "妈妈做的饭最好吃。", e: "Mom's cooking is the best."},
+  "哥哥": {p: "Wǒ gēge bǐ wǒ dà sān suì.", c: "我哥哥比我大三岁。", e: "My older brother is 3 years older than me."},
+  "姐姐": {p: "Jiějie zài Běijīng gōngzuò.", c: "姐姐在北京工作。", e: "My older sister works in Beijing."},
+  "弟弟": {p: "Dìdi hái zài shàng dàxué.", c: "弟弟还在上大学。", e: "My younger brother is still in college."},
+  "妹妹": {p: "Mèimei jīnnián shíbā suì.", c: "妹妹今年十八岁。", e: "My younger sister is 18 this year."},
+  "孩子": {p: "Nǐ yǒu háizi ma?", c: "你有孩子吗？", e: "Do you have kids?"},
+  "儿子": {p: "Wǒ érzi shàng xiǎoxué le.", c: "我儿子上小学了。", e: "My son started elementary school."},
+  "女儿": {p: "Nǚ'ér zhǎng de xiàng māma.", c: "女儿长得像妈妈。", e: "My daughter looks like her mom."},
+  "丈夫": {p: "Wǒ zhàngfu zài chúfáng zuòfàn.", c: "我丈夫在厨房做饭。", e: "My husband is cooking in the kitchen."},
+  "妻子": {p: "Tā qīzi shì yīshēng.", c: "他妻子是医生。", e: "His wife is a doctor."},
+  "朋友": {p: "Zhè shì wǒ zuì hǎo de péngyou.", c: "这是我最好的朋友。", e: "This is my best friend."},
+  "同学": {p: "Wǒmen shì dàxué tóngxué.", c: "我们是大学同学。", e: "We were college classmates."},
+  "老师": {p: "Lǎoshī, wǒ yǒu wèntí.", c: "老师，我有问题。", e: "Teacher, I have a question."},
+  "医生": {p: "Yīshēng shuō wǒ yào duō xiūxi.", c: "医生说我要多休息。", e: "The doctor said I need more rest."},
+  "学生": {p: "Wǒ shì Zhōngwén xuésheng.", c: "我是中文学生。", e: "I'm a Chinese student."},
+  "先生": {p: "Zhāng xiānsheng, nín hǎo!", c: "张先生，您好！", e: "Hello, Mr. Zhang!"},
+  "小姐": {p: "Xiǎojiě, qǐng děng yíxià.", c: "小姐，请等一下。", e: "Miss, please wait a moment."},
+  // Pronouns
+  "它": {p: "Tā shì wǒ de māo.", c: "它是我的猫。", e: "It's my cat."},
+  "你们": {p: "Nǐmen xiǎng chī shénme?", c: "你们想吃什么？", e: "What do you guys want to eat?"},
+  "他们": {p: "Tāmen dōu shì wǒ péngyou.", c: "他们都是我朋友。", e: "They are all my friends."},
+  // Particles
+  "呀": {p: "Kuài lái ya!", c: "快来呀！", e: "Come quickly!"},
+  "吧": {p: "Wǒmen zǒu ba.", c: "我们走吧。", e: "Let's go."},
+  "和": {p: "Wǒ hé tā shì hǎo péngyou.", c: "我和他是好朋友。", e: "He and I are good friends."},
+  "但是": {p: "Wǒ xiǎng qù, dànshì méi shíjiān.", c: "我想去，但是没时间。", e: "I want to go, but I don't have time."},
+  "虽然": {p: "Suīrán guì, dànshì zhídé.", c: "虽然贵，但是值得。", e: "Although expensive, it's worth it."},
+  // Numbers
+  "四": {p: "Sì gè rén yìqǐ chīfàn.", c: "四个人一起吃饭。", e: "Four people eating together."},
+  "五": {p: "Wǒ děng le wǔ fēnzhōng.", c: "我等了五分钟。", e: "I waited five minutes."},
+  "六": {p: "Tā liù diǎn xià bān.", c: "他六点下班。", e: "He gets off work at 6."},
+  "七": {p: "Yì zhōu yǒu qī tiān.", c: "一周有七天。", e: "There are 7 days in a week."},
+  "八": {p: "Bā yuè tiānqì hěn rè.", c: "八月天气很热。", e: "August weather is very hot."},
+  "九": {p: "Jiǔ diǎn shàngkè.", c: "九点上课。", e: "Class starts at 9."},
+  "千": {p: "Zhège bāo yì qiān kuài.", c: "这个包一千块。", e: "This bag is 1000 yuan."},
+  "两": {p: "Wǒ yào liǎng bēi kāfēi.", c: "我要两杯咖啡。", e: "I want two cups of coffee."},
+  "零": {p: "Xiànzài shì shí diǎn líng wǔ fēn.", c: "现在是十点零五分。", e: "It's 10:05 now."},
+  "第": {p: "Zhè shì wǒ dì yī cì lái.", c: "这是我第一次来。", e: "This is my first time here."},
+  // Time
+  "半": {p: "Xiànzài sān diǎn bàn.", c: "现在三点半。", e: "It's 3:30 now."},
+  "早上": {p: "Wǒ zǎoshang hē kāfēi.", c: "我早上喝咖啡。", e: "I drink coffee in the morning."},
+  "上午": {p: "Shàngwǔ wǒ yào kāi huì.", c: "上午我要开会。", e: "I have a meeting this morning."},
+  "中午": {p: "Zhōngwǔ yìqǐ chī wǔfàn ba.", c: "中午一起吃午饭吧。", e: "Let's have lunch together at noon."},
+  "下午": {p: "Xiàwǔ sān diǎn jiàn.", c: "下午三点见。", e: "See you at 3 PM."},
+  "晚上": {p: "Wǎnshang nǐ yǒu kòng ma?", c: "晚上你有空吗？", e: "Are you free tonight?"},
+  "星期": {p: "Jīntiān xīngqī jǐ?", c: "今天星期几？", e: "What day is it today?"},
+  "月": {p: "Wǒ shì sān yuè chūshēng de.", c: "我是三月出生的。", e: "I was born in March."},
+  "年": {p: "Xīnnián kuàilè!", c: "新年快乐！", e: "Happy New Year!"},
+  "号": {p: "Jīntiān jǐ yuè jǐ hào?", c: "今天几月几号？", e: "What's today's date?"},
+  // Measure words
+  "杯": {p: "Lái yì bēi chá.", c: "来一杯茶。", e: "A cup of tea, please."},
+  "个": {p: "Wǒ yào liǎng gè píngguǒ.", c: "我要两个苹果。", e: "I want two apples."},
+  "只": {p: "Tā yǒu yì zhī gǒu.", c: "他有一只狗。", e: "He has a dog."},
+  "本": {p: "Zhè běn shū hěn yǒu yìsi.", c: "这本书很有意思。", e: "This book is interesting."},
+  "瓶": {p: "Mǎi yì píng shuǐ.", c: "买一瓶水。", e: "Buy a bottle of water."},
+  "位": {p: "Jǐ wèi? Liǎng wèi.", c: "几位？两位。", e: "How many people? Two."},
+  "块": {p: "Zhège shí kuài qián.", c: "这个十块钱。", e: "This is 10 yuan."},
+  // Useful phrases
+  "正在": {p: "Wǒ zhèngzài chīfàn.", c: "我正在吃饭。", e: "I'm eating right now."},
+  "一下": {p: "Děng yíxià, wǒ mǎshàng lái.", c: "等一下，我马上来。", e: "Wait a moment, I'll be right there."},
+  "一起": {p: "Wǒmen yìqǐ qù ba!", c: "我们一起去吧！", e: "Let's go together!"},
+  "一点儿": {p: "Wǒ huì yìdiǎnr Zhōngwén.", c: "我会一点儿中文。", e: "I know a little Chinese."},
+  "汉语": {p: "Nǐ de Hànyǔ shuō de zhēn hǎo!", c: "你的汉语说得真好！", e: "Your Chinese is really good!"},
+  "中文": {p: "Wǒ xuéxí Zhōngwén liǎng nián le.", c: "我学习中文两年了。", e: "I've been studying Chinese for 2 years."},
+  "中国人": {p: "Tā shì Zhōngguó rén.", c: "他是中国人。", e: "He is Chinese."},
+  "姓": {p: "Nín guì xìng?", c: "您贵姓？", e: "What is your surname? (polite)"},
+  "叫": {p: "Wǒ jiào Xiǎolì, nǐ ne?", c: "我叫小丽，你呢？", e: "My name is Xiaoli, and yours?"}
 };
 
 let studySession = null;
@@ -1895,9 +1990,34 @@ function renderStudyCard() {
 }
 
 // Highlight a word within a sentence
+// Handles split patterns like "太...了" (tài...le) where parts are separated
 function highlightWord(sentence, word) {
-  if (!word || !sentence.includes(word)) return sentence;
-  return sentence.replace(word, `<span class="highlight">${word}</span>`);
+  if (!word || !sentence) return sentence;
+  
+  // Check for split patterns (e.g., "太...了", "tài...le")
+  if (word.includes('...')) {
+    const parts = word.split('...').filter(p => p.length > 0);
+    let result = sentence;
+    parts.forEach(part => {
+      // For pinyin, try case-insensitive match
+      const regex = new RegExp(`(${escapeRegex(part)})`, 'gi');
+      result = result.replace(regex, '<span class="highlight">$1</span>');
+    });
+    return result;
+  }
+  
+  // Standard single word highlight (case-insensitive for pinyin)
+  const regex = new RegExp(`(${escapeRegex(word)})`, 'gi');
+  if (regex.test(sentence)) {
+    return sentence.replace(new RegExp(`(${escapeRegex(word)})`, 'gi'), '<span class="highlight">$1</span>');
+  }
+  
+  return sentence;
+}
+
+// Escape special regex characters
+function escapeRegex(string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
 function nextStudyCard() {
