@@ -1713,6 +1713,18 @@ const EXAMPLE_SENTENCES = {
   "容易": {p: "Zhège wèntí hěn róngyì.", c: "这个问题很容易。", e: "This question is easy."},
   "高兴": {p: "Wǒ hěn gāoxìng rènshi nǐ.", c: "我很高兴认识你。", e: "I'm happy to meet you."},
   "好吃": {p: "Zhège cài hěn hǎochī.", c: "这个菜很好吃。", e: "This dish is delicious."},
+  // Colors
+  "颜色": {p: "Nǐ xǐhuan shénme yánsè?", c: "你喜欢什么颜色？", e: "What color do you like?"},
+  "红": {p: "Tā chuān le yí jiàn hóng yīfu.", c: "她穿了一件红衣服。", e: "She wore a red dress."},
+  "黄": {p: "Huáng sè shì wǒ zuì xǐhuan de yánsè.", c: "黄色是我最喜欢的颜色。", e: "Yellow is my favorite color."},
+  "蓝": {p: "Tiānkōng shì lán de.", c: "天空是蓝的。", e: "The sky is blue."},
+  "绿": {p: "Chūntiān shù dōu biàn lǜ le.", c: "春天树都变绿了。", e: "In spring the trees all turn green."},
+  "白": {p: "Tā yǒu yì zhī bái māo.", c: "他有一只白猫。", e: "He has a white cat."},
+  "黑": {p: "Wǒ xǐhuan hēi kāfēi.", c: "我喜欢黑咖啡。", e: "I like black coffee."},
+  "粉": {p: "Xiǎo nǚhái xǐhuan fěn sè.", c: "小女孩喜欢粉色。", e: "Little girls like pink."},
+  "紫": {p: "Zǐ sè de huā hěn piàoliang.", c: "紫色的花很漂亮。", e: "Purple flowers are beautiful."},
+  "灰": {p: "Jīntiān tiān shì huī de.", c: "今天天是灰的。", e: "The sky is gray today."},
+  "橙": {p: "Chéng sè shì hóng sè hé huáng sè de hùnhé.", c: "橙色是红色和黄色的混合。", e: "Orange is a mix of red and yellow."},
   // Common Verbs
   "吃": {p: "Wǒ xiǎng chī miàntiáo.", c: "我想吃面条。", e: "I want to eat noodles."},
   "喝": {p: "Nǐ xiǎng hē shénme?", c: "你想喝什么？", e: "What would you like to drink?"},
@@ -1810,6 +1822,8 @@ const EXAMPLE_SENTENCES = {
   "多少": {p: "Zhège duōshao qián?", c: "这个多少钱？", e: "How much is this?"},
   "几": {p: "Nǐ jiā yǒu jǐ kǒu rén?", c: "你家有几口人？", e: "How many people are in your family?"},
   // Family
+  "家人": {p: "Wǒ hěn xiǎngniàn wǒ de jiārén.", c: "我很想念我的家人。", e: "I miss my family very much."},
+  "父母": {p: "Wǒ fùmǔ zhù zài Shànghǎi.", c: "我父母住在上海。", e: "My parents live in Shanghai."},
   "爸爸": {p: "Wǒ bàba shì lǎoshī.", c: "我爸爸是老师。", e: "My dad is a teacher."},
   "妈妈": {p: "Māma zuò de fàn zuì hǎochī.", c: "妈妈做的饭最好吃。", e: "Mom's cooking is the best."},
   "哥哥": {p: "Wǒ gēge bǐ wǒ dà sān suì.", c: "我哥哥比我大三岁。", e: "My older brother is 3 years older than me."},
@@ -1849,6 +1863,10 @@ const EXAMPLE_SENTENCES = {
   "两": {p: "Wǒ yào liǎng bēi kāfēi.", c: "我要两杯咖啡。", e: "I want two cups of coffee."},
   "零": {p: "Xiànzài shì shí diǎn líng wǔ fēn.", c: "现在是十点零五分。", e: "It's 10:05 now."},
   "第": {p: "Zhè shì wǒ dì yī cì lái.", c: "这是我第一次来。", e: "This is my first time here."},
+  "万": {p: "Zhège chē yào shí wàn kuài.", c: "这个车要十万块。", e: "This car costs 100,000 yuan."},
+  "第一": {p: "Tā shì dìyī míng.", c: "他是第一名。", e: "He is first place."},
+  "第二": {p: "Wǒ zhù zài dì'èr lóu.", c: "我住在第二楼。", e: "I live on the second floor."},
+  "第三": {p: "Zhè shì wǒ dìsān cì lái Zhōngguó.", c: "这是我第三次来中国。", e: "This is my third time coming to China."},
   // Time
   "半": {p: "Xiànzài sān diǎn bàn.", c: "现在三点半。", e: "It's 3:30 now."},
   "早上": {p: "Wǒ zǎoshang hē kāfēi.", c: "我早上喝咖啡。", e: "I drink coffee in the morning."},
@@ -2125,7 +2143,125 @@ const EXAMPLE_SENTENCES = {
   "猪": {p: "Zhū hěn pàng.", c: "猪很胖。", e: "The pig is very fat."},
   "羊": {p: "Shān shàng yǒu hěn duō yáng.", c: "山上有很多羊。", e: "There are many sheep on the mountain."},
   "马": {p: "Tā huì qí mǎ.", c: "他会骑马。", e: "He can ride a horse."},
-  "龙": {p: "Lóng shì Zhōngguó de xiàngzhēng.", c: "龙是中国的象征。", e: "The dragon is a symbol of China."}
+  "龙": {p: "Lóng shì Zhōngguó de xiàngzhēng.", c: "龙是中国的象征。", e: "The dragon is a symbol of China."},
+  
+  // ============ LEVEL 4 EXAMPLE SENTENCES ============
+  // Question Expressions
+  "什么时候": {p: "Nǐ shénme shíhou yǒu kòng?", c: "你什么时候有空？", e: "When are you free?"},
+  "怎么样": {p: "Zhège cài zěnme yàng?", c: "这个菜怎么样？", e: "How is this dish?"},
+  "哪国人": {p: "Nǐ shì nǎ guó rén?", c: "你是哪国人？", e: "What nationality are you?"},
+  "多长时间": {p: "Nǐ xué Zhōngwén xué le duō cháng shíjiān?", c: "你学中文学了多长时间？", e: "How long have you been studying Chinese?"},
+  "多大": {p: "Nǐ jīnnián duō dà?", c: "你今年多大？", e: "How old are you this year?"},
+  
+  // Dates & Calendar
+  "年": {p: "Jīnnián shì èr líng èr wǔ nián.", c: "今年是二零二五年。", e: "This year is 2025."},
+  "月": {p: "Wǒ de shēngrì shì bā yuè.", c: "我的生日是八月。", e: "My birthday is in August."},
+  "日": {p: "Jīntiān shì jǐ yuè jǐ rì?", c: "今天是几月几日？", e: "What is today's date?"},
+  "号": {p: "Jīntiān shì shí wǔ hào.", c: "今天是十五号。", e: "Today is the 15th."},
+  "生日": {p: "Zhù nǐ shēngrì kuàilè!", c: "祝你生日快乐！", e: "Happy birthday to you!"},
+  "岁": {p: "Wǒ èrshí wǔ suì.", c: "我二十五岁。", e: "I'm 25 years old."},
+  "上个星期": {p: "Shàng ge xīngqī wǒ qù le Shànghǎi.", c: "上个星期我去了上海。", e: "I went to Shanghai last week."},
+  "这个星期": {p: "Zhè ge xīngqī wǒ hěn máng.", c: "这个星期我很忙。", e: "I'm very busy this week."},
+  "下个星期": {p: "Xià ge xīngqī wǒmen qù lǚyóu.", c: "下个星期我们去旅游。", e: "We're going traveling next week."},
+  "每天": {p: "Wǒ měi tiān qī diǎn qǐchuáng.", c: "我每天七点起床。", e: "I get up at 7 every day."},
+  "每年": {p: "Měi nián chūnjié wǒ huí jiā.", c: "每年春节我回家。", e: "I go home every year for Spring Festival."},
+  
+  // Grandparents
+  "爷爷": {p: "Wǒ yéye jīnnián bāshí suì le.", c: "我爷爷今年八十岁了。", e: "My grandpa is 80 years old this year."},
+  "奶奶": {p: "Nǎinai zuò de fàn zuì hǎochī.", c: "奶奶做的饭最好吃。", e: "Grandma's cooking is the best."},
+  "外公": {p: "Wàigōng xǐhuan diào yú.", c: "外公喜欢钓鱼。", e: "My maternal grandpa likes fishing."},
+  "外婆": {p: "Wàipó zhù zài xiāngxià.", c: "外婆住在乡下。", e: "My maternal grandma lives in the countryside."},
+  
+  // Honorific Titles
+  "先生": {p: "Wáng xiānsheng, nín hǎo!", c: "王先生，您好！", e: "Hello, Mr. Wang!"},
+  "小姐": {p: "Lǐ xiǎojiě, qǐng zuò.", c: "李小姐，请坐。", e: "Miss Li, please sit down."},
+  "太太": {p: "Zhāng tàitai shì yīshēng.", c: "张太太是医生。", e: "Mrs. Zhang is a doctor."},
+  
+  // Countries & Places
+  "国": {p: "Nǐ shì nǎ ge guó de rén?", c: "你是哪个国的人？", e: "Which country are you from?"},
+  "中国": {p: "Wǒ xiǎng qù Zhōngguó lǚyóu.", c: "我想去中国旅游。", e: "I want to travel to China."},
+  "北京": {p: "Běijīng shì Zhōngguó de shǒudū.", c: "北京是中国的首都。", e: "Beijing is China's capital."},
+  "日本": {p: "Rìběn de yīnghuā hěn měi.", c: "日本的樱花很美。", e: "Japan's cherry blossoms are beautiful."},
+  "韩国": {p: "Tā shì Hánguó rén.", c: "他是韩国人。", e: "He is Korean."},
+  "美国": {p: "Wǒ zài Měiguó zhù le sān nián.", c: "我在美国住了三年。", e: "I lived in America for three years."},
+  "英国": {p: "Yīngguó de tiānqì chángcháng xià yǔ.", c: "英国的天气常常下雨。", e: "It often rains in the UK."},
+  "法国": {p: "Fǎguó de jiǔ hěn yǒumíng.", c: "法国的酒很有名。", e: "French wine is very famous."},
+  "德国": {p: "Déguó de qìchē hěn hǎo.", c: "德国的汽车很好。", e: "German cars are very good."},
+  "澳大利亚": {p: "Àodàlìyà yǒu hěn duō dàishǔ.", c: "澳大利亚有很多袋鼠。", e: "Australia has many kangaroos."},
+  "加拿大": {p: "Jiānádà de dōngtiān hěn lěng.", c: "加拿大的冬天很冷。", e: "Canada's winters are very cold."},
+  "印度": {p: "Yìndù de rénkǒu hěn duō.", c: "印度的人口很多。", e: "India has a large population."},
+  "西班牙": {p: "Xībānyá de zúqiú hěn qiáng.", c: "西班牙的足球很强。", e: "Spanish football is very strong."},
+  "意大利": {p: "Yìdàlì de pīsà hěn hǎochī.", c: "意大利的披萨很好吃。", e: "Italian pizza is delicious."},
+  
+  // Address Vocabulary
+  "地址": {p: "Qǐng gàosu wǒ nǐ de dìzhǐ.", c: "请告诉我你的地址。", e: "Please tell me your address."},
+  "区": {p: "Wǒ zhù zài Cháoyáng qū.", c: "我住在朝阳区。", e: "I live in Chaoyang District."},
+  "楼": {p: "Wǒ zhù zài wǔ lóu.", c: "我住在五楼。", e: "I live on the fifth floor."},
+  "室": {p: "Wǒ de bàngōngshì shì sān líng èr shì.", c: "我的办公室是302室。", e: "My office is room 302."},
+  
+  // Home & Appliances
+  "沙发": {p: "Qǐng zuò zài shāfā shàng.", c: "请坐在沙发上。", e: "Please sit on the sofa."},
+  "床": {p: "Zhège chuáng hěn shūfu.", c: "这个床很舒服。", e: "This bed is very comfortable."},
+  "冰箱": {p: "Bīngxiāng lǐ yǒu niúnǎi.", c: "冰箱里有牛奶。", e: "There's milk in the refrigerator."},
+  "洗衣机": {p: "Xǐyījī huài le.", c: "洗衣机坏了。", e: "The washing machine is broken."},
+  "微波炉": {p: "Yòng wēibōlú jiā rè yíxià.", c: "用微波炉加热一下。", e: "Heat it up in the microwave."},
+  "电视机": {p: "Diànshìjī kāi zhe ne.", c: "电视机开着呢。", e: "The TV is on."},
+  "空调": {p: "Qǐng bǎ kōngtiáo dǎkāi.", c: "请把空调打开。", e: "Please turn on the air conditioner."},
+  "镜子": {p: "Wǒ zài jìngzi qián huà zhuāng.", c: "我在镜子前化妆。", e: "I put on makeup in front of the mirror."},
+  "窗户": {p: "Qǐng bǎ chuānghù guān shàng.", c: "请把窗户关上。", e: "Please close the window."},
+  "厨房": {p: "Māma zài chúfáng zuò fàn.", c: "妈妈在厨房做饭。", e: "Mom is cooking in the kitchen."},
+  
+  // Food & Drinks (Extended)
+  "汉堡": {p: "Wǒ yào yí ge hànbǎo.", c: "我要一个汉堡。", e: "I want a burger."},
+  "热狗": {p: "Règǒu jiā shénme jiàng?", c: "热狗加什么酱？", e: "What sauce on the hot dog?"},
+  "三明治": {p: "Zǎofàn wǒ chī sānmíngzhì.", c: "早饭我吃三明治。", e: "I eat a sandwich for breakfast."},
+  "意大利面": {p: "Zhège yìdàlì miàn hěn hǎochī.", c: "这个意大利面很好吃。", e: "This pasta is delicious."},
+  "鸡块": {p: "Háizi xǐhuan chī jī kuài.", c: "孩子喜欢吃鸡块。", e: "Kids like eating chicken nuggets."},
+  "可乐": {p: "Wǒ yào yì bēi kělè.", c: "我要一杯可乐。", e: "I want a glass of cola."},
+  "橙汁": {p: "Qǐng gěi wǒ yì bēi chéng zhī.", c: "请给我一杯橙汁。", e: "Please give me a glass of orange juice."},
+  "啤酒": {p: "Wǒmen hē pí jiǔ ba.", c: "我们喝啤酒吧。", e: "Let's drink beer."},
+  "汽水": {p: "Nǐ yào qì shuǐ ma?", c: "你要汽水吗？", e: "Do you want soda?"},
+  "白饭": {p: "Wǒ yào yì wǎn báifàn.", c: "我要一碗白饭。", e: "I want a bowl of plain rice."},
+  "汤": {p: "Jīntiān de tāng hěn xiān.", c: "今天的汤很鲜。", e: "Today's soup is very fresh."},
+  "饺子": {p: "Wǒmen bāo jiǎozi ba.", c: "我们包饺子吧。", e: "Let's make dumplings."},
+  "包子": {p: "Zhège bāozi shì ròu de.", c: "这个包子是肉的。", e: "This bun has meat filling."},
+  
+  // Body Parts
+  "头": {p: "Wǒ tóu téng.", c: "我头疼。", e: "I have a headache."},
+  "头发": {p: "Tā de tóufa hěn cháng.", c: "她的头发很长。", e: "Her hair is very long."},
+  "脸": {p: "Tā de liǎn hóng le.", c: "她的脸红了。", e: "Her face turned red."},
+  "鼻子": {p: "Tā de bízi hěn gāo.", c: "他的鼻子很高。", e: "His nose is very high."},
+  "耳朵": {p: "Wǒ de ěrduo bù shūfu.", c: "我的耳朵不舒服。", e: "My ears are uncomfortable."},
+  "嘴巴": {p: "Bié shuōhuà, bǎ zuǐba bì shàng.", c: "别说话，把嘴巴闭上。", e: "Don't talk, close your mouth."},
+  "牙齿": {p: "Wǒ yào qù kàn yáchǐ.", c: "我要去看牙齿。", e: "I need to see the dentist."},
+  "手": {p: "Qǐng xiān xǐ shǒu.", c: "请先洗手。", e: "Please wash your hands first."},
+  "脚": {p: "Wǒ de jiǎo hěn suān.", c: "我的脚很酸。", e: "My feet are sore."},
+  "眼睛": {p: "Tā de yǎnjing hěn piàoliang.", c: "她的眼睛很漂亮。", e: "Her eyes are very beautiful."},
+  "腿": {p: "Wǒ de tuǐ téng.", c: "我的腿疼。", e: "My leg hurts."},
+  "肚子": {p: "Wǒ dùzi è le.", c: "我肚子饿了。", e: "My stomach is hungry."},
+  
+  // Measure Words
+  "个": {p: "Wǒ yào sān ge píngguǒ.", c: "我要三个苹果。", e: "I want three apples."},
+  "本": {p: "Wǒ mǎi le liǎng běn shū.", c: "我买了两本书。", e: "I bought two books."},
+  "张": {p: "Gěi wǒ yì zhāng zhǐ.", c: "给我一张纸。", e: "Give me a piece of paper."},
+  "件": {p: "Zhè jiàn yīfu duōshao qián?", c: "这件衣服多少钱？", e: "How much is this piece of clothing?"},
+  "只": {p: "Wǒ yǒu liǎng zhī māo.", c: "我有两只猫。", e: "I have two cats."},
+  "条": {p: "Nà tiáo lù hěn cháng.", c: "那条路很长。", e: "That road is very long."},
+  "杯": {p: "Wǒ hē le sān bēi kāfēi.", c: "我喝了三杯咖啡。", e: "I drank three cups of coffee."},
+  "瓶": {p: "Mǎi liǎng píng shuǐ.", c: "买两瓶水。", e: "Buy two bottles of water."},
+  "位": {p: "Zhè wèi shì wǒ de lǎoshī.", c: "这位是我的老师。", e: "This is my teacher."},
+  "块": {p: "Zhège yào shí kuài qián.", c: "这个要十块钱。", e: "This costs ten yuan."},
+  
+  // Useful Expressions
+  "正在": {p: "Wǒ zhèngzài chīfàn.", c: "我正在吃饭。", e: "I'm eating right now."},
+  "一下": {p: "Qǐng děng yīxià.", c: "请等一下。", e: "Please wait a moment."},
+  "一起": {p: "Wǒmen yīqǐ qù ba.", c: "我们一起去吧。", e: "Let's go together."},
+  "一点儿": {p: "Wǒ huì shuō yīdiǎnr Zhōngwén.", c: "我会说一点儿中文。", e: "I can speak a little Chinese."},
+  "汉语": {p: "Nǐ de Hànyǔ shuō de hěn hǎo!", c: "你的汉语说得很好！", e: "Your Chinese is very good!"},
+  "中文": {p: "Wǒ xuéxí Zhōngwén liǎng nián le.", c: "我学习中文两年了。", e: "I've been studying Chinese for two years."},
+  "中国人": {p: "Wǒ de péngyou shì Zhōngguó rén.", c: "我的朋友是中国人。", e: "My friend is Chinese."},
+  "姓": {p: "Wǒ xìng Wáng.", c: "我姓王。", e: "My surname is Wang."},
+  "叫": {p: "Wǒ jiào Xiǎomíng.", c: "我叫小明。", e: "My name is Xiaoming."}
 };
 
 let studySession = null;
