@@ -143,9 +143,9 @@
     .organize-btn{display:none}
     .organize-btn.show{display:block}
     
-    .study-card-container{flex:1;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;touch-action:none;margin:1rem 0}
+    .study-card-container{flex:1;display:flex;align-items:center;justify-content:center;position:relative;overflow:visible;touch-action:none;margin:1rem 0;min-height:280px}
     
-    .study-flashcard{position:absolute;width:90%;max-width:400px;background:linear-gradient(165deg,rgba(26,26,46,.95),rgba(10,10,15,.98));border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:2rem 1.5rem;text-align:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 15px 50px rgba(0,0,0,.5);cursor:pointer;will-change:transform,opacity}
+    .study-flashcard{position:absolute;width:90%;max-width:400px;background:linear-gradient(165deg,rgba(26,26,46,.95),rgba(10,10,15,.98));border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:1.5rem 1.5rem;text-align:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 15px 50px rgba(0,0,0,.5);cursor:pointer;will-change:transform,opacity}
     .study-flashcard.animating{transition:transform .35s cubic-bezier(.4,.0,.2,1),opacity .35s cubic-bezier(.4,.0,.2,1)}
     .study-flashcard.current{transform:translateX(0) scale(1);opacity:1;z-index:2}
     .study-flashcard.exit-left{transform:translateX(-120%) scale(.85);opacity:0;z-index:1}
@@ -153,23 +153,19 @@
     .study-flashcard.enter-left{transform:translateX(-120%) scale(.85);opacity:0;z-index:1}
     .study-flashcard.enter-right{transform:translateX(120%) scale(.85);opacity:0;z-index:1}
     
-    .study-flashcard .card-type{font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:.15em;margin-bottom:1.5rem}
+    .study-flashcard .card-type{font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:.15em;margin-bottom:1rem}
     .study-flashcard .card-type.example{color:var(--purple)}
     
-    .study-flashcard .study-pinyin{font-size:2.2rem;font-weight:700;color:#fff;margin-bottom:.75rem;line-height:1.3}
-    .study-flashcard .study-chinese{font-family:'Noto Sans SC',sans-serif;font-size:1.4rem;color:var(--accent);margin-bottom:.75rem}
-    .study-flashcard .study-english{font-size:1rem;color:var(--muted);line-height:1.5}
+    .study-flashcard .study-pinyin{font-size:2rem;font-weight:700;color:#fff;margin-bottom:.5rem;line-height:1.3}
+    .study-flashcard .study-chinese{font-family:'Noto Sans SC',sans-serif;font-size:1.3rem;color:var(--accent);margin-bottom:.5rem}
+    .study-flashcard .study-english{font-size:.95rem;color:var(--muted);line-height:1.4}
     .study-flashcard .study-pinyin .highlight{color:var(--ok);text-shadow:0 0 10px rgba(100,255,218,.3)}
     .study-flashcard .study-chinese .highlight{color:var(--ok);text-shadow:0 0 10px rgba(100,255,218,.3)}
-    
-    .study-flashcard .tap-hint{font-size:.55rem;color:var(--muted);opacity:.5;margin-top:1.5rem;display:flex;align-items:center;justify-content:center;gap:.3rem}
     
     .study-nav{display:flex;justify-content:center;gap:1rem;padding:1rem 0}
     .study-nav-btn{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);color:var(--light);width:50px;height:50px;border-radius:50%;font-size:1.2rem;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center}
     .study-nav-btn:active{border-color:var(--ok);color:var(--ok);transform:scale(.95)}
     .study-nav-btn:disabled{opacity:.3;cursor:default}
-    
-    .swipe-hint{text-align:center;font-size:.6rem;color:var(--muted);opacity:.6;margin-bottom:1rem}
     
     /* Study Center Search */
     .study-search-container{padding:0 1rem;margin-bottom:.5rem}
@@ -426,15 +422,12 @@
         <div class="search-results" id="search-results"></div>
       </div>
       
-      <div class="swipe-hint">← Swipe or use arrows →</div>
-      
       <div class="study-card-container" id="study-card-container">
         <div class="study-flashcard current" id="study-flashcard">
           <div class="card-type" id="study-card-type">Word</div>
           <div class="study-pinyin" id="study-pinyin">nǐ hǎo</div>
           <div class="study-chinese" id="study-chinese">你好</div>
           <div class="study-english" id="study-english">hello</div>
-          <div class="tap-hint">Tap card to replay audio</div>
         </div>
       </div>
       
