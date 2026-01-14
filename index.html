@@ -123,15 +123,16 @@
     
     /* Review Section Dropdown */
     .review-header{display:flex;align-items:center;cursor:pointer;padding:.5rem 0;gap:.75rem}
-    @media(hover:hover) and (pointer:fine){.review-header:hover .review-title{color:var(--warn)}}
-    .review-title{font-size:.9rem;font-weight:700;color:var(--warn);transition:all .2s}
-    .review-count{font-size:.55rem;color:var(--muted);background:var(--input-bg);padding:.25rem .5rem;border-radius:4px}
-    .review-header .expand-icon{margin-left:auto}
-    .review-header.expanded .expand-icon{transform:rotate(180deg)}
-    .review-grid{display:none;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:1rem}
-    .review-grid.expanded{display:grid;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--card-border)}
-    .review-empty{display:none;color:var(--muted);font-size:.75rem;padding:1rem 0;text-align:center}
-    .review-empty.show{display:block}
+    /* Review Section - uses level-header style with warn color */
+    .review-level-header .level-title{color:var(--warn)}
+    @media(hover:hover) and (pointer:fine){.review-level-header:hover .level-title{color:var(--warn)}}
+    .review-level-header .progress-ring::before{background:conic-gradient(var(--warn) calc(var(--progress) * 1%),var(--input-border) calc(var(--progress) * 1%))}
+    .review-level-header .progress-ring.complete::before{background:var(--warn)}
+    .review-level-header .progress-ring.complete .progress-ring-text{color:var(--warn)}
+    .review-all-btn{background:var(--warn);color:var(--bg)}
+    .review-all-btn:disabled{opacity:.4;cursor:default}
+    .review-all-btn:disabled:hover{transform:none;box-shadow:none}
+    @media(hover:hover) and (pointer:fine){.review-all-btn:hover:not(:disabled){box-shadow:0 4px 12px rgba(255,217,61,.4)}}
     
     .category-card{background:var(--card-gradient);border:1px solid transparent;border-radius:12px;padding:1rem;cursor:pointer;transition:all .2s;position:relative;box-shadow:0 2px 8px var(--card-shadow);display:flex;flex-direction:column;justify-content:center;min-height:70px}
     @media(hover:hover) and (pointer:fine){.category-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px var(--card-shadow),0 0 0 1px var(--accent)}}
@@ -362,7 +363,7 @@
       .global-stat .value{font-size:1.1rem}
       .global-stat .label{font-size:.5rem}
       .menu-section{padding:1rem 1.25rem;border-radius:14px}
-      .category-grid,.review-grid{grid-template-columns:1fr 1fr;gap:.75rem}
+      .category-grid{grid-template-columns:1fr 1fr;gap:.75rem}
       .category-card{padding:.85rem;min-height:60px;border-radius:10px}
       .category-name{font-size:.7rem}
       .category-count{font-size:.55rem}
@@ -372,9 +373,7 @@
       .progress-ring::after{inset:2.5px}
       .progress-ring-text{font-size:.45rem}
       .level-meta{gap:.5rem}
-      .play-all-btn{padding:.45rem .8rem;font-size:.55rem}
-      .review-header{gap:.5rem}
-      .review-title{font-size:.85rem}
+      .play-all-btn,.review-all-btn{padding:.45rem .8rem;font-size:.55rem}
       .quiz-card{padding:1.5rem 1.2rem}
       .pinyin{font-size:2.2rem}
       .quiz-card.sentence-mode .pinyin{font-size:1.4rem}
@@ -1336,12 +1335,20 @@ function updateGlobalStats() {
 function getCategoryProgress(level, category) {
   const words = getAllWordsInCategory(level, category);
   const mastered = words.filter(w => progress.mastered[getWordId(w)]).length;
-  return { mastered, total: words.length, percent: words.length ? Math.round((mastered / words.length) * 100) : 0 };
+  const practiced = words.filter(w => progress.wordProgress[getWordId(w)]).length;
+  return { 
+    mastered, 
+    practiced,
+    total: words.length, 
+    percent: words.length ? Math.round((mastered / words.length) * 100) : 0,
+    practicedPercent: words.length ? Math.round((practiced / words.length) * 100) : 0
+  };
 }
 
 function getLevelProgress(level) {
   const words = getAllWordsInLevel(level);
   const mastered = words.filter(w => progress.mastered[getWordId(w)]).length;
+  const practiced = words.filter(w => progress.wordProgress[getWordId(w)]).length;
   const catStats = {};
   for (const cat of Object.keys(VOCAB_DATA[level] || {})) {
     const key = `${level}_${cat}`;
@@ -1352,7 +1359,14 @@ function getLevelProgress(level) {
   const totalAttempts = totalCorrect + totalWrong;
   const accuracy = totalAttempts > 0 ? Math.round((totalCorrect / totalAttempts) * 100) : 0;
   
-  return { mastered, total: words.length, percent: words.length ? Math.round((mastered / words.length) * 100) : 0, accuracy };
+  return { 
+    mastered, 
+    practiced,
+    total: words.length, 
+    percent: words.length ? Math.round((mastered / words.length) * 100) : 0, 
+    practicedPercent: words.length ? Math.round((practiced / words.length) * 100) : 0,
+    accuracy 
+  };
 }
 
 // ============ SENTENCE HELPERS ============
@@ -1363,7 +1377,46 @@ function getSentenceId(sentence) {
 function getSentenceProgress(level) {
   const sentences = SENTENCE_DATA[level] || [];
   const mastered = sentences.filter(s => progress.masteredSentences[getSentenceId(s)]).length;
-  return { mastered, total: sentences.length, percent: sentences.length ? Math.round((mastered / sentences.length) * 100) : 0 };
+  const practiced = sentences.filter(s => progress.sentenceProgress[getSentenceId(s)]).length;
+  return { 
+    mastered, 
+    practiced,
+    total: sentences.length, 
+    percent: sentences.length ? Math.round((mastered / sentences.length) * 100) : 0,
+    practicedPercent: sentences.length ? Math.round((practiced / sentences.length) * 100) : 0
+  };
+}
+
+// Get total practiced for a level (words + sentences)
+function getLevelPracticedPercent(level) {
+  const levelProg = getLevelProgress(level);
+  const sentenceProg = getSentenceProgress(level);
+  const totalItems = levelProg.total + sentenceProg.total;
+  const totalPracticed = levelProg.practiced + sentenceProg.practiced;
+  return totalItems > 0 ? Math.round((totalPracticed / totalItems) * 100) : 0;
+}
+
+// Get review progress (% cleared)
+function getReviewProgress() {
+  // We track how many items have been added to review vs cleared
+  // For simplicity, show inverse: 100% when empty, decreases as items pile up
+  // Or better: track a "review pool" size and show % cleared
+  const totalReviewItems = progress.reviewWords.length + progress.reviewSentences.length;
+  // If no items, 100% complete. Otherwise calculate based on max seen
+  if (!progress.maxReviewItems) progress.maxReviewItems = 0;
+  if (totalReviewItems > progress.maxReviewItems) {
+    progress.maxReviewItems = totalReviewItems;
+    saveProgress();
+  }
+  // When all cleared, reset max
+  if (totalReviewItems === 0) {
+    progress.maxReviewItems = 0;
+    saveProgress();
+    return 100;
+  }
+  // Show % cleared from max
+  const cleared = progress.maxReviewItems - totalReviewItems;
+  return progress.maxReviewItems > 0 ? Math.round((cleared / progress.maxReviewItems) * 100) : 100;
 }
 
 function addSentenceToReview(sentence, level) {
@@ -1446,19 +1499,26 @@ function renderMenu() {
   const sections = $('menu-sections');
   sections.innerHTML = '';
   
-  // Review Section
+  // Review Section - matches level header style
   const reviewCount = progress.reviewWords.length;
   const sentenceReviewCount = progress.reviewSentences.length;
   const totalReviewCount = reviewCount + sentenceReviewCount;
+  const reviewProgress = getReviewProgress();
+  const reviewComplete = reviewProgress === 100;
   const reviewSection = document.createElement('div');
   reviewSection.className = 'menu-section review-section';
   reviewSection.innerHTML = `
-    <div class="review-header ${totalReviewCount > 0 ? 'expanded' : ''}" id="review-header">
-      <div class="review-title">Review</div>
-      <span class="review-count">${totalReviewCount} item${totalReviewCount !== 1 ? 's' : ''}</span>
-      <span class="expand-icon">▼</span>
+    <div class="level-header review-level-header" id="review-header">
+      <div class="level-title review-title">Review</div>
+      <div class="progress-ring ${reviewComplete ? 'complete' : ''}" style="--progress: ${reviewProgress}">
+        <span class="progress-ring-text">${reviewProgress}%</span>
+      </div>
+      <div class="level-meta">
+        <button type="button" class="play-all-btn review-all-btn" id="review-all-btn" ${totalReviewCount === 0 ? 'disabled' : ''}>Review All</button>
+        <span class="expand-icon">▼</span>
+      </div>
     </div>
-    <div class="review-grid ${totalReviewCount > 0 ? 'expanded' : ''}" id="review-grid">
+    <div class="category-grid" id="review-grid">
       <div class="category-card review-card ${reviewCount === 0 ? 'empty' : ''}" id="review-card-btn">
         <div class="category-name">Words to Review</div>
         <div class="category-count">${reviewCount} word${reviewCount !== 1 ? 's' : ''}</div>
@@ -1468,22 +1528,36 @@ function renderMenu() {
         <div class="category-count">${sentenceReviewCount} sentence${sentenceReviewCount !== 1 ? 's' : ''}</div>
       </div>
     </div>
-    <div class="review-empty ${totalReviewCount === 0 ? 'show' : ''}" id="review-empty">No items to review — great job!</div>
   `;
   sections.appendChild(reviewSection);
   
   // Review header toggle
-  document.getElementById('review-header').addEventListener('click', function() {
+  document.getElementById('review-header').addEventListener('click', function(e) {
+    if (e.target.classList.contains('play-all-btn') || e.target.classList.contains('review-all-btn')) return;
     this.classList.toggle('expanded');
     document.getElementById('review-grid').classList.toggle('expanded');
   });
   
-  // Add review button listeners
+  // Review All button
+  if (totalReviewCount > 0) {
+    document.getElementById('review-all-btn').addEventListener('click', function(e) {
+      e.stopPropagation();
+      startReview(); // Start with words first, or could combine both
+    });
+  }
+  
+  // Add review card listeners
   if (reviewCount > 0) {
-    document.getElementById('review-card-btn').addEventListener('click', startReview);
+    document.getElementById('review-card-btn').addEventListener('click', function(e) {
+      e.stopPropagation();
+      startReview();
+    });
   }
   if (sentenceReviewCount > 0) {
-    document.getElementById('sentence-review-card-btn').addEventListener('click', startSentenceReview);
+    document.getElementById('sentence-review-card-btn').addEventListener('click', function(e) {
+      e.stopPropagation();
+      startSentenceReview();
+    });
   }
   
   // Level Sections
@@ -1494,7 +1568,8 @@ function renderMenu() {
     
     const levelSection = document.createElement('div');
     levelSection.className = 'menu-section';
-    const progressPercent = levelProg.total > 0 ? Math.round((levelProg.mastered / levelProg.total) * 100) : 0;
+    // Use practicedPercent for the ring (tracks completion/attempted)
+    const progressPercent = getLevelPracticedPercent(level);
     const isComplete = progressPercent === 100;
     
     levelSection.innerHTML = `
