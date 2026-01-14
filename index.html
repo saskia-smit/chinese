@@ -280,6 +280,28 @@
     .study-word-btn:hover{background:rgba(100,255,218,.15);box-shadow:0 6px 25px rgba(100,255,218,.2),0 0 20px rgba(100,255,218,.15);transform:translateY(-2px)}
     .study-word-btn:active{transform:scale(.97)}
     
+    /* Study Word Modal */
+    .study-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:1000;display:none;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(4px)}
+    .study-modal-overlay.show{display:flex}
+    .study-modal{background:linear-gradient(165deg,rgba(26,26,46,.98),rgba(10,10,15,.99));border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:1.5rem;max-width:400px;width:100%;box-shadow:0 25px 60px rgba(0,0,0,.6),0 0 40px rgba(100,255,218,.1);animation:modalEntrance .3s ease-out}
+    .study-modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;padding-bottom:.75rem;border-bottom:1px solid rgba(255,255,255,.08)}
+    .study-modal-header h2{font-size:.85rem;color:var(--ok);text-transform:uppercase;letter-spacing:.15em;margin:0}
+    .study-modal-audio{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);color:var(--muted);width:36px;height:36px;border-radius:50%;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;font-size:1rem}
+    .study-modal-audio:hover{border-color:var(--ok);color:var(--ok)}
+    .study-modal-word{text-align:center;margin-bottom:1.5rem}
+    .study-modal-pinyin{font-size:2rem;font-weight:700;color:#fff;margin-bottom:.5rem;line-height:1.3}
+    .study-modal-chinese{font-family:'Noto Sans SC',sans-serif;font-size:1.8rem;color:var(--accent);margin-bottom:.5rem}
+    .study-modal-english{font-size:1rem;color:var(--muted)}
+    .study-modal-example{background:rgba(0,0,0,.2);border-radius:12px;padding:1rem;margin-bottom:1.5rem;border:1px solid rgba(255,255,255,.05)}
+    .study-modal-example.hidden{display:none}
+    .study-modal-example-label{font-size:.6rem;color:var(--purple);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.75rem}
+    .study-modal-example-pinyin{font-size:.95rem;color:var(--light);margin-bottom:.4rem;line-height:1.4}
+    .study-modal-example-chinese{font-family:'Noto Sans SC',sans-serif;font-size:1.1rem;color:var(--accent);margin-bottom:.4rem;opacity:.9}
+    .study-modal-example-english{font-size:.85rem;color:var(--muted);font-style:italic}
+    .study-modal-close{width:100%;background:linear-gradient(145deg,var(--ok),#4db8a8);border:none;color:#000;padding:.75rem;font-family:inherit;font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;border-radius:10px;transition:all .2s;box-shadow:0 4px 15px rgba(100,255,218,.3)}
+    .study-modal-close:hover{box-shadow:0 6px 25px rgba(100,255,218,.4);transform:translateY(-2px)}
+    .study-modal-close:active{transform:scale(.98)}
+    
     .keyboard-hint{text-align:center;margin-top:1.2rem;font-size:.6rem;color:var(--muted);opacity:.7;display:none}
     @media(hover:hover) and (pointer:fine){.keyboard-hint{display:block}}
     kbd{background:rgba(255,255,255,.06);padding:.15rem .4rem;border-radius:3px;margin:0 .15rem;border:1px solid rgba(255,255,255,.08);font-size:.7rem}
@@ -445,8 +467,8 @@
           <div class="answers" id="answers"></div>
           <div class="feedback" id="feedback"></div>
           <div class="quiz-buttons">
-            <button type="button" class="next-btn" id="next-btn">Next →</button>
-            <button type="button" class="study-word-btn" id="study-word-btn">📖 Study This Word</button>
+            <button type="button" class="next-btn" id="next-btn">Next</button>
+            <button type="button" class="study-word-btn" id="study-word-btn">Study This Word</button>
           </div>
         </div>
         <div class="keyboard-hint">
@@ -454,8 +476,30 @@
         </div>
       </div>
       
+      <!-- Study Word Modal -->
+      <div class="study-modal-overlay" id="study-modal">
+        <div class="study-modal">
+          <div class="study-modal-header">
+            <h2>Study This Word</h2>
+            <button type="button" class="study-modal-audio" id="study-modal-audio" title="Play audio">🔊</button>
+          </div>
+          <div class="study-modal-word">
+            <div class="study-modal-pinyin" id="study-modal-pinyin">nǐ hǎo</div>
+            <div class="study-modal-chinese" id="study-modal-chinese">你好</div>
+            <div class="study-modal-english" id="study-modal-english">hello</div>
+          </div>
+          <div class="study-modal-example" id="study-modal-example">
+            <div class="study-modal-example-label">Example Sentence</div>
+            <div class="study-modal-example-pinyin" id="study-modal-example-pinyin"></div>
+            <div class="study-modal-example-chinese" id="study-modal-example-chinese"></div>
+            <div class="study-modal-example-english" id="study-modal-example-english"></div>
+          </div>
+          <button type="button" class="study-modal-close" id="study-modal-close">Got it</button>
+        </div>
+      </div>
+      
       <div class="complete-screen" id="complete-screen">
-        <h2>✨ Session Complete!</h2>
+        <h2>Session Complete!</h2>
         <div class="complete-stats">
           <div class="complete-stat">
             <div class="value good" id="final-correct">0</div>
@@ -703,8 +747,8 @@ const VOCAB_DATA = {
       {"p": "qǐng zuò", "c": "请坐", "e": "please sit"},
       {"p": "qǐng jìn", "c": "请进", "e": "please come in"},
       {"p": "nín", "c": "您", "e": "you (formal/polite)"},
-      {"p": "jiè shào", "c": "介绍", "e": "to introduce"},
-      {"p": "bāng zhù", "c": "帮助", "e": "to help"}
+      {"p": "jièshào", "c": "介绍", "e": "to introduce"},
+      {"p": "bāngzhù", "c": "帮助", "e": "to help"}
     ],
     "Transportation": [
       {"p": "chē", "c": "车", "e": "vehicle / car"},
@@ -950,7 +994,7 @@ const VOCAB_DATA = {
       {"p": "chéng zhī", "c": "橙汁", "e": "orange juice"},
       {"p": "pí jiǔ", "c": "啤酒", "e": "beer"},
       {"p": "qì shuǐ", "c": "汽水", "e": "soda / sparkling water"},
-      {"p": "bàifàn", "c": "白饭", "e": "plain rice"},
+      {"p": "báifàn", "c": "白饭", "e": "plain rice"},
       {"p": "tāng", "c": "汤", "e": "soup"},
       {"p": "jiǎozi", "c": "饺子", "e": "dumplings"},
       {"p": "bāozi", "c": "包子", "e": "steamed buns"}
@@ -1017,7 +1061,7 @@ const SENTENCE_DATA = {
     // Time, places, modals
     {"p": "Xiànzài ___ diǎn?", "c": "现在 ___ 点？", "e": "What time is it now?", "answer": "jǐ", "answerC": "几", "wrongs": ["shénme", "nǎ", "duōshao"]},
     {"p": "Wǒ ___ shuō Zhōngwén.", "c": "我 ___ 说中文。", "e": "I can speak Chinese.", "answer": "huì", "answerC": "会", "wrongs": ["yào", "qù", "xiǎng"]},
-    {"p": "Nǐ ___ qù cèsuǒ ma?", "c": "你 ___ 去厕所吗？", "e": "May I go to the bathroom?", "answer": "kěyǐ", "answerC": "可以", "wrongs": ["huì", "yào", "néng"]},
+    {"p": "Wǒ ___ qù cèsuǒ ma?", "c": "我 ___ 去厕所吗？", "e": "May I go to the bathroom?", "answer": "kěyǐ", "answerC": "可以", "wrongs": ["huì", "yào", "néng"]},
     {"p": "Míngtiān wǒ ___ qù xuéxiào.", "c": "明天我 ___ 去学校。", "e": "Tomorrow I will go to school.", "answer": "yào", "answerC": "要", "wrongs": ["huì", "kěyǐ", "néng"]},
     {"p": "Wǒ xiǎng hē yì ___ kāfēi.", "c": "我想喝一 ___ 咖啡。", "e": "I want to drink a cup of coffee.", "answer": "bēi", "answerC": "杯", "wrongs": ["gè", "píng", "zhī"]},
     {"p": "Huǒchēzhàn zài ___?", "c": "火车站在 ___？", "e": "Where is the train station?", "answer": "nǎlǐ", "answerC": "哪里", "wrongs": ["zhèlǐ", "nàlǐ", "shénme"]},
@@ -1841,7 +1885,113 @@ const EXAMPLE_SENTENCES = {
   "中文": {p: "Wǒ xuéxí Zhōngwén liǎng nián le.", c: "我学习中文两年了。", e: "I've been studying Chinese for 2 years."},
   "中国人": {p: "Tā shì Zhōngguó rén.", c: "他是中国人。", e: "He is Chinese."},
   "姓": {p: "Nín guì xìng?", c: "您贵姓？", e: "What is your surname? (polite)"},
-  "叫": {p: "Wǒ jiào Xiǎolì, nǐ ne?", c: "我叫小丽，你呢？", e: "My name is Xiaoli, and yours?"}
+  "叫": {p: "Wǒ jiào Xiǎolì, nǐ ne?", c: "我叫小丽，你呢？", e: "My name is Xiaoli, and yours?"},
+  
+  // ============ LEVEL 2 EXAMPLE SENTENCES ============
+  // Basic Time Words
+  "今天": {p: "Jīntiān tiānqì zhēn hǎo!", c: "今天天气真好！", e: "The weather is really nice today!"},
+  "明天": {p: "Míngtiān nǐ yǒu kòng ma?", c: "明天你有空吗？", e: "Are you free tomorrow?"},
+  "昨天": {p: "Zuótiān wǒ qù le yīyuàn.", c: "昨天我去了医院。", e: "I went to the hospital yesterday."},
+  "现在": {p: "Xiànzài wǒmen chīfàn ba.", c: "现在我们吃饭吧。", e: "Let's eat now."},
+  "早上": {p: "Zǎoshang wǒ qī diǎn qǐchuáng.", c: "早上我七点起床。", e: "I get up at 7 in the morning."},
+  "上午": {p: "Shàngwǔ wǒ yǒu liǎng gè huì.", c: "上午我有两个会。", e: "I have two meetings in the morning."},
+  "中午": {p: "Zhōngwǔ wǒmen qù nǎlǐ chīfàn?", c: "中午我们去哪里吃饭？", e: "Where should we go eat at noon?"},
+  "下午": {p: "Xiàwǔ wǒ yào qù jiànshēnfáng.", c: "下午我要去健身房。", e: "I'm going to the gym this afternoon."},
+  "晚上": {p: "Wǎnshang wǒmen yìqǐ kàn diànyǐng.", c: "晚上我们一起看电影。", e: "Let's watch a movie together tonight."},
+  "夜里": {p: "Yèlǐ bié chū mén.", c: "夜里别出门。", e: "Don't go out at night."},
+  "半夜": {p: "Tā bànyè cái huí jiā.", c: "他半夜才回家。", e: "He didn't come home until midnight."},
+  
+  // Telling Time
+  "点": {p: "Xiànzài shí diǎn le.", c: "现在十点了。", e: "It's 10 o'clock now."},
+  "半": {p: "Huì yì bàn diǎn kāishǐ.", c: "会议半点开始。", e: "The meeting starts at half past."},
+  "分": {p: "Hái yǒu shí fēn.", c: "还有十分。", e: "There are still 10 minutes left."},
+  "分钟": {p: "Děng wǒ wǔ fēnzhōng.", c: "等我五分钟。", e: "Wait for me 5 minutes."},
+  "刻": {p: "Xiànzài sān diǎn yí kè.", c: "现在三点一刻。", e: "It's a quarter past three now."},
+  "两点": {p: "Wǒmen liǎng diǎn jiàn.", c: "我们两点见。", e: "Let's meet at 2 o'clock."},
+  "几点": {p: "Nǐ jǐ diǎn xiàbān?", c: "你几点下班？", e: "What time do you get off work?"},
+  "小时": {p: "Wǒ děng le liǎng ge xiǎoshí.", c: "我等了两个小时。", e: "I waited for two hours."},
+  
+  // Modal Verbs
+  "会": {p: "Wǒ huì shuō yìdiǎn Rìyǔ.", c: "我会说一点日语。", e: "I can speak a little Japanese."},
+  "可以": {p: "Zhèlǐ kěyǐ xīyān ma?", c: "这里可以吸烟吗？", e: "Can I smoke here?"},
+  "能": {p: "Nǐ néng bāng wǒ ma?", c: "你能帮我吗？", e: "Can you help me?"},
+  "可能": {p: "Míngtiān kěnéng huì xià yǔ.", c: "明天可能会下雨。", e: "It might rain tomorrow."},
+  "必须": {p: "Nǐ bìxū xiànzài zǒu.", c: "你必须现在走。", e: "You must leave now."},
+  "应该": {p: "Nǐ yīnggāi duō xiūxi.", c: "你应该多休息。", e: "You should rest more."},
+  
+  // Places & Directions
+  "这里": {p: "Zhèlǐ shì wǒ de bàngōngshì.", c: "这里是我的办公室。", e: "This is my office."},
+  "那里": {p: "Cèsuǒ zài nàlǐ.", c: "厕所在那里。", e: "The bathroom is over there."},
+  "家": {p: "Wǒ xiǎng huí jiā.", c: "我想回家。", e: "I want to go home."},
+  "学校": {p: "Wǒ de xuéxiào hěn dà.", c: "我的学校很大。", e: "My school is very big."},
+  "办公室": {p: "Tā zài bàngōngshì gōngzuò.", c: "他在办公室工作。", e: "He works in the office."},
+  "公司": {p: "Wǒ de gōngsī zài shì zhōngxīn.", c: "我的公司在市中心。", e: "My company is in the city center."},
+  "厕所": {p: "Qǐngwèn, cèsuǒ zài nǎlǐ?", c: "请问，厕所在哪里？", e: "Excuse me, where is the bathroom?"},
+  "房间": {p: "Zhège fángjiān hěn gānjìng.", c: "这个房间很干净。", e: "This room is very clean."},
+  "教室": {p: "Xuéshēng zài jiàoshì lǐ.", c: "学生在教室里。", e: "The students are in the classroom."},
+  "商店": {p: "Fùjìn yǒu shāngdiàn ma?", c: "附近有商店吗？", e: "Is there a store nearby?"},
+  "饭店": {p: "Zhège fàndiàn de cài hěn hǎochī.", c: "这个饭店的菜很好吃。", e: "The food at this restaurant is delicious."},
+  "医院": {p: "Yīyuàn lí zhèlǐ yuǎn ma?", c: "医院离这里远吗？", e: "Is the hospital far from here?"},
+  "机场": {p: "Qù jīchǎng yào duō cháng shíjiān?", c: "去机场要多长时间？", e: "How long does it take to get to the airport?"},
+  "火车站": {p: "Huǒchēzhàn zài zuǒbiān.", c: "火车站在左边。", e: "The train station is on the left."},
+  "前": {p: "Yínháng zài qiánmiàn.", c: "银行在前面。", e: "The bank is in front."},
+  "后": {p: "Tíngchēchǎng zài hòumiàn.", c: "停车场在后面。", e: "The parking lot is in the back."},
+  "左": {p: "Zài dì yí gè lùkǒu wǎng zuǒ guǎi.", c: "在第一个路口往左拐。", e: "Turn left at the first intersection."},
+  "右": {p: "Yòubiān shì yīyuàn.", c: "右边是医院。", e: "The hospital is on the right."},
+  "上": {p: "Māo zài zhuōzi shàng.", c: "猫在桌子上。", e: "The cat is on the table."},
+  "下": {p: "Gǒu zài chuáng xià.", c: "狗在床下。", e: "The dog is under the bed."},
+  "里": {p: "Yàoshi zài bāo lǐ.", c: "钥匙在包里。", e: "The keys are in the bag."},
+  "外": {p: "Wài miàn xià yǔ le.", c: "外面下雨了。", e: "It's raining outside."},
+  "旁边": {p: "Yínháng zài yóujú pángbiān.", c: "银行在邮局旁边。", e: "The bank is next to the post office."},
+  "对面": {p: "Kāfēi diàn zài duìmiàn.", c: "咖啡店在对面。", e: "The coffee shop is across the street."},
+  
+  // Food & Drinks
+  "水": {p: "Qǐng gěi wǒ yì bēi shuǐ.", c: "请给我一杯水。", e: "Please give me a glass of water."},
+  "咖啡": {p: "Wǒ měitiān hē kāfēi.", c: "我每天喝咖啡。", e: "I drink coffee every day."},
+  "茶": {p: "Zhōngguó de chá hěn yǒumíng.", c: "中国的茶很有名。", e: "Chinese tea is very famous."},
+  "牛奶": {p: "Háizi xǐhuan hē niúnǎi.", c: "孩子喜欢喝牛奶。", e: "Children like to drink milk."},
+  "面包": {p: "Zǎofàn wǒ chī miànbāo.", c: "早饭我吃面包。", e: "I eat bread for breakfast."},
+  "米饭": {p: "Zhōngguó rén chángcháng chī mǐfàn.", c: "中国人常常吃米饭。", e: "Chinese people often eat rice."},
+  "面条": {p: "Wǒ xiǎng chī yì wǎn miàntiáo.", c: "我想吃一碗面条。", e: "I want to eat a bowl of noodles."},
+  "菜": {p: "Jīntiān de cài hěn xīnxiān.", c: "今天的菜很新鲜。", e: "Today's vegetables are very fresh."},
+  "肉": {p: "Wǒ bù chī ròu.", c: "我不吃肉。", e: "I don't eat meat."},
+  "鸡": {p: "Zhège jī hěn nèn.", c: "这个鸡很嫩。", e: "This chicken is very tender."},
+  "鱼": {p: "Wǒ zuì xǐhuan chī yú.", c: "我最喜欢吃鱼。", e: "I like eating fish the most."},
+  "鸡蛋": {p: "Zǎofàn wǒ chī liǎng gè jīdàn.", c: "早饭我吃两个鸡蛋。", e: "I eat two eggs for breakfast."},
+  "水果": {p: "Duō chī shuǐguǒ duì shēntǐ hǎo.", c: "多吃水果对身体好。", e: "Eating more fruit is good for your health."},
+  "苹果": {p: "Zhège píngguǒ hěn tián.", c: "这个苹果很甜。", e: "This apple is very sweet."},
+  "蛋糕": {p: "Shēngrì dàngāo zhēn hǎochī!", c: "生日蛋糕真好吃！", e: "The birthday cake is really delicious!"},
+  "冰淇淋": {p: "Xiàtiān wǒ xǐhuan chī bīngqílín.", c: "夏天我喜欢吃冰淇淋。", e: "I like eating ice cream in summer."},
+  "饭": {p: "Nǐ chī fàn le ma?", c: "你吃饭了吗？", e: "Have you eaten yet?"},
+  
+  // Polite Expressions
+  "请": {p: "Qǐng zuò, qǐng hē chá.", c: "请坐，请喝茶。", e: "Please sit, please have some tea."},
+  "请问": {p: "Qǐngwèn, zhè shì shénme?", c: "请问，这是什么？", e: "Excuse me, what is this?"},
+  "请坐": {p: "Qǐng zuò, bié kèqi.", c: "请坐，别客气。", e: "Please sit, don't be polite."},
+  "请进": {p: "Qǐng jìn, huānyíng huānyíng!", c: "请进，欢迎欢迎！", e: "Please come in, welcome!"},
+  "您": {p: "Nín yào hē diǎn shénme?", c: "您要喝点什么？", e: "What would you like to drink?"},
+  "介绍": {p: "Wǒ lái jièshào yíxià.", c: "我来介绍一下。", e: "Let me introduce."},
+  "帮助": {p: "Xièxie nǐ de bāngzhù.", c: "谢谢你的帮助。", e: "Thank you for your help."},
+  
+  // Transportation
+  "车": {p: "Wǒ de chē zài tíngchēchǎng.", c: "我的车在停车场。", e: "My car is in the parking lot."},
+  "出租车": {p: "Wǒmen dǎ chūzūchē qù ba.", c: "我们打出租车去吧。", e: "Let's take a taxi."},
+  "公共汽车": {p: "Gōnggòng qìchē lái le.", c: "公共汽车来了。", e: "The bus is coming."},
+  "火车": {p: "Zuò huǒchē qù Shànghǎi yào liǎng ge xiǎoshí.", c: "坐火车去上海要两个小时。", e: "It takes two hours to go to Shanghai by train."},
+  "飞机": {p: "Wǒ dì yí cì zuò fēijī.", c: "我第一次坐飞机。", e: "This is my first time on a plane."},
+  "自行车": {p: "Wǒ měitiān qí zìxíngchē shàngbān.", c: "我每天骑自行车上班。", e: "I ride my bike to work every day."},
+  "路": {p: "Zhè tiáo lù hěn cháng.", c: "这条路很长。", e: "This road is very long."},
+  "票": {p: "Wǒ yào mǎi liǎng zhāng piào.", c: "我要买两张票。", e: "I want to buy two tickets."},
+  
+  // Weather
+  "天气": {p: "Jīntiān tiānqì zěnmeyàng?", c: "今天天气怎么样？", e: "How's the weather today?"},
+  "晴": {p: "Míngtiān shì qíngtiān.", c: "明天是晴天。", e: "Tomorrow will be sunny."},
+  "阴": {p: "Jīntiān tiān yīn.", c: "今天天阴。", e: "It's cloudy today."},
+  "下雨": {p: "Kuài yào xià yǔ le, dài sǎn ba.", c: "快要下雨了，带伞吧。", e: "It's about to rain, bring an umbrella."},
+  "雪": {p: "Dōngtiān zhèlǐ chángcháng xià xuě.", c: "冬天这里常常下雪。", e: "It often snows here in winter."},
+  "风": {p: "Jīntiān fēng hěn dà.", c: "今天风很大。", e: "The wind is strong today."},
+  "暖和": {p: "Chūntiān de tiānqì hěn nuǎnhuo.", c: "春天的天气很暖和。", e: "The spring weather is very warm."},
+  "凉快": {p: "Qiūtiān bǐjiào liángkuai.", c: "秋天比较凉快。", e: "Autumn is relatively cool."}
 };
 
 let studySession = null;
@@ -2379,40 +2529,48 @@ function jumpToStudyCard(index) {
   }
 }
 
-// ============ STUDY THIS WORD ============
+// ============ STUDY THIS WORD MODAL ============
 // Track the current word for study button
 let currentStudyWord = null;
 
 function studyCurrentWord() {
   if (!currentStudyWord) return;
   
-  const level = currentStudyWord.level || session.level;
+  const word = currentStudyWord;
   
-  // Build study cards for this level
-  studySession = { level };
-  studyCards = buildStudyCards(level);
+  // Populate the modal with word info
+  $('study-modal-pinyin').textContent = word.p;
+  $('study-modal-chinese').textContent = word.c;
+  $('study-modal-english').textContent = word.e;
   
-  // Find the index of this word in the study cards
-  const wordChinese = currentStudyWord.c;
-  let targetIndex = studyCards.findIndex(card => 
-    card.type === 'word' && card.chinese === wordChinese
-  );
+  // Look up example sentence
+  const example = EXAMPLE_SENTENCES[word.c];
+  const exampleSection = $('study-modal-example');
   
-  if (targetIndex === -1) targetIndex = 0;
+  if (example) {
+    $('study-modal-example-pinyin').textContent = example.p;
+    $('study-modal-example-chinese').textContent = example.c;
+    $('study-modal-example-english').textContent = example.e;
+    exampleSection.classList.remove('hidden');
+  } else {
+    exampleSection.classList.add('hidden');
+  }
   
-  studyCardIndex = targetIndex;
+  // Show the modal
+  $('study-modal').classList.add('show');
   
-  // Reset shuffle state
-  isShuffled = false;
-  $('organize-btn').classList.remove('show');
-  
-  // Hide quiz, show study center
-  $('quiz-session').classList.remove('active');
-  $('study-session').classList.add('active');
-  $('study-title').textContent = `Level ${level} Study Center`;
-  
-  renderStudyCard();
-  setupSwipeGestures();
+  // Play audio for the word
+  speak(word.c);
+}
+
+function closeStudyModal() {
+  $('study-modal').classList.remove('show');
+}
+
+function playStudyModalAudio() {
+  if (currentStudyWord) {
+    speak(currentStudyWord.c);
+  }
 }
 
 function startSentencePractice(level) {
@@ -2926,6 +3084,13 @@ document.addEventListener('click', (e) => {
 
 // Study This Word button
 $('study-word-btn').onclick = studyCurrentWord;
+
+// Study Modal controls
+$('study-modal-close').onclick = closeStudyModal;
+$('study-modal-audio').onclick = playStudyModalAudio;
+$('study-modal').onclick = (e) => {
+  if (e.target === $('study-modal')) closeStudyModal();
+};
 
 // Settings modal
 $('settings-btn').onclick = openSettings;
