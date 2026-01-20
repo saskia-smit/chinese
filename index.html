@@ -20,10 +20,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
     /* Dark Mode (Default) */
-    :root{--bg:#0a0a0f;--bg2:#151520;--card:#1a1a2e;--card2:#16213e;--card-border:rgba(255,255,255,0.06);--card-shadow:rgba(0,0,0,0.3);--card-shadow-lg:0 10px 40px rgba(0,0,0,0.4);--card-inset:inset 0 1px 0 rgba(255,255,255,0.06),inset 0 -8px 20px rgba(0,0,0,0.2);--accent:#e94560;--glow:rgba(233,69,96,0.4);--light:#eaeaea;--muted:#8892b0;--ok:#64ffda;--ok-bg:rgba(100,255,218,0.08);--warn:#ffd93d;--purple:#bd93f9;--wrong:#ff6b6b;--input-bg:rgba(255,255,255,0.03);--input-border:rgba(255,255,255,0.1);--overlay:rgba(0,0,0,0.85);--card-gradient:linear-gradient(165deg,rgba(26,26,46,0.95),rgba(15,15,26,0.98));--section-gradient:linear-gradient(165deg,rgba(26,26,46,0.6),rgba(15,15,26,0.8))}
+    :root{--bg:#0a0a0f;--bg2:#151520;--card:#1a1a2e;--card2:#16213e;--card-border:rgba(255,255,255,0.06);--card-shadow:rgba(0,0,0,0.3);--card-shadow-lg:0 10px 40px rgba(0,0,0,0.4);--card-inset:inset 0 1px 0 rgba(255,255,255,0.06),inset 0 -8px 20px rgba(0,0,0,0.2);--accent:#e94560;--glow:rgba(233,69,96,0.4);--light:#eaeaea;--muted:#8892b0;--ok:#64ffda;--ok-bg:rgba(100,255,218,0.08);--warn:#ffd93d;--purple:#bd93f9;--wrong:#ff6b6b;--input-bg:rgba(255,255,255,0.03);--input-border:rgba(255,255,255,0.1);--overlay:rgba(0,0,0,0.85);--card-gradient:linear-gradient(165deg,rgba(26,26,46,0.95),rgba(15,15,26,0.98));--section-gradient:linear-gradient(165deg,rgba(26,26,46,0.6),rgba(15,15,26,0.8));--teal:#14b8a6;--teal-glow:rgba(20,184,166,0.4);--teal-bg:rgba(20,184,166,0.08)}
     
     /* Light Mode */
-    body.light-mode{--bg:#f5f5f7;--bg2:#eeeef2;--card:#ffffff;--card2:#f8f8fa;--card-border:rgba(0,0,0,0.06);--card-shadow:rgba(0,0,0,0.06);--card-shadow-lg:0 10px 40px rgba(0,0,0,0.08),0 2px 8px rgba(0,0,0,0.04);--card-inset:inset 0 1px 0 rgba(255,255,255,0.8),inset 0 -1px 0 rgba(0,0,0,0.03);--accent:#d63850;--glow:rgba(214,56,80,0.2);--light:#1a1a2e;--muted:#5a6378;--ok:#0d9373;--ok-bg:rgba(13,147,115,0.08);--warn:#c9a227;--purple:#8b5fc7;--wrong:#d94452;--input-bg:rgba(0,0,0,0.02);--input-border:rgba(0,0,0,0.08);--overlay:rgba(0,0,0,0.5);--card-gradient:linear-gradient(165deg,#ffffff,#f8f8fa);--section-gradient:linear-gradient(165deg,#ffffff,#f5f5f8)}
+    body.light-mode{--bg:#f5f5f7;--bg2:#eeeef2;--card:#ffffff;--card2:#f8f8fa;--card-border:rgba(0,0,0,0.06);--card-shadow:rgba(0,0,0,0.06);--card-shadow-lg:0 10px 40px rgba(0,0,0,0.08),0 2px 8px rgba(0,0,0,0.04);--card-inset:inset 0 1px 0 rgba(255,255,255,0.8),inset 0 -1px 0 rgba(0,0,0,0.03);--accent:#d63850;--glow:rgba(214,56,80,0.2);--light:#1a1a2e;--muted:#5a6378;--ok:#0d9373;--ok-bg:rgba(13,147,115,0.08);--warn:#c9a227;--purple:#8b5fc7;--wrong:#d94452;--input-bg:rgba(0,0,0,0.02);--input-border:rgba(0,0,0,0.08);--overlay:rgba(0,0,0,0.5);--card-gradient:linear-gradient(165deg,#ffffff,#f8f8fa);--section-gradient:linear-gradient(165deg,#ffffff,#f5f5f8);--teal:#0d9488;--teal-glow:rgba(13,148,136,0.3);--teal-bg:rgba(13,148,136,0.08)}
     
     *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
     html,body{height:100%}
@@ -155,12 +155,130 @@
     @media(hover:hover) and (pointer:fine){.sentence-review:hover{box-shadow:0 8px 24px var(--card-shadow),0 0 0 1px var(--purple)}}
     .sentence-review:active{box-shadow:0 2px 8px var(--card-shadow),0 0 0 1px var(--purple)}
     
-    /* Study Center Card */
-    .study-card{box-shadow:0 2px 8px var(--card-shadow),0 0 0 1px var(--ok)}
-    @media(hover:hover) and (pointer:fine){.study-card:hover{box-shadow:0 8px 24px var(--card-shadow),0 0 0 1px var(--ok)}}
-    .study-card:active{box-shadow:0 2px 8px var(--card-shadow),0 0 0 1px var(--ok)}
-    .study-card .category-name{color:var(--ok)}
-    .study-card .study-icon{margin-right:.3rem}
+    /* Vocab Study Card (renamed from Study Center) */
+    .vocab-study-card{box-shadow:0 2px 8px var(--card-shadow),0 0 0 1px var(--ok)}
+    @media(hover:hover) and (pointer:fine){.vocab-study-card:hover{box-shadow:0 8px 24px var(--card-shadow),0 0 0 1px var(--ok)}}
+    .vocab-study-card:active{box-shadow:0 2px 8px var(--card-shadow),0 0 0 1px var(--ok)}
+    .vocab-study-card .category-name{color:var(--ok)}
+    
+    /* NEW: Study Center Section - Teal Theme */
+    .study-center-section .level-title{color:var(--teal)}
+    .study-center-header{cursor:pointer}
+    @media(hover:hover) and (pointer:fine){.study-center-header:hover .level-title{color:var(--teal)}}
+    .study-all-btn{background:var(--teal)!important}
+    @media(hover:hover) and (pointer:fine){.study-all-btn:hover{box-shadow:0 4px 12px var(--teal-glow)!important}}
+    
+    /* Study Center Cards in Menu */
+    .study-center-card{box-shadow:0 2px 8px var(--card-shadow),0 0 0 1px rgba(20,184,166,.3)}
+    @media(hover:hover) and (pointer:fine){.study-center-card:hover{box-shadow:0 8px 24px var(--card-shadow),0 0 0 1px var(--teal)}}
+    .study-center-card:active{box-shadow:0 2px 8px var(--card-shadow),0 0 0 1px var(--teal)}
+    .study-center-card .category-name{color:var(--teal)}
+    
+    /* Study Center Session - Full Screen Layout */
+    .study-center-session{display:none;flex-direction:column;flex:1;position:relative}
+    .study-center-session.active{display:flex}
+    .study-center-session .study-header{text-align:center;margin-bottom:1rem}
+    .study-center-session .study-header h1{font-size:1.1rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal)}
+    .study-center-session .study-progress{font-size:.7rem;color:var(--muted);margin-top:.5rem}
+    
+    /* Study Center Content Area */
+    .sc-content-area{flex:1;overflow-y:auto;padding:0 1rem 1rem;-webkit-overflow-scrolling:touch}
+    .sc-content-area::-webkit-scrollbar{width:4px}
+    .sc-content-area::-webkit-scrollbar-track{background:var(--input-bg);border-radius:2px}
+    .sc-content-area::-webkit-scrollbar-thumb{background:var(--teal);border-radius:2px}
+    
+    /* Pattern Container with Animation */
+    .sc-pattern{opacity:1;transform:translateX(0);transition:opacity .3s,transform .3s}
+    .sc-pattern.exit-left{opacity:0;transform:translateX(-100%)}
+    .sc-pattern.exit-right{opacity:0;transform:translateX(100%)}
+    .sc-pattern.enter-left{opacity:0;transform:translateX(-100%)}
+    .sc-pattern.enter-right{opacity:0;transform:translateX(100%)}
+    
+    /* Pattern Title */
+    .sc-pattern-title{font-size:1.2rem;font-weight:700;color:var(--light);margin-bottom:.5rem;text-align:center}
+    .sc-pattern-tag{display:inline-block;font-size:.6rem;background:var(--teal-bg);color:var(--teal);padding:.25rem .6rem;border-radius:4px;margin-left:.5rem;vertical-align:middle;font-weight:400}
+    .sc-pattern-level{font-size:.65rem;color:var(--muted);text-align:center;margin-bottom:1.5rem}
+    
+    /* Formula Box */
+    .sc-formula{font-family:'Noto Sans SC',sans-serif;font-size:1.1rem;color:var(--teal);background:var(--teal-bg);padding:1rem 1.5rem;border-radius:10px;margin-bottom:1.5rem;text-align:center;letter-spacing:.05em}
+    
+    /* Explanation */
+    .sc-explanation{font-size:.85rem;color:var(--muted);line-height:1.7;margin-bottom:1.5rem;padding:0 .5rem}
+    
+    /* Examples Table */
+    .sc-section-title{font-size:.7rem;color:var(--teal);text-transform:uppercase;letter-spacing:.12em;margin-bottom:.75rem;padding-left:.25rem}
+    .sc-table{width:100%;border-collapse:collapse;margin-bottom:1.5rem;background:var(--card-gradient);border-radius:10px;overflow:hidden;border:1px solid var(--card-border)}
+    .sc-table th{font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;padding:.6rem .75rem;text-align:left;background:var(--input-bg);border-bottom:1px solid var(--card-border);font-weight:400}
+    .sc-table td{padding:.75rem;border-bottom:1px solid var(--card-border);vertical-align:top}
+    .sc-table tr:last-child td{border-bottom:none}
+    .sc-table-chinese{font-family:'Noto Sans SC',sans-serif;font-size:1.05rem;color:var(--accent);line-height:1.4}
+    .sc-table-chinese .hl{color:var(--teal);font-weight:700}
+    .sc-table-pinyin{font-size:.75rem;color:var(--light);line-height:1.4}
+    .sc-table-pinyin .hl{color:var(--teal);font-weight:700}
+    .sc-table-english{font-size:.75rem;color:var(--muted);line-height:1.4}
+    .sc-table-audio{background:none;border:none;color:var(--muted);cursor:pointer;padding:.25rem .5rem;font-size:.9rem;transition:color .15s}
+    .sc-table-audio:hover{color:var(--teal)}
+    
+    /* Practice Button */
+    .sc-practice-btn{display:block;width:100%;max-width:300px;margin:1rem auto;background:var(--teal);color:#fff;border:none;padding:.75rem 1.5rem;font-family:inherit;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;border-radius:8px;cursor:pointer;transition:all .2s}
+    .sc-practice-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px var(--teal-glow)}
+    .sc-practice-btn:active{transform:scale(.98)}
+    
+    /* Breakdown Specific Styles */
+    .sc-sentence-display{text-align:center;margin-bottom:1.5rem}
+    .sc-sentence-chinese{font-family:'Noto Sans SC',sans-serif;font-size:1.5rem;color:var(--light);margin-bottom:.5rem;line-height:1.5}
+    .sc-sentence-pinyin{font-size:.9rem;color:var(--muted);margin-bottom:.25rem}
+    .sc-sentence-english{font-size:.85rem;color:var(--teal);font-style:italic}
+    .sc-sentence-audio{background:none;border:none;color:var(--muted);cursor:pointer;padding:.25rem;font-size:1rem;margin-left:.5rem;vertical-align:middle}
+    .sc-sentence-audio:hover{color:var(--teal)}
+    
+    .sc-words-grid{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-bottom:1rem}
+    .sc-word-chip{background:var(--input-bg);border:1px solid var(--input-border);border-radius:8px;padding:.5rem .75rem;text-align:center;cursor:pointer;transition:all .15s;min-width:50px}
+    .sc-word-chip:hover,.sc-word-chip.active{border-color:var(--teal);background:var(--teal-bg)}
+    .sc-word-chip-char{font-family:'Noto Sans SC',sans-serif;font-size:1.1rem;color:var(--accent)}
+    .sc-word-chip-pinyin{font-size:.6rem;color:var(--muted);margin-top:.15rem}
+    .sc-word-chip-role{font-size:.5rem;color:var(--teal);text-transform:uppercase;margin-top:.2rem}
+    
+    .sc-word-detail{background:var(--teal-bg);border-radius:8px;padding:1rem;margin-bottom:1.5rem;display:none}
+    .sc-word-detail.active{display:block}
+    .sc-word-detail-header{font-size:.9rem;color:var(--teal);font-weight:700;margin-bottom:.5rem}
+    .sc-word-detail-content{font-size:.8rem;color:var(--light);line-height:1.6}
+    
+    .sc-word-order{background:var(--card-gradient);border:1px solid var(--card-border);border-radius:10px;padding:1rem}
+    .sc-word-order-title{font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.75rem}
+    .sc-word-order-row{display:flex;gap:.75rem;margin-bottom:.5rem;align-items:baseline}
+    .sc-word-order-row:last-child{margin-bottom:0}
+    .sc-word-order-label{font-size:.65rem;color:var(--muted);width:55px;flex-shrink:0}
+    .sc-word-order-content{font-size:.8rem;color:var(--light)}
+    .sc-word-order-content.zh{font-family:'Noto Sans SC',sans-serif;color:var(--accent)}
+    
+    /* Usage Specific Styles */
+    .sc-usage-content{font-size:.85rem;color:var(--muted);line-height:1.7;margin-bottom:1.5rem;text-align:center;padding:0 .5rem}
+    .sc-comparison-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.75rem;margin-bottom:1.5rem}
+    .sc-comparison-card{background:var(--card-gradient);border:1px solid var(--card-border);border-radius:10px;padding:1rem;text-align:center}
+    .sc-comparison-word{font-family:'Noto Sans SC',sans-serif;font-size:1.3rem;color:var(--accent);margin-bottom:.25rem}
+    .sc-comparison-pinyin{font-size:.7rem;color:var(--light);margin-bottom:.25rem}
+    .sc-comparison-meaning{font-size:.65rem;color:var(--muted);margin-bottom:.5rem}
+    .sc-comparison-use{font-size:.7rem;color:var(--teal);line-height:1.5;text-align:left}
+    
+    .sc-examples-section{margin-bottom:1.5rem}
+    .sc-example-row{background:var(--input-bg);border-radius:8px;padding:.75rem 1rem;margin-bottom:.5rem;display:flex;align-items:flex-start;gap:.75rem}
+    .sc-example-label{font-size:.55rem;text-transform:uppercase;font-weight:700;padding:.2rem .4rem;border-radius:4px;flex-shrink:0}
+    .sc-example-label.correct{background:rgba(100,255,218,.15);color:var(--ok)}
+    .sc-example-label.wrong{background:rgba(255,107,107,.15);color:var(--wrong)}
+    .sc-example-text{font-family:'Noto Sans SC',sans-serif;font-size:.9rem;color:var(--light)}
+    
+    .sc-tip-box{background:rgba(255,217,61,.08);border-left:3px solid var(--warn);padding:1rem;border-radius:0 8px 8px 0}
+    .sc-tip-title{font-size:.6rem;color:var(--warn);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.35rem;font-weight:700}
+    .sc-tip-text{font-size:.8rem;color:var(--light);line-height:1.6}
+    
+    /* Navigation */
+    .sc-nav{display:flex;justify-content:center;gap:1rem;padding:1rem;border-top:1px solid var(--card-border);margin-top:auto}
+    .sc-nav-btn{background:var(--input-bg);border:1px solid var(--input-border);color:var(--light);width:50px;height:50px;border-radius:50%;font-size:1.2rem;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center}
+    .sc-nav-btn:hover{border-color:var(--teal);color:var(--teal)}
+    .sc-nav-btn:active{border-color:var(--teal);color:var(--teal);transform:scale(.95)}
+    .sc-nav-btn:disabled{opacity:.3;cursor:default}
+    .sc-nav-btn:disabled:hover{border-color:var(--input-border);color:var(--light)}
     
     .review-buttons{display:flex;gap:.5rem;margin-top:1rem}
     
@@ -449,11 +567,11 @@
       </div>
     </div>
     
-    <!-- Study Center Session -->
+    <!-- Vocab Study Session (for vocabulary flashcards) -->
     <div class="study-session" id="study-session">
       <button type="button" class="back-btn" id="study-back-btn">← Menu</button>
       <div class="study-header">
-        <h1 id="study-title">Study Center</h1>
+        <h1 id="study-title">Vocab Study</h1>
         <div class="study-progress" id="study-progress">Card 1 of 50</div>
         <div class="study-controls">
           <button type="button" class="shuffle-btn" id="shuffle-btn">Shuffle</button>
@@ -464,8 +582,8 @@
       <!-- Search Bar -->
       <div class="study-search-container">
         <div class="study-search-wrapper">
-          <span class="search-icon">🔍</span>
-          <input type="text" id="study-search" class="study-search" placeholder="Search pinyin, 中文, or English...">
+          <span class="search-icon">?</span>
+          <input type="text" id="study-search" class="study-search" placeholder="Search pinyin, chinese, or English...">
           <button type="button" id="clear-search" class="clear-search-btn">✕</button>
         </div>
         <div class="search-results" id="search-results"></div>
@@ -486,6 +604,26 @@
       </div>
     </div>
     
+    <!-- Study Center Session (for grammar, breakdown, usage) -->
+    <div class="study-center-session" id="study-center-session">
+      <button type="button" class="back-btn" id="sc-back-btn">← Menu</button>
+      <div class="study-header">
+        <h1 id="sc-title">Grammar Patterns</h1>
+        <div class="study-progress" id="sc-progress">1 of 12</div>
+      </div>
+      
+      <div class="sc-content-area" id="sc-content-area">
+        <div class="sc-pattern" id="sc-pattern">
+          <!-- Content rendered by JS -->
+        </div>
+      </div>
+      
+      <div class="sc-nav">
+        <button type="button" class="sc-nav-btn" id="sc-prev-btn">←</button>
+        <button type="button" class="sc-nav-btn" id="sc-next-btn">→</button>
+      </div>
+    </div>
+    
     <!-- Quiz Session -->
     <div class="quiz-session" id="quiz-session">
       <button type="button" class="back-btn" id="back-btn">← Menu</button>
@@ -501,7 +639,7 @@
       </header>
       
       <div class="quiz-area" id="quiz-area">
-        <div class="quiz-card">
+        <div class="quiz-card" id="quiz-card">
           <span class="card-label" id="card-label">Adjectives</span>
           <button type="button" class="audio-btn" id="audio-btn" title="Play audio">🔊</button>
           <div class="pinyin" id="pinyin">nǐ hǎo</div>
@@ -1081,68 +1219,847 @@ const VOCAB_DATA = {
   }
 };
 
+
 // ============ SENTENCE DATA ============
-// Each sentence has: pinyin, chinese, english, blank position, answer, and wrong options
+// 30 sentences per level covering diverse grammar patterns
 const SENTENCE_DATA = {
   "1": [
-    // Using adjectives and degree adverbs
+    // Basic adjectives with 很
     {"p": "Wǒ ___ è le.", "c": "我 ___ 饿了。", "e": "I am very hungry.", "answer": "hěn", "answerC": "很", "wrongs": ["yě", "dōu", "bù"]},
     {"p": "Tā ___ máng.", "c": "他 ___ 忙。", "e": "He is also busy.", "answer": "yě", "answerC": "也", "wrongs": ["hěn", "bù", "zuì"]},
     {"p": "Jīntiān tiānqì hěn ___.", "c": "今天天气很 ___。", "e": "Today's weather is very hot.", "answer": "rè", "answerC": "热", "wrongs": ["lěng", "hǎo", "máng"]},
     {"p": "Zhège ___ guì.", "c": "这个 ___ 贵。", "e": "This is too expensive.", "answer": "tài", "answerC": "太", "wrongs": ["hěn", "yě", "bù"]},
+    {"p": "Wǒ ___ lèi le.", "c": "我 ___ 累了。", "e": "I am very tired.", "answer": "hěn", "answerC": "很", "wrongs": ["tài", "yě", "dōu"]},
+    {"p": "Zhège píngguǒ hěn ___.", "c": "这个苹果很 ___。", "e": "This apple is very delicious.", "answer": "hǎochī", "answerC": "好吃", "wrongs": ["hǎo", "dà", "guì"]},
+    {"p": "Tā de fángzi hěn ___.", "c": "他的房子很 ___。", "e": "His house is very big.", "answer": "dà", "answerC": "大", "wrongs": ["xiǎo", "guì", "yuǎn"]},
+    {"p": "Wǒ jīntiān ___ gāoxìng.", "c": "我今天 ___ 高兴。", "e": "I am very happy today.", "answer": "hěn", "answerC": "很", "wrongs": ["bù", "yě", "tài"]},
+    // Negation with 不
+    {"p": "Wǒ ___ xǐhuan kāfēi.", "c": "我 ___ 喜欢咖啡。", "e": "I don't like coffee.", "answer": "bù", "answerC": "不", "wrongs": ["hěn", "yě", "dōu"]},
+    {"p": "Tā ___ shì wǒ de péngyou.", "c": "他 ___ 是我的朋友。", "e": "He is not my friend.", "answer": "bù", "answerC": "不", "wrongs": ["hěn", "yě", "jiù"]},
+    {"p": "Jīntiān ___ lěng.", "c": "今天 ___ 冷。", "e": "Today is not cold.", "answer": "bù", "answerC": "不", "wrongs": ["hěn", "tài", "yě"]},
+    {"p": "Zhège ___ nán.", "c": "这个 ___ 难。", "e": "This is not difficult.", "answer": "bù", "answerC": "不", "wrongs": ["hěn", "tài", "zuì"]},
+    // Common verbs
     {"p": "Wǒ ___ chī mǐfàn.", "c": "我 ___ 吃米饭。", "e": "I want to eat rice.", "answer": "yào", "answerC": "要", "wrongs": ["qù", "lái", "kàn"]},
     {"p": "Nǐ ___ shénme?", "c": "你 ___ 什么？", "e": "What do you want to eat?", "answer": "chī", "answerC": "吃", "wrongs": ["hē", "qù", "kàn"]},
-    {"p": "Tā shì ___ gēge.", "c": "他是 ___ 哥哥。", "e": "He is my older brother.", "answer": "wǒ de", "answerC": "我的", "wrongs": ["nǐ de", "tā de", "wǒmen"]},
-    {"p": "Wǒ ___ xǐhuan kāfēi.", "c": "我 ___ 喜欢咖啡。", "e": "I don't like coffee.", "answer": "bù", "answerC": "不", "wrongs": ["hěn", "yě", "dōu"]},
-    {"p": "Zhège píngguǒ hěn ___.", "c": "这个苹果很 ___。", "e": "This apple is very delicious.", "answer": "hǎochī", "answerC": "好吃", "wrongs": ["hǎo", "dà", "guì"]},
+    {"p": "Wǒmen qù ___ diànyǐng ba.", "c": "我们去 ___ 电影吧。", "e": "Let's go watch a movie.", "answer": "kàn", "answerC": "看", "wrongs": ["tīng", "chī", "mǎi"]},
+    {"p": "Tā xiǎng ___ shuǐ.", "c": "他想 ___ 水。", "e": "He wants to drink water.", "answer": "hē", "answerC": "喝", "wrongs": ["chī", "mǎi", "kàn"]},
+    {"p": "Wǒ ___ tīng yīnyuè.", "c": "我 ___ 听音乐。", "e": "I like to listen to music.", "answer": "xǐhuan", "answerC": "喜欢", "wrongs": ["yào", "qù", "huì"]},
+    {"p": "Māma zài ___ fàn.", "c": "妈妈在 ___ 饭。", "e": "Mom is cooking.", "answer": "zuò", "answerC": "做", "wrongs": ["chī", "kàn", "mǎi"]},
+    // Question words
     {"p": "___ shì shéi?", "c": "___ 是谁？", "e": "Who is that?", "answer": "Nà", "answerC": "那", "wrongs": ["Zhè", "Shénme", "Nǎ"]},
+    {"p": "Nǐ jiào ___?", "c": "你叫 ___？", "e": "What is your name?", "answer": "shénme", "answerC": "什么", "wrongs": ["shéi", "nǎlǐ", "jǐ"]},
+    {"p": "Tā shì ___?", "c": "他是 ___？", "e": "Who is he?", "answer": "shéi", "answerC": "谁", "wrongs": ["shénme", "nǎ", "nǎlǐ"]},
+    {"p": "Nǐ yào ___ gè?", "c": "你要 ___ 个？", "e": "How many do you want?", "answer": "jǐ", "answerC": "几", "wrongs": ["shénme", "nǎ", "duōshao"]},
+    // Family and possessives
+    {"p": "Tā shì ___ gēge.", "c": "他是 ___ 哥哥。", "e": "He is my older brother.", "answer": "wǒ de", "answerC": "我的", "wrongs": ["nǐ de", "tā de", "wǒmen"]},
+    {"p": "Zhè shì wǒ ___.", "c": "这是我 ___。", "e": "This is my mom.", "answer": "māma", "answerC": "妈妈", "wrongs": ["bàba", "gēge", "jiějie"]},
+    {"p": "Wǒ ___ yǒu sān ge rén.", "c": "我 ___ 有三个人。", "e": "My family has three people.", "answer": "jiā", "answerC": "家", "wrongs": ["men", "de", "yě"]},
     {"p": "Wǒ jiā yǒu ___ ge rén.", "c": "我家有 ___ 个人。", "e": "My family has five people.", "answer": "wǔ", "answerC": "五", "wrongs": ["sān", "liù", "sì"]},
-    {"p": "Māma zuò de cài ___ hǎochī.", "c": "妈妈做的菜 ___ 好吃。", "e": "Mom's cooking is the most delicious.", "answer": "zuì", "answerC": "最", "wrongs": ["hěn", "yě", "bù"]}
+    // Degree adverbs
+    {"p": "Māma zuò de cài ___ hǎochī.", "c": "妈妈做的菜 ___ 好吃。", "e": "Mom's cooking is the most delicious.", "answer": "zuì", "answerC": "最", "wrongs": ["hěn", "yě", "bù"]},
+    {"p": "Tā ___ hěn cōngming.", "c": "他 ___ 很聪明。", "e": "He is really very smart.", "answer": "zhēn", "answerC": "真", "wrongs": ["hěn", "tài", "yě"]},
+    {"p": "Wǒ ___ yǒu diǎn kùn.", "c": "我 ___ 有点困。", "e": "I am still a little sleepy.", "answer": "hái", "answerC": "还", "wrongs": ["hěn", "yě", "dōu"]},
+    {"p": "Zhège ___ nàge dà.", "c": "这个 ___ 那个大。", "e": "This one is bigger than that one.", "answer": "bǐ", "answerC": "比", "wrongs": ["hé", "hěn", "gèng"]}
   ],
+  
   "2": [
-    // Time, places, modals
+    // Time expressions
     {"p": "Xiànzài ___ diǎn?", "c": "现在 ___ 点？", "e": "What time is it now?", "answer": "jǐ", "answerC": "几", "wrongs": ["shénme", "nǎ", "duōshao"]},
+    {"p": "Wǒ ___ qī diǎn qǐchuáng.", "c": "我 ___ 七点起床。", "e": "I get up at 7 o'clock every day.", "answer": "měitiān", "answerC": "每天", "wrongs": ["jīntiān", "míngtiān", "zuótiān"]},
+    {"p": "Tā ___ lái wǒ jiā.", "c": "他 ___ 来我家。", "e": "He came to my house yesterday.", "answer": "zuótiān", "answerC": "昨天", "wrongs": ["jīntiān", "míngtiān", "xiànzài"]},
+    {"p": "___ wǒ yào qù xuéxiào.", "c": "___ 我要去学校。", "e": "Tomorrow I will go to school.", "answer": "Míngtiān", "answerC": "明天", "wrongs": ["Jīntiān", "Zuótiān", "Xiànzài"]},
+    {"p": "Wǒ ___ zǎoshang liù diǎn qǐchuáng.", "c": "我 ___ 早上六点起床。", "e": "I wake up at 6 in the morning every day.", "answer": "měitiān", "answerC": "每天", "wrongs": ["jīntiān", "zuótiān", "míngtiān"]},
+    {"p": "Xiànzài shì ___ shí diǎn.", "c": "现在是 ___ 十点。", "e": "It is 10 o'clock in the morning now.", "answer": "shàngwǔ", "answerC": "上午", "wrongs": ["xiàwǔ", "wǎnshang", "zhōngwǔ"]},
+    // Modal verbs (会, 可以, 能, 要)
     {"p": "Wǒ ___ shuō Zhōngwén.", "c": "我 ___ 说中文。", "e": "I can speak Chinese.", "answer": "huì", "answerC": "会", "wrongs": ["yào", "qù", "xiǎng"]},
     {"p": "Wǒ ___ qù cèsuǒ ma?", "c": "我 ___ 去厕所吗？", "e": "May I go to the bathroom?", "answer": "kěyǐ", "answerC": "可以", "wrongs": ["huì", "yào", "néng"]},
+    {"p": "Nǐ ___ bāng wǒ ma?", "c": "你 ___ 帮我吗？", "e": "Can you help me?", "answer": "néng", "answerC": "能", "wrongs": ["huì", "kěyǐ", "yào"]},
     {"p": "Míngtiān wǒ ___ qù xuéxiào.", "c": "明天我 ___ 去学校。", "e": "Tomorrow I will go to school.", "answer": "yào", "answerC": "要", "wrongs": ["huì", "kěyǐ", "néng"]},
+    {"p": "Tā bù ___ yóuyǒng.", "c": "他不 ___ 游泳。", "e": "He can't swim.", "answer": "huì", "answerC": "会", "wrongs": ["yào", "kěyǐ", "néng"]},
+    {"p": "Zhèlǐ bù ___ chōuyān.", "c": "这里不 ___ 抽烟。", "e": "Smoking is not allowed here.", "answer": "kěyǐ", "answerC": "可以", "wrongs": ["huì", "néng", "yào"]},
+    // Measure words
     {"p": "Wǒ xiǎng hē yì ___ kāfēi.", "c": "我想喝一 ___ 咖啡。", "e": "I want to drink a cup of coffee.", "answer": "bēi", "answerC": "杯", "wrongs": ["gè", "píng", "zhī"]},
+    {"p": "Qǐng gěi wǒ liǎng ___ zhǐ.", "c": "请给我两 ___ 纸。", "e": "Please give me two sheets of paper.", "answer": "zhāng", "answerC": "张", "wrongs": ["gè", "běn", "kuài"]},
+    {"p": "Wǒ yǒu yì ___ māo.", "c": "我有一 ___ 猫。", "e": "I have a cat.", "answer": "zhī", "answerC": "只", "wrongs": ["gè", "tiáo", "běn"]},
+    {"p": "Tā mǎi le sān ___ shū.", "c": "他买了三 ___ 书。", "e": "He bought three books.", "answer": "běn", "answerC": "本", "wrongs": ["gè", "zhāng", "kuài"]},
+    // Places and locations
     {"p": "Huǒchēzhàn zài ___?", "c": "火车站在 ___？", "e": "Where is the train station?", "answer": "nǎlǐ", "answerC": "哪里", "wrongs": ["zhèlǐ", "nàlǐ", "shénme"]},
-    {"p": "Jīntiān ___ xià yǔ.", "c": "今天 ___ 下雨。", "e": "It might rain today.", "answer": "kěnéng", "answerC": "可能", "wrongs": ["yīnggāi", "bìxū", "huì"]},
-    {"p": "Qǐng ___, xǐshǒujiān zài nǎlǐ?", "c": "请 ___，洗手间在哪里？", "e": "Excuse me, where is the restroom?", "answer": "wèn", "answerC": "问", "wrongs": ["zuò", "jìn", "shuō"]},
+    {"p": "Cèsuǒ zài ___.", "c": "厕所在 ___。", "e": "The bathroom is over there.", "answer": "nàlǐ", "answerC": "那里", "wrongs": ["zhèlǐ", "nǎlǐ", "wàimiàn"]},
+    {"p": "Wǒ xiǎng qù ___.", "c": "我想去 ___。", "e": "I want to go to the hospital.", "answer": "yīyuàn", "answerC": "医院", "wrongs": ["xuéxiào", "fàndiàn", "jīchǎng"]},
+    {"p": "Tā zài ___ gōngzuò.", "c": "他在 ___ 工作。", "e": "He works at a bank.", "answer": "yínháng", "answerC": "银行", "wrongs": ["yīyuàn", "xuéxiào", "shāngdiàn"]},
+    // Transportation
     {"p": "Wǒ ___ chūzūchē qù jīchǎng.", "c": "我 ___ 出租车去机场。", "e": "I take a taxi to the airport.", "answer": "zuò", "answerC": "坐", "wrongs": ["qù", "lái", "kāi"]},
+    {"p": "Tā měitiān ___ gōnggòng qìchē.", "c": "他每天 ___ 公共汽车。", "e": "He takes the bus every day.", "answer": "zuò", "answerC": "坐", "wrongs": ["kāi", "qù", "yào"]},
+    {"p": "Wǒ ___ zìxíngchē qù xuéxiào.", "c": "我 ___ 自行车去学校。", "e": "I ride a bike to school.", "answer": "qí", "answerC": "骑", "wrongs": ["zuò", "kāi", "zǒu"]},
+    // Weather
     {"p": "Tiānqì ___ le.", "c": "天气 ___ 了。", "e": "The weather has gotten cold.", "answer": "lěng", "answerC": "冷", "wrongs": ["rè", "hǎo", "nuǎnhuo"]},
-    {"p": "Wǒ měitiān zǎoshang ___ diǎn qǐchuáng.", "c": "我每天早上 ___ 点起床。", "e": "I wake up at 7 o'clock every morning.", "answer": "qī", "answerC": "七", "wrongs": ["liù", "bā", "jiǔ"]},
-    {"p": "Zhè jiàn yīfu duōshao ___?", "c": "这件衣服多少 ___？", "e": "How much is this piece of clothing?", "answer": "qián", "answerC": "钱", "wrongs": ["gè", "jiàn", "kuài"]}
+    {"p": "Jīntiān ___ xià yǔ.", "c": "今天 ___ 下雨。", "e": "It might rain today.", "answer": "kěnéng", "answerC": "可能", "wrongs": ["yīnggāi", "bìxū", "huì"]},
+    {"p": "Wàimiàn zài ___ xuě.", "c": "外面在 ___ 雪。", "e": "It's snowing outside.", "answer": "xià", "answerC": "下", "wrongs": ["shàng", "dà", "lěng"]},
+    // Money and shopping
+    {"p": "Zhè jiàn yīfu duōshao ___?", "c": "这件衣服多少 ___？", "e": "How much is this piece of clothing?", "answer": "qián", "answerC": "钱", "wrongs": ["gè", "jiàn", "kuài"]},
+    {"p": "Tài ___ le, piányi yìdiǎn ba.", "c": "太 ___ 了，便宜一点吧。", "e": "Too expensive, can you make it cheaper?", "answer": "guì", "answerC": "贵", "wrongs": ["dà", "duō", "hǎo"]},
+    {"p": "Wǒ yào ___ zhège.", "c": "我要 ___ 这个。", "e": "I want to buy this.", "answer": "mǎi", "answerC": "买", "wrongs": ["mài", "yào", "kàn"]},
+    {"p": "Qǐng ___, xǐshǒujiān zài nǎlǐ?", "c": "请 ___，洗手间在哪里？", "e": "Excuse me, where is the restroom?", "answer": "wèn", "answerC": "问", "wrongs": ["zuò", "jìn", "shuō"]}
   ],
+  
   "3": [
-    // Extended expressions, conjunctions, actions
+    // 已经 (already) and 还 (still)
     {"p": "Wǒ ___ rènshi tā.", "c": "我 ___ 认识他。", "e": "I already know him.", "answer": "yǐjīng", "answerC": "已经", "wrongs": ["hái", "cái", "jiù"]},
+    {"p": "Tā ___ méi lái.", "c": "他 ___ 没来。", "e": "He still hasn't come.", "answer": "hái", "answerC": "还", "wrongs": ["yǐjīng", "jiù", "cái"]},
+    {"p": "Wǒ ___ chī le fàn.", "c": "我 ___ 吃了饭。", "e": "I have already eaten.", "answer": "yǐjīng", "answerC": "已经", "wrongs": ["hái", "zài", "méi"]},
+    {"p": "Nǐ ___ zài xuéxí ma?", "c": "你 ___ 在学习吗？", "e": "Are you still studying?", "answer": "hái", "answerC": "还", "wrongs": ["yǐjīng", "jiù", "cái"]},
+    // Conjunctions (虽然...但是, 因为...所以, 如果...就)
     {"p": "___ tiānqì bù hǎo, wǒ hái yào qù.", "c": "___ 天气不好，我还要去。", "e": "Although the weather is bad, I still want to go.", "answer": "Suīrán", "answerC": "虽然", "wrongs": ["Yīnwèi", "Rúguǒ", "Dànshì"]},
-    {"p": "Wǒ yǒu māo ___ yǒu gǒu.", "c": "我有猫 ___ 有狗。", "e": "I have both cats and dogs.", "answer": "yě", "answerC": "也", "wrongs": ["hé", "dōu", "hái"]},
-    {"p": "Qǐng nǐ ___ yíxià.", "c": "请你 ___ 一下。", "e": "Please wait a moment.", "answer": "děng", "answerC": "等", "wrongs": ["kàn", "shuō", "zuò"]},
-    {"p": "Wǒmen ___ qù kàn diànyǐng ba.", "c": "我们 ___ 去看电影吧。", "e": "Let's go watch a movie together.", "answer": "yīqǐ", "answerC": "一起", "wrongs": ["yīxià", "yīdiǎn", "yīhuìr"]},
-    {"p": "Tā shì wǒ de ___.", "c": "他是我的 ___。", "e": "He is my classmate.", "answer": "tóngxué", "answerC": "同学", "wrongs": ["tóngshì", "péngyou", "lǎoshī"]},
-    {"p": "Wǒ xǐhuan tīng yīnyuè ___ kàn shū.", "c": "我喜欢听音乐 ___ 看书。", "e": "I like both listening to music and reading.", "answer": "hé", "answerC": "和", "wrongs": ["yě", "dōu", "huòzhě"]},
     {"p": "___ xià yǔ, wǒ jiù bú qù le.", "c": "___ 下雨，我就不去了。", "e": "If it rains, I won't go.", "answer": "Rúguǒ", "answerC": "如果", "wrongs": ["Suīrán", "Yīnwèi", "Dànshì"]},
-    {"p": "Zhège zhōumò nǐ yǒu ___ ma?", "c": "这个周末你有 ___ 吗？", "e": "Do you have time this weekend?", "answer": "shíjiān", "answerC": "时间", "wrongs": ["kòng", "shì", "máng"]},
-    {"p": "Wǒ de shǒujī ___ le.", "c": "我的手机 ___ 了。", "e": "My phone is broken.", "answer": "huài", "answerC": "坏", "wrongs": ["hǎo", "xīn", "guì"]},
+    {"p": "___ wǒ bìng le, suǒyǐ méi qù shàngbān.", "c": "___ 我病了，所以没去上班。", "e": "Because I was sick, I didn't go to work.", "answer": "Yīnwèi", "answerC": "因为", "wrongs": ["Suīrán", "Rúguǒ", "Dànshì"]},
+    {"p": "Suīrán hěn lèi, ___ wǒ hěn kāixīn.", "c": "虽然很累，___ 我很开心。", "e": "Although I'm tired, I'm very happy.", "answer": "dànshì", "answerC": "但是", "wrongs": ["suǒyǐ", "yīnwèi", "rúguǒ"]},
+    {"p": "Rúguǒ nǐ yǒu shíjiān, ___ lái wǒ jiā ba.", "c": "如果你有时间，___ 来我家吧。", "e": "If you have time, then come to my house.", "answer": "jiù", "answerC": "就", "wrongs": ["cái", "hái", "yě"]},
+    {"p": "Yīnwèi tài guì le, ___ wǒ méi mǎi.", "c": "因为太贵了，___ 我没买。", "e": "Because it was too expensive, I didn't buy it.", "answer": "suǒyǐ", "answerC": "所以", "wrongs": ["dànshì", "jiù", "cái"]},
+    // 和 (and), 或者 (or), 还是 (or in questions)
+    {"p": "Wǒ xǐhuan tīng yīnyuè ___ kàn shū.", "c": "我喜欢听音乐 ___ 看书。", "e": "I like listening to music and reading.", "answer": "hé", "answerC": "和", "wrongs": ["yě", "dōu", "huòzhě"]},
+    {"p": "Nǐ hē chá ___ kāfēi?", "c": "你喝茶 ___ 咖啡？", "e": "Do you drink tea or coffee?", "answer": "háishi", "answerC": "还是", "wrongs": ["hé", "huòzhě", "yě"]},
+    {"p": "Míngtiān ___ hòutiān dōu kěyǐ.", "c": "明天 ___ 后天都可以。", "e": "Tomorrow or the day after are both fine.", "answer": "huòzhě", "answerC": "或者", "wrongs": ["háishi", "hé", "dōu"]},
+    // 一起 (together), 一下 (a little/moment), 一点 (a bit)
+    {"p": "Wǒmen ___ qù kàn diànyǐng ba.", "c": "我们 ___ 去看电影吧。", "e": "Let's go watch a movie together.", "answer": "yīqǐ", "answerC": "一起", "wrongs": ["yīxià", "yīdiǎn", "yīhuìr"]},
+    {"p": "Qǐng nǐ ___ yíxià.", "c": "请你 ___ 一下。", "e": "Please wait a moment.", "answer": "děng", "answerC": "等", "wrongs": ["kàn", "shuō", "zuò"]},
+    {"p": "Wǒ xiǎng xiūxi ___.", "c": "我想休息 ___。", "e": "I want to rest for a bit.", "answer": "yīxià", "answerC": "一下", "wrongs": ["yīqǐ", "yīdiǎn", "yīhuìr"]},
+    {"p": "Qǐng shuō ___ yīdiǎn.", "c": "请说 ___ 一点。", "e": "Please speak slower.", "answer": "màn", "answerC": "慢", "wrongs": ["kuài", "dà", "xiǎo"]},
+    // Aspect particles (了, 过, 着)
     {"p": "Nǐ ___ guò Zhōngguó ma?", "c": "你 ___ 过中国吗？", "e": "Have you been to China?", "answer": "qù", "answerC": "去", "wrongs": ["lái", "dào", "zài"]},
-    {"p": "Tā měi tiān zǒu ___ qù shàngbān.", "c": "他每天走 ___ 去上班。", "e": "He walks to work every day.", "answer": "lù", "answerC": "路", "wrongs": ["bù", "chē", "jiā"]}
+    {"p": "Wǒ chī ___ fàn le.", "c": "我吃 ___ 饭了。", "e": "I have finished eating.", "answer": "wán", "answerC": "完", "wrongs": ["hǎo", "dào", "guò"]},
+    {"p": "Tā chuān ___ hóng yīfu.", "c": "他穿 ___ 红衣服。", "e": "He is wearing red clothes.", "answer": "zhe", "answerC": "着", "wrongs": ["le", "guò", "de"]},
+    {"p": "Mén ___ zhe ne.", "c": "门 ___ 着呢。", "e": "The door is open.", "answer": "kāi", "answerC": "开", "wrongs": ["guān", "jìn", "chū"]},
+    // Directional complements
+    {"p": "Tā zǒu ___ le.", "c": "他走 ___ 了。", "e": "He has left.", "answer": "le", "answerC": "了", "wrongs": ["guò", "zhe", "de"]},
+    {"p": "Qǐng jìn ___!", "c": "请进 ___！", "e": "Please come in!", "answer": "lái", "answerC": "来", "wrongs": ["qù", "shàng", "xià"]},
+    {"p": "Tā pǎo ___ qù le.", "c": "他跑 ___ 去了。", "e": "He ran out.", "answer": "chū", "answerC": "出", "wrongs": ["jìn", "shàng", "xià"]},
+    // Time duration and frequency
+    {"p": "Wǒ xué le sān ___ Zhōngwén.", "c": "我学了三 ___ 中文。", "e": "I have studied Chinese for three years.", "answer": "nián", "answerC": "年", "wrongs": ["tiān", "yuè", "gè"]},
+    {"p": "Tā měi tiān zǒu ___ qù shàngbān.", "c": "他每天走 ___ 去上班。", "e": "He walks to work every day.", "answer": "lù", "answerC": "路", "wrongs": ["bù", "chē", "jiā"]},
+    {"p": "Wǒ ___ ge xīngqī qù yīcì.", "c": "我 ___ 个星期去一次。", "e": "I go once every week.", "answer": "měi", "answerC": "每", "wrongs": ["yī", "zhè", "nà"]},
+    // Relationship words
+    {"p": "Tā shì wǒ de ___.", "c": "他是我的 ___。", "e": "He is my classmate.", "answer": "tóngxué", "answerC": "同学", "wrongs": ["tóngshì", "péngyou", "lǎoshī"]},
+    {"p": "Zhège zhōumò nǐ yǒu ___ ma?", "c": "这个周末你有 ___ 吗？", "e": "Do you have time this weekend?", "answer": "shíjiān", "answerC": "时间", "wrongs": ["kòng", "shì", "máng"]},
+    {"p": "Wǒ de shǒujī ___ le.", "c": "我的手机 ___ 了。", "e": "My phone is broken.", "answer": "huài", "answerC": "坏", "wrongs": ["hǎo", "xīn", "guì"]}
   ],
+  
   "4": [
-    // Advanced expressions, measure words, cultural
-    {"p": "Nǐ shì ___ guó rén?", "c": "你是 ___ 国人？", "e": "What nationality are you?", "answer": "nǎ", "answerC": "哪", "wrongs": ["shénme", "nǎlǐ", "jǐ"]},
-    {"p": "Wǒ de shēngrì shì sān yuè shíwǔ ___.", "c": "我的生日是三月十五 ___。", "e": "My birthday is March 15th.", "answer": "hào", "answerC": "号", "wrongs": ["rì", "tiān", "nián"]},
+    // Measure words (advanced)
     {"p": "Wǒ yào mǎi liǎng ___ shū.", "c": "我要买两 ___ 书。", "e": "I want to buy two books.", "answer": "běn", "answerC": "本", "wrongs": ["gè", "zhāng", "jiàn"]},
     {"p": "Zhè ___ gǒu hěn kě'ài.", "c": "这 ___ 狗很可爱。", "e": "This dog is very cute.", "answer": "zhī", "answerC": "只", "wrongs": ["gè", "tiáo", "běn"]},
+    {"p": "Qǐng gěi wǒ yì ___ shuǐ.", "c": "请给我一 ___ 水。", "e": "Please give me a bottle of water.", "answer": "píng", "answerC": "瓶", "wrongs": ["bēi", "gè", "zhī"]},
+    {"p": "Zhuōzi shàng yǒu yì ___ huā.", "c": "桌子上有一 ___ 花。", "e": "There is a flower on the table.", "answer": "duǒ", "answerC": "朵", "wrongs": ["zhī", "gè", "kē"]},
+    {"p": "Wǒ mǎi le yì ___ xīn yīfu.", "c": "我买了一 ___ 新衣服。", "e": "I bought a new piece of clothing.", "answer": "jiàn", "answerC": "件", "wrongs": ["gè", "tiáo", "zhāng"]},
+    {"p": "Tā yǒu liǎng ___ qìchē.", "c": "他有两 ___ 汽车。", "e": "He has two cars.", "answer": "liàng", "answerC": "辆", "wrongs": ["gè", "zhī", "jiàn"]},
+    // Names and titles
     {"p": "Wǒ ___ Zhāng.", "c": "我 ___ 张。", "e": "My surname is Zhang.", "answer": "xìng", "answerC": "姓", "wrongs": ["míng", "jiào", "shì"]},
+    {"p": "Zhè wèi shì Wáng ___.", "c": "这位是王 ___。", "e": "This is Mr. Wang.", "answer": "xiānsheng", "answerC": "先生", "wrongs": ["xiǎojiě", "tàitai", "lǎoshī"]},
+    {"p": "Nín ___ wèi?", "c": "您 ___ 位？", "e": "How many people (polite)?", "answer": "jǐ", "answerC": "几", "wrongs": ["duōshao", "shénme", "nǎ"]},
+    {"p": "Nǐ shì ___ guó rén?", "c": "你是 ___ 国人？", "e": "What nationality are you?", "answer": "nǎ", "answerC": "哪", "wrongs": ["shénme", "nǎlǐ", "jǐ"]},
+    // Dates and age
+    {"p": "Wǒ de shēngrì shì sān yuè shíwǔ ___.", "c": "我的生日是三月十五 ___。", "e": "My birthday is March 15th.", "answer": "hào", "answerC": "号", "wrongs": ["rì", "tiān", "nián"]},
     {"p": "Nǐ ___ duō dà?", "c": "你 ___ 多大？", "e": "How old are you this year?", "answer": "jīnnián", "answerC": "今年", "wrongs": ["míngtiān", "zuótiān", "xiànzài"]},
     {"p": "Wǒ yéye jīnnián bāshí ___ le.", "c": "我爷爷今年八十 ___ 了。", "e": "My grandfather is eighty years old this year.", "answer": "suì", "answerC": "岁", "wrongs": ["nián", "hào", "tiān"]},
-    {"p": "Qǐng gěi wǒ yì ___ shuǐ.", "c": "请给我一 ___ 水。", "e": "Please give me a bottle of water.", "answer": "píng", "answerC": "瓶", "wrongs": ["bēi", "gè", "zhī"]},
-    {"p": "Wǒ ___ xué Zhōngwén.", "c": "我 ___ 学中文。", "e": "I am currently studying Chinese.", "answer": "zhèngzài", "answerC": "正在", "wrongs": ["yǐjīng", "hái", "jiù"]},
+    {"p": "Jīnnián shì èr líng èr wǔ ___.", "c": "今年是二零二五 ___。", "e": "This year is 2025.", "answer": "nián", "answerC": "年", "wrongs": ["hào", "yuè", "tiān"]},
+    // Location and floors
     {"p": "Wǒ jiā zài sān ___.", "c": "我家在三 ___。", "e": "My home is on the third floor.", "answer": "lóu", "answerC": "楼", "wrongs": ["lù", "shì", "hào"]},
-    {"p": "Zhè wèi shì Wáng ___.", "c": "这位是王 ___。", "e": "This is Mr. Wang.", "answer": "xiānsheng", "answerC": "先生", "wrongs": ["xiǎojiě", "tàitai", "lǎoshī"]},
-    {"p": "Wǒ xiǎng ___ yíxià.", "c": "我想 ___ 一下。", "e": "I want to give it a try.", "answer": "shì", "answerC": "试", "wrongs": ["kàn", "zuò", "shuō"]}
+    {"p": "Qǐng wǎng ___ zǒu.", "c": "请往 ___ 走。", "e": "Please go left.", "answer": "zuǒ", "answerC": "左", "wrongs": ["yòu", "qián", "hòu"]},
+    {"p": "Yīyuàn zài yínháng ___.", "c": "医院在银行 ___。", "e": "The hospital is behind the bank.", "answer": "hòumiàn", "answerC": "后面", "wrongs": ["qiánmiàn", "zuǒbiān", "yòubiān"]},
+    {"p": "Shūdiàn zài lùkǒu de ___.", "c": "书店在路口的 ___。", "e": "The bookstore is on the right side of the intersection.", "answer": "yòubiān", "answerC": "右边", "wrongs": ["zuǒbiān", "qiánmiàn", "hòumiàn"]},
+    // Advanced grammar (正在, 着, comparisons)
+    {"p": "Wǒ ___ xué Zhōngwén.", "c": "我 ___ 学中文。", "e": "I am currently studying Chinese.", "answer": "zhèngzài", "answerC": "正在", "wrongs": ["yǐjīng", "hái", "jiù"]},
+    {"p": "Tā ___ wǒ gāo.", "c": "他 ___ 我高。", "e": "He is taller than me.", "answer": "bǐ", "answerC": "比", "wrongs": ["hé", "hěn", "gèng"]},
+    {"p": "Zhège gēn nàge ___.", "c": "这个跟那个 ___。", "e": "This one is the same as that one.", "answer": "yīyàng", "answerC": "一样", "wrongs": ["bùyīyàng", "bǐ", "gèng"]},
+    {"p": "Tā de Zhōngwén shuō de ___ hǎo.", "c": "他的中文说得 ___ 好。", "e": "His Chinese is spoken very well.", "answer": "hěn", "answerC": "很", "wrongs": ["de", "bù", "tài"]},
+    // Trying and experiencing
+    {"p": "Wǒ xiǎng ___ yíxià.", "c": "我想 ___ 一下。", "e": "I want to give it a try.", "answer": "shì", "answerC": "试", "wrongs": ["kàn", "zuò", "shuō"]},
+    {"p": "Nǐ ___ guò Běijīng kǎoyā ma?", "c": "你 ___ 过北京烤鸭吗？", "e": "Have you tried Beijing roast duck?", "answer": "chī", "answerC": "吃", "wrongs": ["hē", "kàn", "zuò"]},
+    {"p": "Ràng wǒ ___ yīxià.", "c": "让我 ___ 一下。", "e": "Let me think about it.", "answer": "xiǎng", "answerC": "想", "wrongs": ["kàn", "shuō", "zuò"]},
+    // Making suggestions and requests
+    {"p": "Wǒmen zǒu ___!", "c": "我们走 ___！", "e": "Let's go!", "answer": "ba", "answerC": "吧", "wrongs": ["le", "ma", "ne"]},
+    {"p": "___ wǒ lái bāng nǐ.", "c": "___ 我来帮你。", "e": "Let me help you.", "answer": "Ràng", "answerC": "让", "wrongs": ["Qǐng", "Bié", "Yào"]},
+    {"p": "___ wàng le dài yàoshi.", "c": "___ 忘了带钥匙。", "e": "Don't forget to bring the key.", "answer": "Bié", "answerC": "别", "wrongs": ["Bù", "Méi", "Ràng"]},
+    // Complex sentences
+    {"p": "Chúle Zhōngwén, wǒ ___ xué Rìyǔ.", "c": "除了中文，我 ___ 学日语。", "e": "Besides Chinese, I also study Japanese.", "answer": "hái", "answerC": "还", "wrongs": ["yě", "dōu", "jiù"]},
+    {"p": "Wǒ yìbiān chīfàn, yìbiān ___ diànshì.", "c": "我一边吃饭，一边 ___ 电视。", "e": "I eat while watching TV.", "answer": "kàn", "answerC": "看", "wrongs": ["tīng", "shuō", "zuò"]}
+  ]
+};
+
+// ============ STUDY CENTER CONTENT DATA ============
+
+const GRAMMAR_PATTERNS = {
+  "1": [
+    {
+      id: "subject-hen-adj",
+      title: "Basic Adjective Sentences",
+      tag: "Essential",
+      formula: "Subject + 很 + Adjective",
+      explanation: "In Chinese, adjectives can act as predicates without a linking verb like 'is'. However, you typically need an adverb like 很 (hěn) before the adjective. While 很 means 'very', in this pattern it often just serves a grammatical function and doesn't always add emphasis.",
+      examples: [
+        {p: "Wǒ <span class='highlight'>hěn</span> máng.", c: "我<span class='highlight'>很</span>忙。", e: "I am (very) busy."},
+        {p: "Tā <span class='highlight'>hěn</span> gāo.", c: "他<span class='highlight'>很</span>高。", e: "He is (very) tall."},
+        {p: "Jīntiān <span class='highlight'>hěn</span> rè.", c: "今天<span class='highlight'>很</span>热。", e: "Today is (very) hot."}
+      ],
+      relatedLevel: 1
+    },
+    {
+      id: "negation-bu",
+      title: "Negation with 不",
+      tag: "Essential",
+      formula: "Subject + 不 + Verb/Adjective",
+      explanation: "不 (bù) is the most common negation word in Chinese. Use it before verbs and adjectives to make negative statements. Note: 不 changes to 'bú' (second tone) when followed by a fourth-tone word.",
+      examples: [
+        {p: "Wǒ <span class='highlight'>bù</span> xǐhuan kāfēi.", c: "我<span class='highlight'>不</span>喜欢咖啡。", e: "I don't like coffee."},
+        {p: "Tā <span class='highlight'>bù</span> máng.", c: "他<span class='highlight'>不</span>忙。", e: "He is not busy."},
+        {p: "Zhège <span class='highlight'>bù</span> guì.", c: "这个<span class='highlight'>不</span>贵。", e: "This is not expensive."}
+      ],
+      relatedLevel: 1
+    },
+    {
+      id: "question-ma",
+      title: "Yes/No Questions with 吗",
+      tag: "Essential",
+      formula: "Statement + 吗？",
+      explanation: "The easiest way to form a yes/no question in Chinese is to add 吗 (ma) at the end of a statement. The word order stays exactly the same - just add 吗!",
+      examples: [
+        {p: "Nǐ è <span class='highlight'>ma</span>?", c: "你饿<span class='highlight'>吗</span>？", e: "Are you hungry?"},
+        {p: "Tā shì nǐ de péngyou <span class='highlight'>ma</span>?", c: "他是你的朋友<span class='highlight'>吗</span>？", e: "Is he your friend?"},
+        {p: "Zhège hǎochī <span class='highlight'>ma</span>?", c: "这个好吃<span class='highlight'>吗</span>？", e: "Is this delicious?"}
+      ],
+      relatedLevel: 1
+    },
+    {
+      id: "possessive-de",
+      title: "Possession with 的",
+      tag: "Essential",
+      formula: "Noun/Pronoun + 的 + Noun",
+      explanation: "的 (de) shows possession, similar to 's in English. Place it between the possessor and what is possessed. For close relationships (family, close friends), 的 can be omitted.",
+      examples: [
+        {p: "Wǒ <span class='highlight'>de</span> shū.", c: "我<span class='highlight'>的</span>书。", e: "My book."},
+        {p: "Tā <span class='highlight'>de</span> māma.", c: "他<span class='highlight'>的</span>妈妈。", e: "His mom."},
+        {p: "Zhè shì shéi <span class='highlight'>de</span>?", c: "这是谁<span class='highlight'>的</span>？", e: "Whose is this?"}
+      ],
+      relatedLevel: 1
+    },
+    {
+      id: "superlative-zui",
+      title: "Superlatives with 最",
+      tag: "Intermediate",
+      formula: "Subject + 最 + Adjective",
+      explanation: "最 (zuì) means 'most' and creates superlatives. Unlike English, you don't need to change the adjective form - just add 最 before it.",
+      examples: [
+        {p: "Tā <span class='highlight'>zuì</span> gāo.", c: "他<span class='highlight'>最</span>高。", e: "He is the tallest."},
+        {p: "Zhège <span class='highlight'>zuì</span> hǎochī.", c: "这个<span class='highlight'>最</span>好吃。", e: "This is the most delicious."},
+        {p: "Wǒ <span class='highlight'>zuì</span> xǐhuan hóng sè.", c: "我<span class='highlight'>最</span>喜欢红色。", e: "I like red the most."}
+      ],
+      relatedLevel: 1
+    },
+    {
+      id: "also-ye",
+      title: "Also with 也",
+      tag: "Essential",
+      formula: "Subject + 也 + Verb/Adjective",
+      explanation: "也 (yě) means 'also' or 'too'. It always comes BEFORE the verb or adjective, never at the end of the sentence like 'too' in English.",
+      examples: [
+        {p: "Wǒ <span class='highlight'>yě</span> è le.", c: "我<span class='highlight'>也</span>饿了。", e: "I am also hungry."},
+        {p: "Tā <span class='highlight'>yě</span> xǐhuan chī.", c: "他<span class='highlight'>也</span>喜欢吃。", e: "He also likes to eat."},
+        {p: "Māma <span class='highlight'>yě</span> hěn máng.", c: "妈妈<span class='highlight'>也</span>很忙。", e: "Mom is also very busy."}
+      ],
+      relatedLevel: 1
+    }
+  ],
+  "2": [
+    {
+      id: "modal-hui",
+      title: "Ability with 会",
+      tag: "Essential",
+      formula: "Subject + 会 + Verb",
+      explanation: "会 (huì) indicates learned ability or skill - things you can do because you learned how. It's used for skills like speaking languages, swimming, cooking, etc. It can also indicate future likelihood.",
+      examples: [
+        {p: "Wǒ <span class='highlight'>huì</span> shuō Zhōngwén.", c: "我<span class='highlight'>会</span>说中文。", e: "I can speak Chinese."},
+        {p: "Tā bù <span class='highlight'>huì</span> yóuyǒng.", c: "他不<span class='highlight'>会</span>游泳。", e: "He can't swim."},
+        {p: "Míngtiān <span class='highlight'>huì</span> xià yǔ.", c: "明天<span class='highlight'>会</span>下雨。", e: "It will rain tomorrow."}
+      ],
+      relatedLevel: 2
+    },
+    {
+      id: "modal-keyi",
+      title: "Permission with 可以",
+      tag: "Essential",
+      formula: "Subject + 可以 + Verb",
+      explanation: "可以 (kěyǐ) indicates permission or possibility - whether something is allowed or feasible. Use it when asking if you may do something.",
+      examples: [
+        {p: "Wǒ <span class='highlight'>kěyǐ</span> jìnlái ma?", c: "我<span class='highlight'>可以</span>进来吗？", e: "May I come in?"},
+        {p: "Zhèlǐ bù <span class='highlight'>kěyǐ</span> chōuyān.", c: "这里不<span class='highlight'>可以</span>抽烟。", e: "Smoking is not allowed here."},
+        {p: "Nǐ <span class='highlight'>kěyǐ</span> zǒu le.", c: "你<span class='highlight'>可以</span>走了。", e: "You may go now."}
+      ],
+      relatedLevel: 2
+    },
+    {
+      id: "modal-neng",
+      title: "Capability with 能",
+      tag: "Essential",
+      formula: "Subject + 能 + Verb",
+      explanation: "能 (néng) indicates physical ability or circumstantial possibility - whether conditions allow something to happen. Use it for capabilities based on circumstances.",
+      examples: [
+        {p: "Nǐ <span class='highlight'>néng</span> bāng wǒ ma?", c: "你<span class='highlight'>能</span>帮我吗？", e: "Can you help me?"},
+        {p: "Wǒ jīntiān bù <span class='highlight'>néng</span> lái.", c: "我今天不<span class='highlight'>能</span>来。", e: "I can't come today."},
+        {p: "Tā bìng le, bù <span class='highlight'>néng</span> chī.", c: "他病了，不<span class='highlight'>能</span>吃。", e: "He's sick, he can't eat."}
+      ],
+      relatedLevel: 2
+    },
+    {
+      id: "measure-words",
+      title: "Measure Words",
+      tag: "Essential",
+      formula: "Number + Measure Word + Noun",
+      explanation: "Chinese uses measure words (classifiers) between numbers and nouns. Different nouns require different measure words. 个 (gè) is the most common and can be used as a default when unsure.",
+      examples: [
+        {p: "Yì <span class='highlight'>bēi</span> kāfēi.", c: "一<span class='highlight'>杯</span>咖啡。", e: "A cup of coffee."},
+        {p: "Sān <span class='highlight'>běn</span> shū.", c: "三<span class='highlight'>本</span>书。", e: "Three books."},
+        {p: "Liǎng <span class='highlight'>zhī</span> māo.", c: "两<span class='highlight'>只</span>猫。", e: "Two cats."}
+      ],
+      relatedLevel: 2
+    },
+    {
+      id: "time-when",
+      title: "Time Words Position",
+      tag: "Essential",
+      formula: "Subject + Time + Verb + Object",
+      explanation: "In Chinese, time words typically come BEFORE the verb, either at the beginning of the sentence or right after the subject. This is different from English where time often comes at the end.",
+      examples: [
+        {p: "Wǒ <span class='highlight'>míngtiān</span> qù.", c: "我<span class='highlight'>明天</span>去。", e: "I'll go tomorrow."},
+        {p: "Tā <span class='highlight'>měitiān</span> liù diǎn qǐchuáng.", c: "他<span class='highlight'>每天</span>六点起床。", e: "He gets up at 6 every day."},
+        {p: "<span class='highlight'>Xiànzài</span> jǐ diǎn?", c: "<span class='highlight'>现在</span>几点？", e: "What time is it now?"}
+      ],
+      relatedLevel: 2
+    },
+    {
+      id: "location-zai",
+      title: "Location with 在",
+      tag: "Essential",
+      formula: "Subject + 在 + Place",
+      explanation: "在 (zài) indicates location - where someone or something is. It can mean 'at', 'in', or 'on' depending on context.",
+      examples: [
+        {p: "Wǒ <span class='highlight'>zài</span> jiā.", c: "我<span class='highlight'>在</span>家。", e: "I am at home."},
+        {p: "Cèsuǒ <span class='highlight'>zài</span> nǎlǐ?", c: "厕所<span class='highlight'>在</span>哪里？", e: "Where is the bathroom?"},
+        {p: "Tā <span class='highlight'>zài</span> xuéxiào gōngzuò.", c: "他<span class='highlight'>在</span>学校工作。", e: "He works at school."}
+      ],
+      relatedLevel: 2
+    }
+  ],
+  "3": [
+    {
+      id: "past-le",
+      title: "Completed Action with 了",
+      tag: "Essential",
+      formula: "Subject + Verb + 了 + (Object)",
+      explanation: "了 (le) after a verb indicates a completed action - something that has already happened. It's one of the most important grammar points in Chinese and is used similarly to past tense in English.",
+      examples: [
+        {p: "Wǒ chī <span class='highlight'>le</span> fàn.", c: "我吃<span class='highlight'>了</span>饭。", e: "I ate / I have eaten."},
+        {p: "Tā qù <span class='highlight'>le</span> Zhōngguó.", c: "他去<span class='highlight'>了</span>中国。", e: "He went to China."},
+        {p: "Wǒ kàn <span class='highlight'>le</span> nà ge diànyǐng.", c: "我看<span class='highlight'>了</span>那个电影。", e: "I watched that movie."}
+      ],
+      relatedLevel: 3
+    },
+    {
+      id: "experience-guo",
+      title: "Experience with 过",
+      tag: "Essential",
+      formula: "Subject + Verb + 过 + (Object)",
+      explanation: "过 (guò) after a verb indicates that someone has experienced doing something at least once before. It emphasizes the experience rather than when it happened.",
+      examples: [
+        {p: "Wǒ qù <span class='highlight'>guò</span> Běijīng.", c: "我去<span class='highlight'>过</span>北京。", e: "I have been to Beijing (before)."},
+        {p: "Nǐ chī <span class='highlight'>guò</span> jiǎozi ma?", c: "你吃<span class='highlight'>过</span>饺子吗？", e: "Have you ever eaten dumplings?"},
+        {p: "Tā méi kàn <span class='highlight'>guò</span> zhè ge diànyǐng.", c: "他没看<span class='highlight'>过</span>这个电影。", e: "He has never seen this movie."}
+      ],
+      relatedLevel: 3
+    },
+    {
+      id: "progressive-zai",
+      title: "Progressive Action with 在",
+      tag: "Essential",
+      formula: "Subject + 在 + Verb + (Object)",
+      explanation: "在 (zài) before a verb indicates an action in progress - something happening right now. It's similar to English '-ing' form.",
+      examples: [
+        {p: "Tā <span class='highlight'>zài</span> chī fàn.", c: "他<span class='highlight'>在</span>吃饭。", e: "He is eating."},
+        {p: "Wǒ <span class='highlight'>zài</span> xuéxí Zhōngwén.", c: "我<span class='highlight'>在</span>学习中文。", e: "I am studying Chinese."},
+        {p: "Māma <span class='highlight'>zài</span> zuò fàn.", c: "妈妈<span class='highlight'>在</span>做饭。", e: "Mom is cooking."}
+      ],
+      relatedLevel: 3
+    },
+    {
+      id: "comparison-bi",
+      title: "Comparison with 比",
+      tag: "Essential",
+      formula: "A + 比 + B + Adjective",
+      explanation: "比 (bǐ) is used to compare two things. The structure is different from English - you say 'A compared-to B [adjective]' rather than 'A is more [adjective] than B'.",
+      examples: [
+        {p: "Tā <span class='highlight'>bǐ</span> wǒ gāo.", c: "他<span class='highlight'>比</span>我高。", e: "He is taller than me."},
+        {p: "Jīntiān <span class='highlight'>bǐ</span> zuótiān rè.", c: "今天<span class='highlight'>比</span>昨天热。", e: "Today is hotter than yesterday."},
+        {p: "Zhè ge <span class='highlight'>bǐ</span> nà ge guì.", c: "这个<span class='highlight'>比</span>那个贵。", e: "This one is more expensive than that one."}
+      ],
+      relatedLevel: 3
+    },
+    {
+      id: "duration",
+      title: "Duration of Time",
+      tag: "Intermediate",
+      formula: "Subject + Verb + 了 + Duration + (的) + Object",
+      explanation: "To express how long an action lasted, place the duration after the verb. For completed actions, use 了 before the duration.",
+      examples: [
+        {p: "Wǒ xué <span class='highlight'>le liǎng nián</span> Zhōngwén.", c: "我学<span class='highlight'>了两年</span>中文。", e: "I studied Chinese for two years."},
+        {p: "Tā shuì <span class='highlight'>le bā ge xiǎoshí</span>.", c: "他睡<span class='highlight'>了八个小时</span>。", e: "He slept for eight hours."},
+        {p: "Wǒmen děng <span class='highlight'>le hěn jiǔ</span>.", c: "我们等<span class='highlight'>了很久</span>。", e: "We waited for a long time."}
+      ],
+      relatedLevel: 3
+    },
+    {
+      id: "want-xiang",
+      title: "Wanting with 想",
+      tag: "Essential",
+      formula: "Subject + 想 + Verb + (Object)",
+      explanation: "想 (xiǎng) means 'want to' or 'would like to'. It expresses desires and intentions. It's softer and more polite than 要 (yào).",
+      examples: [
+        {p: "Wǒ <span class='highlight'>xiǎng</span> qù Zhōngguó.", c: "我<span class='highlight'>想</span>去中国。", e: "I want to go to China."},
+        {p: "Nǐ <span class='highlight'>xiǎng</span> chī shénme?", c: "你<span class='highlight'>想</span>吃什么？", e: "What do you want to eat?"},
+        {p: "Tā <span class='highlight'>xiǎng</span> xué zuò fàn.", c: "他<span class='highlight'>想</span>学做饭。", e: "He wants to learn to cook."}
+      ],
+      relatedLevel: 3
+    }
+  ],
+  "4": [
+    {
+      id: "change-le",
+      title: "Change of State with 了",
+      tag: "Essential",
+      formula: "Statement + 了",
+      explanation: "了 (le) at the end of a sentence indicates a change of state - something is now different from before. This is different from the completed action 了 after a verb.",
+      examples: [
+        {p: "Tiān hēi <span class='highlight'>le</span>.", c: "天黑<span class='highlight'>了</span>。", e: "It's gotten dark. (It wasn't dark before)"},
+        {p: "Wǒ è <span class='highlight'>le</span>.", c: "我饿<span class='highlight'>了</span>。", e: "I'm hungry now. (I wasn't before)"},
+        {p: "Tā shì dàxuéshēng <span class='highlight'>le</span>.", c: "他是大学生<span class='highlight'>了</span>。", e: "He's a college student now."}
+      ],
+      relatedLevel: 4
+    },
+    {
+      id: "giving-gei",
+      title: "Giving with 给",
+      tag: "Essential",
+      formula: "Subject + 给 + Recipient + Verb + Object",
+      explanation: "给 (gěi) can mean 'to give' or indicate the recipient of an action. When used before a verb, it shows who the action is done for.",
+      examples: [
+        {p: "Wǒ <span class='highlight'>gěi</span> nǐ yì běn shū.", c: "我<span class='highlight'>给</span>你一本书。", e: "I give you a book."},
+        {p: "Qǐng <span class='highlight'>gěi</span> wǒ yì bēi shuǐ.", c: "请<span class='highlight'>给</span>我一杯水。", e: "Please give me a glass of water."},
+        {p: "Māma <span class='highlight'>gěi</span> wǒ zuò fàn.", c: "妈妈<span class='highlight'>给</span>我做饭。", e: "Mom cooks for me."}
+      ],
+      relatedLevel: 4
+    },
+    {
+      id: "resultative-complements",
+      title: "Result Complements",
+      tag: "Intermediate",
+      formula: "Verb + Result (好/完/到/见/懂)",
+      explanation: "Result complements follow verbs to indicate the outcome of an action. Common ones include 好 (properly done), 完 (finished), 到 (achieved), 见 (perceived), 懂 (understood).",
+      examples: [
+        {p: "Wǒ zuò <span class='highlight'>wán</span> le.", c: "我做<span class='highlight'>完</span>了。", e: "I finished doing it."},
+        {p: "Nǐ tīng <span class='highlight'>dǒng</span> le ma?", c: "你听<span class='highlight'>懂</span>了吗？", e: "Did you understand (by listening)?"},
+        {p: "Wǒ kàn <span class='highlight'>jiàn</span> tā le.", c: "我看<span class='highlight'>见</span>他了。", e: "I saw him."}
+      ],
+      relatedLevel: 4
+    },
+    {
+      id: "directional-lai-qu",
+      title: "Directional Complements 来/去",
+      tag: "Intermediate",
+      formula: "Verb + 来/去",
+      explanation: "来 (lái) and 去 (qù) after verbs indicate direction of movement. 来 means toward the speaker, 去 means away from the speaker.",
+      examples: [
+        {p: "Tā zǒu <span class='highlight'>jìnlái</span> le.", c: "他走<span class='highlight'>进来</span>了。", e: "He walked in (toward me)."},
+        {p: "Qǐng ná <span class='highlight'>chūlái</span>.", c: "请拿<span class='highlight'>出来</span>。", e: "Please take it out."},
+        {p: "Wǒmen pǎo <span class='highlight'>shàngqù</span> ba.", c: "我们跑<span class='highlight'>上去</span>吧。", e: "Let's run up (there)."}
+      ],
+      relatedLevel: 4
+    },
+    {
+      id: "ba-construction",
+      title: "把 Construction",
+      tag: "Advanced",
+      formula: "Subject + 把 + Object + Verb + Complement",
+      explanation: "把 (bǎ) is used to bring the object before the verb, emphasizing what happens to the object. The verb usually needs a complement or 了.",
+      examples: [
+        {p: "Qǐng <span class='highlight'>bǎ</span> mén guān shang.", c: "请<span class='highlight'>把</span>门关上。", e: "Please close the door."},
+        {p: "Wǒ <span class='highlight'>bǎ</span> shū fàng zài zhuōzi shang.", c: "我<span class='highlight'>把</span>书放在桌子上。", e: "I put the book on the table."},
+        {p: "Tā <span class='highlight'>bǎ</span> kāfēi hē wán le.", c: "他<span class='highlight'>把</span>咖啡喝完了。", e: "He finished drinking the coffee."}
+      ],
+      relatedLevel: 4
+    },
+    {
+      id: "passive-bei",
+      title: "Passive with 被",
+      tag: "Advanced",
+      formula: "Subject + 被 + (Agent) + Verb + Complement",
+      explanation: "被 (bèi) creates passive sentences where the subject receives the action. It often implies something unfortunate happened to the subject.",
+      examples: [
+        {p: "Wǒ de shǒujī <span class='highlight'>bèi</span> tōu le.", c: "我的手机<span class='highlight'>被</span>偷了。", e: "My phone was stolen."},
+        {p: "Dàngāo <span class='highlight'>bèi</span> chī wán le.", c: "蛋糕<span class='highlight'>被</span>吃完了。", e: "The cake was all eaten."},
+        {p: "Tā <span class='highlight'>bèi</span> lǎoshī pīpíng le.", c: "他<span class='highlight'>被</span>老师批评了。", e: "He was criticized by the teacher."}
+      ],
+      relatedLevel: 4
+    }
+  ]
+};
+
+const SENTENCE_BREAKDOWNS = {
+  "1": [
+    {
+      sentence: "我很喜欢吃中国菜。",
+      pinyin: "Wǒ hěn xǐhuan chī Zhōngguó cài.",
+      english: "I really like eating Chinese food.",
+      words: [
+        {c: "我", p: "wǒ", role: "Subject", meaning: "I / me", explanation: "The subject comes first, just like in English."},
+        {c: "很", p: "hěn", role: "Adverb", meaning: "very / really", explanation: "Adverbs come before the verb they modify."},
+        {c: "喜欢", p: "xǐhuan", role: "Verb", meaning: "to like", explanation: "The main verb of the sentence."},
+        {c: "吃", p: "chī", role: "Verb", meaning: "to eat", explanation: "A second verb forming a verb phrase with 喜欢."},
+        {c: "中国", p: "Zhōngguó", role: "Modifier", meaning: "China / Chinese", explanation: "Modifies the noun that follows."},
+        {c: "菜", p: "cài", role: "Object", meaning: "food / dish", explanation: "The object of the verb 吃."}
+      ],
+      wordOrderChinese: "我 + 很 + 喜欢 + 吃 + 中国菜",
+      wordOrderEnglish: "I + really + like + eating + Chinese food"
+    },
+    {
+      sentence: "他是我的哥哥。",
+      pinyin: "Tā shì wǒ de gēge.",
+      english: "He is my older brother.",
+      words: [
+        {c: "他", p: "tā", role: "Subject", meaning: "he / him", explanation: "The subject of the sentence."},
+        {c: "是", p: "shì", role: "Verb", meaning: "to be", explanation: "The 'to be' verb linking subject to complement."},
+        {c: "我", p: "wǒ", role: "Possessor", meaning: "I / me", explanation: "Shows who the brother belongs to."},
+        {c: "的", p: "de", role: "Particle", meaning: "(possessive)", explanation: "Marks possession, like 's in English."},
+        {c: "哥哥", p: "gēge", role: "Noun", meaning: "older brother", explanation: "The complement completing the sentence."}
+      ],
+      wordOrderChinese: "他 + 是 + 我的 + 哥哥",
+      wordOrderEnglish: "He + is + my + older brother"
+    },
+    {
+      sentence: "这个苹果太贵了。",
+      pinyin: "Zhège píngguǒ tài guì le.",
+      english: "This apple is too expensive.",
+      words: [
+        {c: "这个", p: "zhège", role: "Determiner", meaning: "this", explanation: "Points to a specific item."},
+        {c: "苹果", p: "píngguǒ", role: "Subject", meaning: "apple", explanation: "The topic of the sentence."},
+        {c: "太", p: "tài", role: "Adverb", meaning: "too (much)", explanation: "Indicates excess, works with 了."},
+        {c: "贵", p: "guì", role: "Adjective", meaning: "expensive", explanation: "Describes the apple."},
+        {c: "了", p: "le", role: "Particle", meaning: "(emphasis)", explanation: "Used with 太 to complete the pattern."}
+      ],
+      wordOrderChinese: "这个苹果 + 太 + 贵 + 了",
+      wordOrderEnglish: "This apple + too + expensive + (emphasis)"
+    }
+  ],
+  "2": [
+    {
+      sentence: "我每天坐地铁去上班。",
+      pinyin: "Wǒ měitiān zuò dìtiě qù shàngbān.",
+      english: "I take the subway to work every day.",
+      words: [
+        {c: "我", p: "wǒ", role: "Subject", meaning: "I / me", explanation: "The subject comes first."},
+        {c: "每天", p: "měitiān", role: "Time", meaning: "every day", explanation: "Time words come before the verb in Chinese."},
+        {c: "坐", p: "zuò", role: "Verb", meaning: "to sit / take", explanation: "Used for taking transportation."},
+        {c: "地铁", p: "dìtiě", role: "Object", meaning: "subway", explanation: "The means of transportation."},
+        {c: "去", p: "qù", role: "Verb", meaning: "to go", explanation: "Shows direction of movement."},
+        {c: "上班", p: "shàngbān", role: "Purpose", meaning: "to work", explanation: "The destination/purpose."}
+      ],
+      wordOrderChinese: "我 + 每天 + 坐地铁 + 去 + 上班",
+      wordOrderEnglish: "I + every day + take subway + go + work"
+    },
+    {
+      sentence: "你会说中文吗？",
+      pinyin: "Nǐ huì shuō Zhōngwén ma?",
+      english: "Can you speak Chinese?",
+      words: [
+        {c: "你", p: "nǐ", role: "Subject", meaning: "you", explanation: "The subject being asked about."},
+        {c: "会", p: "huì", role: "Modal", meaning: "can / able to", explanation: "Indicates learned ability."},
+        {c: "说", p: "shuō", role: "Verb", meaning: "to speak", explanation: "The main action verb."},
+        {c: "中文", p: "Zhōngwén", role: "Object", meaning: "Chinese", explanation: "The language being discussed."},
+        {c: "吗", p: "ma", role: "Particle", meaning: "(question)", explanation: "Turns the statement into a yes/no question."}
+      ],
+      wordOrderChinese: "你 + 会 + 说 + 中文 + 吗？",
+      wordOrderEnglish: "You + can + speak + Chinese + ?"
+    },
+    {
+      sentence: "火车站在银行后面。",
+      pinyin: "Huǒchēzhàn zài yínháng hòumiàn.",
+      english: "The train station is behind the bank.",
+      words: [
+        {c: "火车站", p: "huǒchēzhàn", role: "Subject", meaning: "train station", explanation: "The topic being located."},
+        {c: "在", p: "zài", role: "Verb", meaning: "at / in", explanation: "Indicates location."},
+        {c: "银行", p: "yínháng", role: "Reference", meaning: "bank", explanation: "The reference point for location."},
+        {c: "后面", p: "hòumiàn", role: "Position", meaning: "behind", explanation: "The position relative to the bank."}
+      ],
+      wordOrderChinese: "火车站 + 在 + 银行 + 后面",
+      wordOrderEnglish: "Train station + is at + bank + behind"
+    }
+  ],
+  "3": [
+    {
+      sentence: "我昨天去了超市买东西。",
+      pinyin: "Wǒ zuótiān qù le chāoshì mǎi dōngxi.",
+      english: "I went to the supermarket to buy things yesterday.",
+      words: [
+        {c: "我", p: "wǒ", role: "Subject", meaning: "I / me", explanation: "The subject comes first."},
+        {c: "昨天", p: "zuótiān", role: "Time", meaning: "yesterday", explanation: "Time word placed before the verb."},
+        {c: "去", p: "qù", role: "Verb", meaning: "to go", explanation: "The main action verb."},
+        {c: "了", p: "le", role: "Particle", meaning: "(completed)", explanation: "Indicates the action is completed."},
+        {c: "超市", p: "chāoshì", role: "Place", meaning: "supermarket", explanation: "The destination."},
+        {c: "买", p: "mǎi", role: "Verb", meaning: "to buy", explanation: "Secondary action (purpose)."},
+        {c: "东西", p: "dōngxi", role: "Object", meaning: "things / stuff", explanation: "What was bought."}
+      ],
+      wordOrderChinese: "我 + 昨天 + 去了 + 超市 + 买 + 东西",
+      wordOrderEnglish: "I + yesterday + went + supermarket + buy + things"
+    },
+    {
+      sentence: "他比我大三岁。",
+      pinyin: "Tā bǐ wǒ dà sān suì.",
+      english: "He is three years older than me.",
+      words: [
+        {c: "他", p: "tā", role: "Subject", meaning: "he", explanation: "The person being compared."},
+        {c: "比", p: "bǐ", role: "Comparison", meaning: "compared to", explanation: "Links the two things being compared."},
+        {c: "我", p: "wǒ", role: "Object", meaning: "me", explanation: "The comparison reference point."},
+        {c: "大", p: "dà", role: "Adjective", meaning: "big / old", explanation: "The quality being compared."},
+        {c: "三岁", p: "sān suì", role: "Degree", meaning: "three years", explanation: "How much greater the difference is."}
+      ],
+      wordOrderChinese: "他 + 比 + 我 + 大 + 三岁",
+      wordOrderEnglish: "He + compared to + me + older + three years"
+    },
+    {
+      sentence: "你去过日本吗？",
+      pinyin: "Nǐ qù guò Rìběn ma?",
+      english: "Have you ever been to Japan?",
+      words: [
+        {c: "你", p: "nǐ", role: "Subject", meaning: "you", explanation: "The person being asked."},
+        {c: "去", p: "qù", role: "Verb", meaning: "to go", explanation: "The action verb."},
+        {c: "过", p: "guò", role: "Particle", meaning: "(experience)", explanation: "Indicates past experience, not just past action."},
+        {c: "日本", p: "Rìběn", role: "Place", meaning: "Japan", explanation: "The destination being asked about."},
+        {c: "吗", p: "ma", role: "Particle", meaning: "(question)", explanation: "Forms a yes/no question."}
+      ],
+      wordOrderChinese: "你 + 去过 + 日本 + 吗？",
+      wordOrderEnglish: "You + have been to + Japan + ?"
+    }
+  ],
+  "4": [
+    {
+      sentence: "请把窗户关上。",
+      pinyin: "Qǐng bǎ chuānghù guān shàng.",
+      english: "Please close the window.",
+      words: [
+        {c: "请", p: "qǐng", role: "Polite", meaning: "please", explanation: "Makes the request polite."},
+        {c: "把", p: "bǎ", role: "Marker", meaning: "(object marker)", explanation: "Brings the object before the verb."},
+        {c: "窗户", p: "chuānghù", role: "Object", meaning: "window", explanation: "The thing being acted upon."},
+        {c: "关", p: "guān", role: "Verb", meaning: "to close", explanation: "The main action."},
+        {c: "上", p: "shàng", role: "Complement", meaning: "up / closed", explanation: "Result of the action - successfully closed."}
+      ],
+      wordOrderChinese: "请 + 把 + 窗户 + 关上",
+      wordOrderEnglish: "Please + [object marker] + window + close-up"
+    },
+    {
+      sentence: "我的手机被弟弟摔坏了。",
+      pinyin: "Wǒ de shǒujī bèi dìdi shuāi huài le.",
+      english: "My phone was broken by my younger brother (he dropped it).",
+      words: [
+        {c: "我的", p: "wǒ de", role: "Possessive", meaning: "my", explanation: "Shows ownership."},
+        {c: "手机", p: "shǒujī", role: "Subject", meaning: "phone", explanation: "The thing affected (patient)."},
+        {c: "被", p: "bèi", role: "Passive", meaning: "by", explanation: "Creates passive voice."},
+        {c: "弟弟", p: "dìdi", role: "Agent", meaning: "younger brother", explanation: "Who did the action."},
+        {c: "摔坏", p: "shuāi huài", role: "Verb+Result", meaning: "drop-broken", explanation: "The action and its result."},
+        {c: "了", p: "le", role: "Particle", meaning: "(completed)", explanation: "Shows the action is done."}
+      ],
+      wordOrderChinese: "我的手机 + 被 + 弟弟 + 摔坏了",
+      wordOrderEnglish: "My phone + by + brother + was dropped-broken"
+    },
+    {
+      sentence: "他跑进来告诉我这个消息。",
+      pinyin: "Tā pǎo jìnlái gàosù wǒ zhège xiāoxi.",
+      english: "He ran in to tell me this news.",
+      words: [
+        {c: "他", p: "tā", role: "Subject", meaning: "he", explanation: "The person doing the action."},
+        {c: "跑", p: "pǎo", role: "Verb", meaning: "to run", explanation: "The manner of movement."},
+        {c: "进来", p: "jìnlái", role: "Direction", meaning: "in (toward)", explanation: "Directional complement - toward speaker."},
+        {c: "告诉", p: "gàosù", role: "Verb", meaning: "to tell", explanation: "The purpose of coming."},
+        {c: "我", p: "wǒ", role: "Indirect Obj", meaning: "me", explanation: "The person being told."},
+        {c: "这个消息", p: "zhège xiāoxi", role: "Direct Obj", meaning: "this news", explanation: "What was told."}
+      ],
+      wordOrderChinese: "他 + 跑进来 + 告诉 + 我 + 这个消息",
+      wordOrderEnglish: "He + ran in + tell + me + this news"
+    }
+  ]
+};
+
+const USAGE_NOTES = {
+  "1": [
+    {
+      id: "hen-vs-shi",
+      title: "很 vs 是 with Adjectives",
+      icon: "💡",
+      content: "A common mistake is using 是 (shì) with adjectives like in English. Don't say '我是忙' (I am busy) - say '我很忙'.",
+      comparisons: [
+        {word: "很", pinyin: "hěn", meaning: "very", use: "Use with adjectives: 我很忙 (I am busy)"},
+        {word: "是", pinyin: "shì", meaning: "to be", use: "Use with nouns: 我是学生 (I am a student)"}
+      ],
+      correct: {label: "Correct", sentence: "我很累。(Wǒ hěn lèi.)"},
+      wrong: {label: "Wrong", sentence: "我是累。(Wǒ shì lèi.)"},
+      tip: {title: "Remember", text: "是 links nouns to nouns. 很 links subjects to adjectives. When in doubt with adjectives, use 很!"}
+    },
+    {
+      id: "ye-position",
+      title: "Position of 也 (also)",
+      icon: "📍",
+      content: "也 (yě) must come BEFORE the verb, not at the end like 'too' in English.",
+      comparisons: [
+        {word: "也", pinyin: "yě", meaning: "also / too", use: "Always before the verb: 我也喜欢"},
+        {word: "too", pinyin: "-", meaning: "also", use: "In English, often at end: I like it too"}
+      ],
+      correct: {label: "Correct", sentence: "我也喜欢咖啡。(Wǒ yě xǐhuan kāfēi.)"},
+      wrong: {label: "Wrong", sentence: "我喜欢咖啡也。"},
+      tip: {title: "Pattern", text: "Subject + 也 + Verb. The 也 always comes immediately before what it modifies."}
+    },
+    {
+      id: "question-words",
+      title: "Question Words Stay in Place",
+      icon: "❓",
+      content: "Unlike English, Chinese question words (什么, 谁, 哪里) stay in the same position as the answer would be. No word order change!",
+      comparisons: [
+        {word: "什么", pinyin: "shénme", meaning: "what", use: "你吃什么？→ 我吃苹果。"},
+        {word: "谁", pinyin: "shéi", meaning: "who", use: "他是谁？→ 他是我哥哥。"}
+      ],
+      correct: {label: "Example", sentence: "你去哪里？(Nǐ qù nǎlǐ?) - Where are you going?"},
+      wrong: {label: "Note", sentence: "Question word stays where the answer goes."},
+      tip: {title: "Tip", text: "If you can answer by replacing the question word, you've got the right position!"}
+    }
+  ],
+  "2": [
+    {
+      id: "hui-neng-keyi",
+      title: "会 vs 能 vs 可以",
+      icon: "🔄",
+      content: "These three words all translate to 'can' in English, but they have different uses in Chinese.",
+      comparisons: [
+        {word: "会", pinyin: "huì", meaning: "can (learned)", use: "Learned skills: 会游泳, 会说中文"},
+        {word: "能", pinyin: "néng", meaning: "can (able)", use: "Ability/circumstances: 能帮忙吗？"},
+        {word: "可以", pinyin: "kěyǐ", meaning: "can (allowed)", use: "Permission: 可以进来吗？"}
+      ],
+      correct: {label: "会", sentence: "我会开车。(I can drive - learned skill)"},
+      wrong: {label: "可以", sentence: "我可以开车。(I may drive - permission)"},
+      tip: {title: "Quick Guide", text: "会 = skill you learned, 能 = physical/circumstantial ability, 可以 = permission"}
+    },
+    {
+      id: "time-position",
+      title: "Time Word Position",
+      icon: "🕐",
+      content: "Time words in Chinese come BEFORE the verb, not at the end like in English.",
+      comparisons: [
+        {word: "Time First", pinyin: "-", meaning: "Chinese order", use: "我明天去 (I tomorrow go)"},
+        {word: "Time Last", pinyin: "-", meaning: "English order", use: "I go tomorrow"}
+      ],
+      correct: {label: "Correct", sentence: "我明天去北京。(Wǒ míngtiān qù Běijīng.)"},
+      wrong: {label: "Wrong", sentence: "我去北京明天。"},
+      tip: {title: "Order", text: "Subject + Time + Verb + Object. Time words like 今天, 明天, 每天 always precede the verb."}
+    },
+    {
+      id: "measure-word-ge",
+      title: "When in Doubt, Use 个",
+      icon: "📊",
+      content: "个 (gè) is the most common measure word and can be used as a default for most nouns when you're unsure.",
+      comparisons: [
+        {word: "个", pinyin: "gè", meaning: "general MW", use: "People, general items: 一个人"},
+        {word: "本", pinyin: "běn", meaning: "books MW", use: "Books, magazines: 一本书"},
+        {word: "杯", pinyin: "bēi", meaning: "cups MW", use: "Drinks: 一杯咖啡"}
+      ],
+      correct: {label: "Specific", sentence: "一杯水 (yì bēi shuǐ) - a cup of water"},
+      wrong: {label: "Default", sentence: "一个水 - understood but not elegant"},
+      tip: {title: "Learning tip", text: "Learn specific measure words as you learn new nouns. They often relate to the shape or category of the object."}
+    }
+  ],
+  "3": [
+    {
+      id: "le-completed-vs-change",
+      title: "了: Completed Action vs Change of State",
+      icon: "🔄",
+      content: "了 appears in two positions with different meanings. After a verb = completed action. At sentence end = change of state.",
+      comparisons: [
+        {word: "V + 了", pinyin: "le", meaning: "completed", use: "我吃了饭 (I ate / have eaten)"},
+        {word: "...了", pinyin: "le", meaning: "change", use: "我饿了 (I'm hungry now)"}
+      ],
+      correct: {label: "Completed", sentence: "他走了。(Tā zǒu le.) - He left. (action done)"},
+      wrong: {label: "Change", sentence: "春天了。(Chūntiān le.) - It's spring now. (new state)"},
+      tip: {title: "Key difference", text: "After verb = what happened. End of sentence = what's different now. Sometimes both appear: 他走了 can mean both!"}
+    },
+    {
+      id: "guo-vs-le",
+      title: "过 vs 了: Experience vs Completion",
+      icon: "⏰",
+      content: "Both relate to past events, but 过 emphasizes having the experience while 了 emphasizes the action being done.",
+      comparisons: [
+        {word: "过", pinyin: "guò", meaning: "ever / before", use: "我去过中国 (I've been to China before)"},
+        {word: "了", pinyin: "le", meaning: "did / done", use: "我去了中国 (I went to China)"}
+      ],
+      correct: {label: "过", sentence: "你看过这个电影吗？(Have you ever seen this movie?)"},
+      wrong: {label: "了", sentence: "我看了这个电影。(I watched this movie [recently/just now])"},
+      tip: {title: "Ask yourself", text: "Am I asking about lifetime experience? Use 过. Am I talking about a specific completed event? Use 了."}
+    },
+    {
+      id: "zai-progressive",
+      title: "在 for Location vs Action in Progress",
+      icon: "📍",
+      content: "在 has two main uses: showing location (at/in) and showing action in progress (doing).",
+      comparisons: [
+        {word: "在 + Place", pinyin: "zài", meaning: "at / in", use: "我在家 (I'm at home)"},
+        {word: "在 + Verb", pinyin: "zài", meaning: "currently doing", use: "我在吃饭 (I'm eating)"}
+      ],
+      correct: {label: "Location", sentence: "他在学校。(Tā zài xuéxiào.) - He is at school."},
+      wrong: {label: "Progressive", sentence: "他在学习。(Tā zài xuéxí.) - He is studying."},
+      tip: {title: "Pattern", text: "在 + noun = location. 在 + verb = action happening now. Sometimes combined: 他在学校学习 (He's at school studying)."}
+    }
+  ],
+  "4": [
+    {
+      id: "ba-when-to-use",
+      title: "When to Use 把",
+      icon: "🎯",
+      content: "把 is used when something happens TO an object - the object is affected, moved, or changed. Don't use it for general statements.",
+      comparisons: [
+        {word: "Use 把", pinyin: "bǎ", meaning: "object affected", use: "把书放桌上 (put book on table)"},
+        {word: "Don't use", pinyin: "-", meaning: "no change", use: "我看书 (I read books - general)"}
+      ],
+      correct: {label: "With 把", sentence: "请把门关上。(Please close the door - door is affected)"},
+      wrong: {label: "Without", sentence: "我喜欢这本书。(I like this book - no 把 needed)"},
+      tip: {title: "Rule", text: "把 needs a result: 把...V好/完/到/在/成/给. If nothing happens to the object, don't use 把."}
+    },
+    {
+      id: "bei-passive-negative",
+      title: "被 Usually Implies Something Bad",
+      icon: "⚠️",
+      content: "Unlike English passive, Chinese 被 often implies something unfortunate happened. For neutral events, rephrase actively.",
+      comparisons: [
+        {word: "被 (negative)", pinyin: "bèi", meaning: "unfortunately", use: "被骂了 (got scolded)"},
+        {word: "Neutral", pinyin: "-", meaning: "just happened", use: "他写了这本书 (He wrote this book)"}
+      ],
+      correct: {label: "With 被", sentence: "钱包被偷了。(Wallet was stolen.) - bad thing"},
+      wrong: {label: "Sounds odd", sentence: "这本书被他写了。(This book was written by him.) - just say 他写了这本书"},
+      tip: {title: "Modern usage", text: "In modern Chinese, 被 is sometimes used neutrally, but traditionally it carries negative connotations. When in doubt, use active voice."}
+    },
+    {
+      id: "directional-compounds",
+      title: "来 vs 去 in Directional Compounds",
+      icon: "↔️",
+      content: "来 means toward the speaker, 去 means away from the speaker. This affects many compound verbs.",
+      comparisons: [
+        {word: "V + 来", pinyin: "lái", meaning: "toward me", use: "走过来 (walk over here)"},
+        {word: "V + 去", pinyin: "qù", meaning: "away from me", use: "走过去 (walk over there)"}
+      ],
+      correct: {label: "来", sentence: "把书拿过来。(Bring the book here - toward speaker)"},
+      wrong: {label: "去", sentence: "把书拿过去。(Take the book there - away from speaker)"},
+      tip: {title: "Think perspective", text: "Imagine where you're standing. 来 = coming to you. 去 = going away from you. 进来 (enter toward me) vs 进去 (enter away from me)."}
+    }
   ]
 };
 
@@ -1274,10 +2191,12 @@ function speak(text) {
     utterance.lang = 'zh-CN';
     utterance.rate = 0.8;
     
-    const audioBtn = $('audio-btn');
-    audioBtn.classList.add('playing');
-    utterance.onend = () => audioBtn.classList.remove('playing');
-    utterance.onerror = () => audioBtn.classList.remove('playing');
+    const audioBtn = document.getElementById('audio-btn');
+    if (audioBtn) {
+      audioBtn.classList.add('playing');
+      utterance.onend = () => audioBtn.classList.remove('playing');
+      utterance.onerror = () => audioBtn.classList.remove('playing');
+    }
     
     window.speechSynthesis.speak(utterance);
   }
@@ -1560,6 +2479,61 @@ function renderMenu() {
     });
   }
   
+  // NEW: Study Center Section (expandable like levels)
+  const grammarCount = (GRAMMAR_PATTERNS["1"]?.length || 0) + (GRAMMAR_PATTERNS["2"]?.length || 0) + (GRAMMAR_PATTERNS["3"]?.length || 0) + (GRAMMAR_PATTERNS["4"]?.length || 0);
+  const breakdownCount = (SENTENCE_BREAKDOWNS["1"]?.length || 0) + (SENTENCE_BREAKDOWNS["2"]?.length || 0) + (SENTENCE_BREAKDOWNS["3"]?.length || 0) + (SENTENCE_BREAKDOWNS["4"]?.length || 0);
+  const usageCount = (USAGE_NOTES["1"]?.length || 0) + (USAGE_NOTES["2"]?.length || 0) + (USAGE_NOTES["3"]?.length || 0) + (USAGE_NOTES["4"]?.length || 0);
+  
+  const studyCenterSection = document.createElement('div');
+  studyCenterSection.className = 'menu-section study-center-section';
+  const totalStudyItems = grammarCount + breakdownCount + usageCount;
+  studyCenterSection.innerHTML = `
+    <div class="level-header study-center-header" id="study-center-header">
+      <div class="level-title">Study Center</div>
+      <div class="level-meta">
+        <button type="button" class="play-all-btn study-all-btn" id="study-all-btn">Study All</button>
+        <span class="expand-icon">▼</span>
+      </div>
+    </div>
+    <div class="category-grid" id="study-center-grid">
+      <div class="category-card study-center-card" data-study-type="grammar">
+        <div class="category-name">Grammar Patterns</div>
+        <div class="category-count">${grammarCount} patterns</div>
+      </div>
+      <div class="category-card study-center-card" data-study-type="breakdown">
+        <div class="category-name">Sentence Breakdown</div>
+        <div class="category-count">${breakdownCount} sentences</div>
+      </div>
+      <div class="category-card study-center-card" data-study-type="usage">
+        <div class="category-name">Usage Notes</div>
+        <div class="category-count">${usageCount} topics</div>
+      </div>
+    </div>
+  `;
+  sections.appendChild(studyCenterSection);
+  
+  // Study Center header toggle
+  document.getElementById('study-center-header').addEventListener('click', function(e) {
+    if (e.target.classList.contains('play-all-btn') || e.target.classList.contains('study-all-btn')) return;
+    this.classList.toggle('expanded');
+    document.getElementById('study-center-grid').classList.toggle('expanded');
+  });
+  
+  // Study All button
+  document.getElementById('study-all-btn').addEventListener('click', function(e) {
+    e.stopPropagation();
+    startStudyCenterSession('all');
+  });
+  
+  // Study Center card click handlers
+  document.querySelectorAll('.study-center-card').forEach(card => {
+    card.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const studyType = this.dataset.studyType;
+      startStudyCenterSession(studyType);
+    });
+  });
+  
   // Level Sections
   for (let level = 1; level <= 4; level++) {
     const categories = Object.keys(VOCAB_DATA[level] || {});
@@ -1584,8 +2558,8 @@ function renderMenu() {
         </div>
       </div>
       <div class="category-grid" id="level-${level}-grid">
-        <div class="category-card study-card" data-level="${level}" data-study="true">
-          <div class="category-name">Study Center</div>
+        <div class="category-card vocab-study-card" data-level="${level}" data-study="true">
+          <div class="category-name">Vocab Study</div>
           <div class="category-count">Learn words before quizzing</div>
         </div>
         ${categories.map((cat, idx) => {
@@ -1639,8 +2613,8 @@ function renderMenu() {
       });
     }
     
-    // Add click listener for study center card
-    const studyCard = levelSection.querySelector('.study-card');
+    // Add click listener for vocab study card
+    const studyCard = levelSection.querySelector('.vocab-study-card');
     studyCard.addEventListener('click', function(e) {
       e.stopPropagation();
       startStudyCenter(levelNum);
@@ -1671,6 +2645,252 @@ function clearReview() {
     renderMenu();
   }
 }
+
+// ============ STUDY CENTER SESSION (full-screen with tables) ============
+let scCards = [];
+let scCurrentIndex = 0;
+let scType = '';
+let scIsAnimating = false;
+
+function startStudyCenterSession(type) {
+  scType = type;
+  scCurrentIndex = 0;
+  scIsAnimating = false;
+  
+  // Build card deck based on type
+  scCards = [];
+  if (type === 'grammar' || type === 'all') {
+    ['1', '2', '3', '4'].forEach(level => {
+      if (GRAMMAR_PATTERNS[level]) {
+        GRAMMAR_PATTERNS[level].forEach(p => scCards.push({...p, cardType: 'grammar', level: level}));
+      }
+    });
+  }
+  if (type === 'breakdown' || type === 'all') {
+    ['1', '2', '3', '4'].forEach(level => {
+      if (SENTENCE_BREAKDOWNS[level]) {
+        SENTENCE_BREAKDOWNS[level].forEach(b => scCards.push({...b, cardType: 'breakdown', level: level}));
+      }
+    });
+  }
+  if (type === 'usage' || type === 'all') {
+    ['1', '2', '3', '4'].forEach(level => {
+      if (USAGE_NOTES[level]) {
+        USAGE_NOTES[level].forEach(u => scCards.push({...u, cardType: 'usage', level: level}));
+      }
+    });
+  }
+  
+  // Set title
+  if (type === 'grammar') {
+    $('sc-title').textContent = 'Grammar Patterns';
+  } else if (type === 'breakdown') {
+    $('sc-title').textContent = 'Sentence Breakdown';
+  } else if (type === 'usage') {
+    $('sc-title').textContent = 'Usage Notes';
+  } else if (type === 'all') {
+    $('sc-title').textContent = 'Study Center';
+  }
+  
+  if (scCards.length === 0) return;
+  
+  $('main-menu').style.display = 'none';
+  $('study-center-session').classList.add('active');
+  
+  renderSCContent();
+  updateSCProgress();
+  updateSCNavButtons();
+}
+
+function renderSCContent() {
+  const card = scCards[scCurrentIndex];
+  const container = $('sc-pattern');
+  let html = '';
+  
+  // Use card's own type when in 'all' mode
+  const cardType = card.cardType || scType;
+  
+  if (cardType === 'grammar') {
+    // Build examples table rows
+    const tableRows = card.examples.map(ex => {
+      const cleanC = ex.c.replace(/<span class='highlight'>/g, '').replace(/<\/span>/g, '');
+      return '<tr>' +
+        '<td><div class="sc-table-chinese">' + ex.c.replace(/highlight/g, 'hl') + '</div>' +
+            '<div class="sc-table-pinyin">' + ex.p.replace(/highlight/g, 'hl') + '</div></td>' +
+        '<td class="sc-table-english">' + ex.e + '</td>' +
+        '<td><button class="sc-table-audio" onclick="speak(\'' + cleanC + '\')">&#9835;</button></td>' +
+      '</tr>';
+    }).join('');
+    
+    html = 
+      '<div class="sc-pattern-title">' + card.title + '<span class="sc-pattern-tag">' + card.tag + '</span></div>' +
+      '<div class="sc-pattern-level">Level ' + card.level + ' — Grammar Pattern</div>' +
+      '<div class="sc-formula">' + card.formula + '</div>' +
+      '<div class="sc-explanation">' + card.explanation + '</div>' +
+      '<div class="sc-section-title">Examples</div>' +
+      '<table class="sc-table"><thead><tr><th>Chinese / Pinyin</th><th>English</th><th></th></tr></thead><tbody>' + tableRows + '</tbody></table>' +
+      '<button class="sc-practice-btn" onclick="exitSCAndPractice(' + card.relatedLevel + ')">Practice Level ' + card.relatedLevel + ' Sentences</button>';
+      
+  } else if (cardType === 'breakdown') {
+    // Word chips
+    const wordsHtml = card.words.map((w, i) => 
+      '<div class="sc-word-chip" data-idx="' + i + '">' +
+        '<div class="sc-word-chip-char">' + w.c + '</div>' +
+        '<div class="sc-word-chip-pinyin">' + w.p + '</div>' +
+        '<div class="sc-word-chip-role">' + w.role + '</div>' +
+      '</div>'
+    ).join('');
+    
+    // Word breakdown table
+    const wordTableRows = card.words.map(w => 
+      '<tr><td class="sc-table-chinese">' + w.c + '</td>' +
+      '<td class="sc-table-pinyin">' + w.p + '</td>' +
+      '<td><span style="color:var(--teal);font-size:.65rem;text-transform:uppercase">' + w.role + '</span></td>' +
+      '<td class="sc-table-english" style="font-size:.7rem">' + w.meaning + '</td></tr>'
+    ).join('');
+    
+    html = 
+      '<div class="sc-pattern-level">Level ' + card.level + ' — Sentence Breakdown</div>' +
+      '<div class="sc-sentence-display">' +
+        '<div class="sc-sentence-chinese">' + card.sentence + '<button class="sc-sentence-audio" onclick="speak(\'' + card.sentence + '\')">&#9835;</button></div>' +
+        '<div class="sc-sentence-pinyin">' + card.pinyin + '</div>' +
+        '<div class="sc-sentence-english">' + card.english + '</div>' +
+      '</div>' +
+      '<div class="sc-section-title">Tap a word for details</div>' +
+      '<div class="sc-words-grid">' + wordsHtml + '</div>' +
+      '<div class="sc-word-detail" id="sc-word-detail"></div>' +
+      '<div class="sc-section-title">Word Breakdown</div>' +
+      '<table class="sc-table"><thead><tr><th>Char</th><th>Pinyin</th><th>Role</th><th>Meaning</th></tr></thead><tbody>' + wordTableRows + '</tbody></table>' +
+      '<div class="sc-word-order">' +
+        '<div class="sc-word-order-title">Word Order Comparison</div>' +
+        '<div class="sc-word-order-row"><div class="sc-word-order-label">Chinese:</div><div class="sc-word-order-content zh">' + card.wordOrderChinese + '</div></div>' +
+        '<div class="sc-word-order-row"><div class="sc-word-order-label">English:</div><div class="sc-word-order-content">' + card.wordOrderEnglish + '</div></div>' +
+      '</div>';
+      
+    // Add word chip click handlers after render
+    setTimeout(() => {
+      document.querySelectorAll('.sc-word-chip').forEach(el => {
+        el.addEventListener('click', function() {
+          const idx = parseInt(this.dataset.idx);
+          const w = card.words[idx];
+          document.querySelectorAll('.sc-word-chip').forEach(x => x.classList.remove('active'));
+          this.classList.add('active');
+          const detail = $('sc-word-detail');
+          detail.innerHTML = '<div class="sc-word-detail-header">' + w.c + ' (' + w.p + ') — ' + w.role + '</div>' +
+            '<div class="sc-word-detail-content"><strong>Meaning:</strong> ' + w.meaning + '<br><strong>Note:</strong> ' + w.explanation + '</div>';
+          detail.classList.add('active');
+        });
+      });
+    }, 50);
+    
+  } else if (cardType === 'usage') {
+    // Comparison cards
+    const compHtml = card.comparisons.map(c =>
+      '<div class="sc-comparison-card">' +
+        '<div class="sc-comparison-word">' + c.word + '</div>' +
+        '<div class="sc-comparison-pinyin">' + c.pinyin + '</div>' +
+        '<div class="sc-comparison-meaning">' + c.meaning + '</div>' +
+        '<div class="sc-comparison-use">' + c.use + '</div>' +
+      '</div>'
+    ).join('');
+    
+    html = 
+      '<div class="sc-pattern-title">' + card.title + '</div>' +
+      '<div class="sc-pattern-level">Level ' + card.level + ' — Usage Note</div>' +
+      '<div class="sc-usage-content">' + card.content + '</div>' +
+      '<div class="sc-section-title">Comparison</div>' +
+      '<div class="sc-comparison-grid">' + compHtml + '</div>' +
+      '<div class="sc-section-title">Examples</div>' +
+      '<div class="sc-examples-section">' +
+        '<div class="sc-example-row"><span class="sc-example-label correct">' + card.correct.label + '</span><span class="sc-example-text">' + card.correct.sentence + '</span></div>' +
+        '<div class="sc-example-row"><span class="sc-example-label wrong">' + card.wrong.label + '</span><span class="sc-example-text">' + card.wrong.sentence + '</span></div>' +
+      '</div>' +
+      '<div class="sc-tip-box"><div class="sc-tip-title">' + card.tip.title + '</div><div class="sc-tip-text">' + card.tip.text + '</div></div>';
+  }
+  
+  container.innerHTML = html;
+  
+  // Scroll to top
+  $('sc-content-area').scrollTop = 0;
+}
+
+function updateSCProgress() {
+  $('sc-progress').textContent = (scCurrentIndex + 1) + ' of ' + scCards.length;
+}
+
+function updateSCNavButtons() {
+  $('sc-prev-btn').disabled = scCurrentIndex === 0;
+  $('sc-next-btn').disabled = scCurrentIndex === scCards.length - 1;
+}
+
+function scNavigate(direction) {
+  if (scIsAnimating) return;
+  if (direction === 'next' && scCurrentIndex >= scCards.length - 1) return;
+  if (direction === 'prev' && scCurrentIndex <= 0) return;
+  
+  scIsAnimating = true;
+  const container = $('sc-pattern');
+  
+  // Add animating class for smooth transition
+  container.style.transition = 'opacity .25s, transform .25s';
+  
+  // Exit animation - card follows the direction (prev=right, next=left)
+  if (direction === 'next') {
+    container.classList.add('exit-left');
+    scCurrentIndex++;
+  } else {
+    container.classList.add('exit-right');
+    scCurrentIndex--;
+  }
+  
+  setTimeout(() => {
+    // Remove transition temporarily
+    container.style.transition = 'none';
+    
+    // Remove exit class and add enter class (new card comes from same side as old card left)
+    container.classList.remove('exit-left', 'exit-right');
+    if (direction === 'next') {
+      container.classList.add('enter-right');
+    } else {
+      container.classList.add('enter-left');
+    }
+    
+    // Update content while invisible
+    renderSCContent();
+    updateSCProgress();
+    updateSCNavButtons();
+    
+    // Force reflow
+    container.offsetHeight;
+    
+    // Re-enable transition and animate to center
+    container.style.transition = 'opacity .25s, transform .25s';
+    
+    requestAnimationFrame(() => {
+      container.classList.remove('enter-left', 'enter-right');
+      
+      setTimeout(() => {
+        container.style.transition = '';
+        scIsAnimating = false;
+      }, 250);
+    });
+  }, 250);
+}
+
+function exitSCAndPractice(level) {
+  $('study-center-session').classList.remove('active');
+  startSentencePractice(level);
+}
+
+function exitStudyCenter() {
+  $('study-center-session').classList.remove('active');
+  $('main-menu').style.display = 'flex';
+}
+
+// Study Center event listeners
+$('sc-back-btn').addEventListener('click', exitStudyCenter);
+$('sc-prev-btn').addEventListener('click', () => scNavigate('prev'));
+$('sc-next-btn').addEventListener('click', () => scNavigate('next'));
 
 // ============ SETTINGS MODAL ============
 function openSettings() {
@@ -2847,7 +4067,7 @@ function bounceBack() {
   }, 350);
 }
 
-function exitStudyCenter() {
+function exitVocabStudy() {
   $('study-session').classList.remove('active');
   $('main-menu').classList.remove('hidden');
   clearStudySearch();
@@ -3388,7 +4608,7 @@ function showComplete() {
   $('final-wrong').textContent = session.wrong;
   $('final-accuracy').textContent = `${accuracy}%`;
   
-  if (session.wrongWords.length > 0 && session.type !== 'review') {
+  if (session.wrongWords && session.wrongWords.length > 0 && session.type !== 'review') {
     $('review-notice').textContent = `${session.wrongWords.length} word${session.wrongWords.length !== 1 ? 's' : ''} added to Review`;
     $('study-review-btn').style.display = 'inline-block';
   } else if (session.type === 'review') {
@@ -3431,11 +4651,29 @@ function restartSession() {
 }
 
 function showMenu() {
-  $('main-menu').classList.remove('hidden');
+  $('main-menu').style.display = '';
   $('quiz-session').classList.remove('active');
+  $('study-session').classList.remove('active');
   // Clean up sentence hint if present
   const hintEl = document.getElementById('sentence-hint');
   if (hintEl) hintEl.remove();
+  // Reset quiz card to default state
+  const quizCard = $('quiz-card');
+  if (quizCard) {
+    quizCard.className = 'quiz-card';
+    quizCard.innerHTML = `
+      <span class="card-label" id="card-label">Adjectives</span>
+      <button type="button" class="audio-btn" id="audio-btn" title="Play audio">🔊</button>
+      <div class="pinyin" id="pinyin">nǐ hǎo</div>
+      <div class="chinese" id="chinese">你好</div>
+      <div class="answers" id="answers"></div>
+      <div class="feedback" id="feedback"></div>
+      <div class="quiz-buttons">
+        <button type="button" class="next-btn" id="next-btn">Next</button>
+        <button type="button" class="study-word-btn" id="study-word-btn">Study This Word</button>
+      </div>
+    `;
+  }
   renderMenu();
 }
 
@@ -3459,7 +4697,7 @@ $('study-review-btn').onclick = () => {
 };
 
 // Study Center controls
-$('study-back-btn').onclick = exitStudyCenter;
+$('study-back-btn').onclick = exitVocabStudy;
 $('study-prev-btn').onclick = prevStudyCard;
 $('study-next-btn').onclick = nextStudyCard;
 $('shuffle-btn').onclick = shuffleStudyCards;
