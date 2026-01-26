@@ -1240,7 +1240,7 @@ const SENTENCE_DATA = {
     {"p": "Zhège ___ nán.", "c": "这个 ___ 难。", "e": "This is not difficult.", "answer": "bù", "answerC": "不", "wrongs": ["hěn", "tài", "zuì"]},
     // Common verbs
     {"p": "Wǒ ___ chī mǐfàn.", "c": "我 ___ 吃米饭。", "e": "I want to eat rice.", "answer": "yào", "answerC": "要", "wrongs": ["qù", "lái", "kàn"]},
-    {"p": "Nǐ ___ shénme?", "c": "你 ___ 什么？", "e": "What do you want to eat?", "answer": "chī", "answerC": "吃", "wrongs": ["hē", "qù", "kàn"]},
+    {"p": "Nǐ xiǎng ___ shénme?", "c": "你想 ___ 什么？", "e": "What do you want to eat?", "answer": "chī", "answerC": "吃", "wrongs": ["hē", "qù", "kàn"]},
     {"p": "Wǒmen qù ___ diànyǐng ba.", "c": "我们去 ___ 电影吧。", "e": "Let's go watch a movie.", "answer": "kàn", "answerC": "看", "wrongs": ["tīng", "chī", "mǎi"]},
     {"p": "Tā xiǎng ___ shuǐ.", "c": "他想 ___ 水。", "e": "He wants to drink water.", "answer": "hē", "answerC": "喝", "wrongs": ["chī", "mǎi", "kàn"]},
     {"p": "Wǒ ___ tīng yīnyuè.", "c": "我 ___ 听音乐。", "e": "I like to listen to music.", "answer": "xǐhuan", "answerC": "喜欢", "wrongs": ["yào", "qù", "huì"]},
@@ -1330,12 +1330,12 @@ const SENTENCE_DATA = {
     {"p": "Tā chuān ___ hóng yīfu.", "c": "他穿 ___ 红衣服。", "e": "He is wearing red clothes.", "answer": "zhe", "answerC": "着", "wrongs": ["le", "guò", "de"]},
     {"p": "Mén ___ zhe ne.", "c": "门 ___ 着呢。", "e": "The door is open.", "answer": "kāi", "answerC": "开", "wrongs": ["guān", "jìn", "chū"]},
     // Directional complements
-    {"p": "Tā zǒu ___ le.", "c": "他走 ___ 了。", "e": "He has left.", "answer": "le", "answerC": "了", "wrongs": ["guò", "zhe", "de"]},
+    {"p": "Tā zǒu ___ le.", "c": "他走 ___ 了。", "e": "He walked away.", "answer": "kāi", "answerC": "开", "wrongs": ["guò", "zhe", "de"]},
     {"p": "Qǐng jìn ___!", "c": "请进 ___！", "e": "Please come in!", "answer": "lái", "answerC": "来", "wrongs": ["qù", "shàng", "xià"]},
     {"p": "Tā pǎo ___ qù le.", "c": "他跑 ___ 去了。", "e": "He ran out.", "answer": "chū", "answerC": "出", "wrongs": ["jìn", "shàng", "xià"]},
     // Time duration and frequency
     {"p": "Wǒ xué le sān ___ Zhōngwén.", "c": "我学了三 ___ 中文。", "e": "I have studied Chinese for three years.", "answer": "nián", "answerC": "年", "wrongs": ["tiān", "yuè", "gè"]},
-    {"p": "Tā měi tiān zǒu ___ qù shàngbān.", "c": "他每天走 ___ 去上班。", "e": "He walks to work every day.", "answer": "lù", "answerC": "路", "wrongs": ["bù", "chē", "jiā"]},
+    {"p": "Tā měi tiān ___ lù qù shàngbān.", "c": "他每天 ___ 路去上班。", "e": "He walks to work every day.", "answer": "zǒu", "answerC": "走", "wrongs": ["qí", "zuò", "kāi"]},
     {"p": "Wǒ ___ ge xīngqī qù yīcì.", "c": "我 ___ 个星期去一次。", "e": "I go once every week.", "answer": "měi", "answerC": "每", "wrongs": ["yī", "zhè", "nà"]},
     // Relationship words
     {"p": "Tā shì wǒ de ___.", "c": "他是我的 ___。", "e": "He is my classmate.", "answer": "tóngxué", "answerC": "同学", "wrongs": ["tóngshì", "péngyou", "lǎoshī"]},
@@ -2694,7 +2694,7 @@ function startStudyCenterSession(type) {
   
   if (scCards.length === 0) return;
   
-  $('main-menu').style.display = 'none';
+  $('main-menu').classList.add('hidden');
   $('study-center-session').classList.add('active');
   
   renderSCContent();
@@ -2884,7 +2884,11 @@ function exitSCAndPractice(level) {
 
 function exitStudyCenter() {
   $('study-center-session').classList.remove('active');
-  $('main-menu').style.display = 'flex';
+  $('main-menu').classList.remove('hidden');
+  $('main-menu').style.display = ''; // Clear any inline styles
+  // Ensure entered class is present for proper display
+  $('main-menu').classList.add('entered');
+  renderMenu();
 }
 
 // Study Center event listeners
@@ -3965,7 +3969,13 @@ let touchCurrentX = 0;
 let isSwiping = false;
 let containerWidth = 0;
 
+let swipeGesturesSetup = false;
+
 function setupSwipeGestures() {
+  // Prevent adding duplicate listeners
+  if (swipeGesturesSetup) return;
+  swipeGesturesSetup = true;
+  
   const container = $('study-card-container');
   const card = $('study-flashcard');
   
@@ -4070,6 +4080,8 @@ function bounceBack() {
 function exitVocabStudy() {
   $('study-session').classList.remove('active');
   $('main-menu').classList.remove('hidden');
+  // Ensure entered class is present for proper display
+  $('main-menu').classList.add('entered');
   clearStudySearch();
   renderMenu();
 }
@@ -4651,12 +4663,19 @@ function restartSession() {
 }
 
 function showMenu() {
-  $('main-menu').style.display = '';
+  // Clean up ALL sessions properly
   $('quiz-session').classList.remove('active');
   $('study-session').classList.remove('active');
+  $('study-center-session').classList.remove('active');
+  $('main-menu').classList.remove('hidden');
+  $('main-menu').style.display = ''; // Clear any inline styles
+  // Ensure entered class is present for proper display
+  $('main-menu').classList.add('entered');
+  
   // Clean up sentence hint if present
   const hintEl = document.getElementById('sentence-hint');
   if (hintEl) hintEl.remove();
+  
   // Reset quiz card to default state
   const quizCard = $('quiz-card');
   if (quizCard) {
