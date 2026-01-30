@@ -606,8 +606,7 @@
     }
 
     .complete-icon {
-      font-size: 4rem;
-      margin-bottom: 16px;
+      display: none;
     }
 
     .complete-title {
@@ -826,7 +825,7 @@
   <!-- Complete Screen -->
   <div id="complete-screen" class="complete-screen">
     <div class="complete-content">
-      <div class="complete-icon">🎉</div>
+      <div class="complete-icon"></div>
       <h2 class="complete-title">Well Done!</h2>
       <div class="complete-score">
         <span id="final-score">0</span><span> / 17</span>
@@ -1229,7 +1228,7 @@
       
       if (isCorrect) {
         selected.classList.add('correct');
-        feedback.textContent = '✓ Correct!';
+        feedback.textContent = 'Correct!';
         feedback.className = 'feedback show correct';
         
         // Play audio and auto-advance quickly
@@ -1253,7 +1252,7 @@
             btn.classList.add('correct');
           }
         });
-        feedback.textContent = `✗ ${word.pinyin} (${word.english})`;
+        feedback.textContent = `${word.pinyin} (${word.english})`;
         feedback.className = 'feedback show wrong';
         
         // Play correct pronunciation
