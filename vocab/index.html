@@ -198,7 +198,7 @@
       box-shadow: 0 4px 16px var(--card-shadow);
     }
 
-    .level-header:hover {
+    .level-header:active {
       border-color: rgba(248, 205, 214, 0.18);
       box-shadow: var(--glow-soft), 0 4px 16px var(--card-shadow);
     }
@@ -283,13 +283,9 @@
       gap: 8px;
     }
 
-    .play-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 28px rgba(248, 205, 214, 0.35);
-    }
-
     .play-btn:active {
-      transform: translateY(0);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 28px rgba(248, 205, 214, 0.35);
     }
 
     /* Quiz Screen */
@@ -342,7 +338,7 @@
       transition: all 0.2s ease;
     }
 
-    .back-btn:hover {
+    .back-btn:active {
       background: var(--card2);
       border-color: var(--pink);
     }
@@ -420,14 +416,10 @@
       touch-action: manipulation;
     }
 
-    .audio-btn:hover {
-      transform: scale(1.05);
-      box-shadow: var(--glow-strong), 0 6px 24px var(--card-shadow);
-      border-color: var(--pink);
-    }
-
     .audio-btn:active {
       transform: scale(0.95);
+      box-shadow: var(--glow-strong), 0 6px 24px var(--card-shadow);
+      border-color: var(--pink);
     }
 
     .audio-btn svg {
@@ -510,14 +502,10 @@
       touch-action: manipulation;
     }
 
-    .option-btn:hover:not(:disabled) {
-      border-color: rgba(248, 205, 214, 0.3);
-      box-shadow: var(--glow-soft);
-    }
-
     .option-btn:active:not(:disabled) {
       transform: scale(0.97);
       background: var(--card2);
+      border-color: rgba(248, 205, 214, 0.3);
     }
 
     .option-btn.correct {
@@ -653,8 +641,8 @@
       box-shadow: 0 4px 20px rgba(248, 205, 214, 0.25);
     }
 
-    .retry-btn:hover {
-      transform: translateY(-2px);
+    .retry-btn:active {
+      transform: translateY(-1px);
       box-shadow: 0 6px 28px rgba(248, 205, 214, 0.35);
     }
 
@@ -670,7 +658,7 @@
       transition: all 0.2s ease;
     }
 
-    .home-btn:hover {
+    .home-btn:active {
       border-color: rgba(248, 205, 214, 0.4);
       background: rgba(248, 205, 214, 0.05);
     }
@@ -1102,6 +1090,9 @@
         case 2: // Pinyin → English
           html += `
             <div class="prompt-label">What does this mean?</div>
+            <button class="audio-btn" id="audio-btn" onclick="playAudio()">
+              <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+            </button>
             <div class="pinyin-display">${word.pinyin}</div>
           `;
           break;
@@ -1109,6 +1100,9 @@
         case 3: // Tone Recall
           html += `
             <div class="prompt-label">Select the correct tones</div>
+            <button class="audio-btn" id="audio-btn" onclick="playAudio()">
+              <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+            </button>
             <div class="pinyin-display no-tone">${removeTones(word.pinyin)}</div>
           `;
           break;
@@ -1153,10 +1147,8 @@
       
       area.innerHTML = html;
       
-      // Auto-play audio for levels 1 and 4 (immediate for mobile)
-      if (currentLevel === 1 || currentLevel === 4) {
-        setTimeout(() => playAudio(), 100);
-      }
+      // Auto-play audio for all levels
+      setTimeout(() => playAudio(), 100);
     }
 
     // Generate answer options
