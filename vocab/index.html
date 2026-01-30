@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="词汇">
+  <meta name="theme-color" content="#1c1418">
+  <title>词汇 - Vocabulary</title>
+  <link rel="apple-touch-icon" href="vocab-icon.png">
+  <link rel="icon" type="image/png" href="vocab-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Soft Pink & Cream Palette */
+      --bg: #1c1418;
+      --bg2: #241c20;
+      --card: #2a2225;
+      --card2: #352a2e;
+      --card-border: rgba(255, 200, 210, 0.08);
+      --card-shadow: rgba(0, 0, 0, 0.25);
+      --card-shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.35);
+      --card-inset: inset 0 1px 0 rgba(255, 200, 210, 0.08), inset 0 -8px 20px rgba(0, 0, 0, 0.15);
+      
+      /* Softer Accent Colors */
+      --pink: #f0b8c4;
+      --pink-bright: #f8cdd6;
+      --pink-glow: rgba(248, 205, 214, 0.35);
+      --cream: #faf3ed;
+      --cream-muted: #e0d4c8;
+      --rose: #e8a0b2;
+      --rose-deep: #d88a9e;
+      
+      /* Functional Colors */
+      --correct: #98d4b8;
+      --correct-glow: rgba(152, 212, 184, 0.25);
+      --wrong: #e8a0a0;
+      --muted: #b8a8a8;
+      
+      /* Gradients */
+      --card-gradient: linear-gradient(165deg, rgba(42, 34, 37, 0.95), rgba(28, 20, 24, 0.98));
+      --pink-gradient: linear-gradient(135deg, #f8cdd6, #e8a0b2);
+      --cream-gradient: linear-gradient(135deg, #faf3ed, #e0d4c8);
+      
+      /* Effects */
+      --glow-soft: 0 0 25px rgba(248, 205, 214, 0.12);
+      --glow-strong: 0 0 35px rgba(248, 205, 214, 0.2);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    button {
+      touch-action: manipulation;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--cream);
+      min-height: 100vh;
+      min-height: -webkit-fill-available;
+      overflow-x: hidden;
+      line-height: 1.5;
+      padding-top: env(safe-area-inset-top);
+      padding-bottom: env(safe-area-inset-bottom);
+      padding-left: env(safe-area-inset-left);
+      padding-right: env(safe-area-inset-right);
+    }
+    
+    html {
+      height: -webkit-fill-available;
+    }
+
+    /* Soft Feminine Texture Overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(ellipse at 0% 0%, rgba(255, 228, 235, 0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 100% 0%, rgba(255, 218, 225, 0.05) 0%, transparent 45%),
+        radial-gradient(ellipse at 100% 100%, rgba(245, 200, 210, 0.04) 0%, transparent 50%),
+        radial-gradient(ellipse at 0% 100%, rgba(255, 235, 240, 0.05) 0%, transparent 45%),
+        radial-gradient(ellipse at 50% 50%, rgba(255, 225, 230, 0.03) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    /* Soft blush glow */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(ellipse at 30% 20%, rgba(248, 187, 200, 0.08) 0%, transparent 40%),
+        radial-gradient(ellipse at 70% 80%, rgba(245, 182, 195, 0.06) 0%, transparent 40%),
+        radial-gradient(ellipse at center, transparent 0%, transparent 60%, rgba(20, 14, 16, 0.3) 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 20px 16px 100px;
+      padding-top: calc(20px + env(safe-area-inset-top));
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 32px;
+      padding-top: 20px;
+    }
+
+    .logo {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: var(--pink-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 4px;
+      filter: drop-shadow(0 0 30px rgba(248, 205, 214, 0.3));
+    }
+
+    .subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: var(--cream-muted);
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* Stats Bar */
+    .stats-bar {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 28px;
+      padding: 18px;
+      background: var(--card-gradient);
+      border-radius: 18px;
+      border: 1px solid var(--card-border);
+      box-shadow: var(--glow-soft), 0 4px 16px var(--card-shadow);
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--pink-bright);
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Level Sections */
+    .level-section {
+      margin-bottom: 16px;
+    }
+
+    .level-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 20px;
+      background: var(--card-gradient);
+      border-radius: 18px;
+      border: 1px solid var(--card-border);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 16px var(--card-shadow);
+    }
+
+    .level-header:hover {
+      border-color: rgba(248, 205, 214, 0.18);
+      box-shadow: var(--glow-soft), 0 4px 16px var(--card-shadow);
+    }
+
+    .level-header.expanded {
+      border-radius: 18px 18px 0 0;
+      border-bottom-color: transparent;
+    }
+
+    .level-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .level-number {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--pink-gradient);
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--bg);
+      box-shadow: 0 3px 12px rgba(248, 205, 214, 0.25);
+    }
+
+    .level-title {
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--cream);
+    }
+
+    .level-desc {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .level-chevron {
+      color: var(--pink);
+      transition: transform 0.3s ease;
+      font-size: 1.1rem;
+    }
+
+    .level-header.expanded .level-chevron {
+      transform: rotate(180deg);
+    }
+
+    .level-content {
+      display: none;
+      padding: 16px;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-top: none;
+      border-radius: 0 0 18px 18px;
+    }
+
+    .level-content.show {
+      display: block;
+    }
+
+    /* Play Button in Content */
+    .play-btn {
+      width: 100%;
+      padding: 16px;
+      background: var(--pink-gradient);
+      border: none;
+      border-radius: 14px;
+      color: var(--bg);
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(248, 205, 214, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .play-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 28px rgba(248, 205, 214, 0.35);
+    }
+
+    .play-btn:active {
+      transform: translateY(0);
+    }
+
+    /* Quiz Screen */
+    .quiz-screen {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--bg);
+      z-index: 100;
+      overflow-y: auto;
+    }
+
+    .quiz-screen.active {
+      display: block;
+    }
+
+    .quiz-container {
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 20px 16px;
+      padding-top: calc(20px + env(safe-area-inset-top));
+      padding-bottom: calc(20px + env(safe-area-inset-bottom));
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .quiz-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .back-btn {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      color: var(--pink);
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .back-btn:hover {
+      background: var(--card2);
+      border-color: var(--pink);
+    }
+
+    .quiz-progress {
+      flex: 1;
+      margin: 0 16px;
+    }
+
+    .progress-bar {
+      height: 6px;
+      background: var(--card);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--pink-gradient);
+      border-radius: 3px;
+      transition: width 0.3s ease;
+    }
+
+    .progress-text {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 6px;
+    }
+
+    .quiz-score {
+      font-size: 0.9rem;
+      color: var(--pink-bright);
+      font-weight: 600;
+    }
+
+    /* Question Area */
+    .question-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 20px 0;
+    }
+
+    .question-prompt {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .prompt-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+    }
+
+    /* Audio Button */
+    .audio-btn {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 16px;
+      background: var(--card-gradient);
+      border: 2px solid rgba(248, 205, 214, 0.4);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: var(--glow-soft), 0 4px 20px var(--card-shadow);
+      -webkit-user-select: none;
+      user-select: none;
+      touch-action: manipulation;
+    }
+
+    .audio-btn:hover {
+      transform: scale(1.05);
+      box-shadow: var(--glow-strong), 0 6px 24px var(--card-shadow);
+      border-color: var(--pink);
+    }
+
+    .audio-btn:active {
+      transform: scale(0.95);
+    }
+
+    .audio-btn svg {
+      width: 40px;
+      height: 40px;
+      fill: var(--pink-bright);
+    }
+
+    .audio-btn.playing {
+      animation: pulse 0.8s ease-in-out infinite;
+      border-color: var(--pink);
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: var(--glow-soft), 0 4px 20px var(--card-shadow); }
+      50% { box-shadow: 0 0 40px rgba(248, 205, 214, 0.35), 0 4px 20px var(--card-shadow); }
+    }
+
+    .tap-hint {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    /* Pinyin Display */
+    .pinyin-display {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 2rem;
+      font-weight: 500;
+      color: var(--cream);
+      text-align: center;
+      padding: 28px 32px;
+      background: var(--card-gradient);
+      border-radius: 18px;
+      border: 1px solid var(--card-border);
+      margin: 0 auto;
+      min-width: 200px;
+      box-shadow: var(--glow-soft), 0 4px 16px var(--card-shadow);
+    }
+
+    .pinyin-display.no-tone {
+      color: var(--pink-bright);
+    }
+
+    /* Character Display */
+    .character-display {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 4rem;
+      font-weight: 500;
+      color: var(--cream);
+      text-align: center;
+      padding: 36px;
+      background: var(--card-gradient);
+      border-radius: 22px;
+      border: 1px solid var(--card-border);
+      margin: 0 auto;
+      box-shadow: var(--glow-soft), 0 4px 20px var(--card-shadow);
+    }
+
+    /* Answer Options */
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .option-btn {
+      padding: 20px 16px;
+      background: var(--card-gradient);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      color: var(--cream);
+      font-family: inherit;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-align: center;
+      -webkit-user-select: none;
+      user-select: none;
+      touch-action: manipulation;
+    }
+
+    .option-btn:hover:not(:disabled) {
+      border-color: rgba(248, 205, 214, 0.3);
+      box-shadow: var(--glow-soft);
+    }
+
+    .option-btn:active:not(:disabled) {
+      transform: scale(0.97);
+      background: var(--card2);
+    }
+
+    .option-btn.correct {
+      background: linear-gradient(165deg, rgba(152, 212, 184, 0.15), rgba(152, 212, 184, 0.08));
+      border-color: var(--correct);
+      color: var(--correct);
+      box-shadow: 0 0 25px rgba(152, 212, 184, 0.15);
+    }
+
+    .option-btn.wrong {
+      background: linear-gradient(165deg, rgba(232, 160, 160, 0.15), rgba(232, 160, 160, 0.08));
+      border-color: var(--wrong);
+      color: var(--wrong);
+    }
+
+    .option-btn:disabled {
+      cursor: default;
+      opacity: 0.7;
+    }
+
+    .option-pinyin {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 500;
+    }
+
+    .option-english {
+      font-size: 0.95rem;
+    }
+
+    .option-character {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 2rem;
+      font-weight: 500;
+    }
+
+    /* Feedback */
+    .feedback {
+      text-align: center;
+      margin-top: 24px;
+      padding: 16px;
+      border-radius: 14px;
+      font-weight: 500;
+      display: none;
+    }
+
+    .feedback.show {
+      display: block;
+    }
+
+    .feedback.correct {
+      background: rgba(152, 212, 184, 0.08);
+      color: var(--correct);
+      border: 1px solid rgba(152, 212, 184, 0.25);
+    }
+
+    .feedback.wrong {
+      background: rgba(232, 160, 160, 0.08);
+      color: var(--wrong);
+      border: 1px solid rgba(232, 160, 160, 0.25);
+    }
+
+    /* Complete Screen */
+    .complete-screen {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--bg);
+      z-index: 100;
+    }
+
+    .complete-screen.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .complete-content {
+      text-align: center;
+      padding: 32px;
+      padding-top: calc(32px + env(safe-area-inset-top));
+      padding-bottom: calc(32px + env(safe-area-inset-bottom));
+    }
+
+    .complete-icon {
+      font-size: 4rem;
+      margin-bottom: 16px;
+    }
+
+    .complete-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      color: var(--pink-bright);
+      margin-bottom: 8px;
+    }
+
+    .complete-score {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--cream);
+      margin: 24px 0;
+    }
+
+    .complete-score span {
+      color: var(--muted);
+      font-size: 1.5rem;
+    }
+
+    .complete-message {
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+
+    .complete-btns {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .retry-btn {
+      padding: 16px 32px;
+      background: var(--pink-gradient);
+      border: none;
+      border-radius: 14px;
+      color: var(--bg);
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(248, 205, 214, 0.25);
+    }
+
+    .retry-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 28px rgba(248, 205, 214, 0.35);
+    }
+
+    .home-btn {
+      padding: 14px 32px;
+      background: transparent;
+      border: 1px solid rgba(248, 205, 214, 0.2);
+      border-radius: 14px;
+      color: var(--cream);
+      font-family: inherit;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .home-btn:hover {
+      border-color: rgba(248, 205, 214, 0.4);
+      background: rgba(248, 205, 214, 0.05);
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.3s ease;
+    }
+
+    /* Mobile Adjustments */
+    @media (max-width: 380px) {
+      .container {
+        padding: 16px 12px 80px;
+      }
+      
+      .logo {
+        font-size: 2rem;
+      }
+      
+      .character-display {
+        font-size: 3rem;
+        padding: 24px;
+      }
+      
+      .option-btn {
+        padding: 16px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Main Menu -->
+  <div id="menu-screen" class="container">
+    <header class="header">
+      <h1 class="logo">词汇</h1>
+      <p class="subtitle">Vocabulary</p>
+    </header>
+
+    <div class="stats-bar">
+      <div class="stat">
+        <div class="stat-value" id="total-words">17</div>
+        <div class="stat-label">Words</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="mastered-count">0</div>
+        <div class="stat-label">Mastered</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="accuracy-rate">0%</div>
+        <div class="stat-label">Accuracy</div>
+      </div>
+    </div>
+
+    <!-- Level 1: Audio → Pinyin -->
+    <div class="level-section">
+      <div class="level-header" onclick="toggleLevel(1)">
+        <div class="level-info">
+          <div class="level-number">1</div>
+          <div>
+            <div class="level-title">Sound Recognition</div>
+          </div>
+        </div>
+        <span class="level-chevron">▼</span>
+      </div>
+      <div class="level-content" id="level-1-content">
+        <button class="play-btn" onclick="startQuiz(1)">
+          <span>▶</span> Start Practice
+        </button>
+      </div>
+    </div>
+
+    <!-- Level 2: Pinyin → English -->
+    <div class="level-section">
+      <div class="level-header" onclick="toggleLevel(2)">
+        <div class="level-info">
+          <div class="level-number">2</div>
+          <div>
+            <div class="level-title">Comprehension</div>
+          </div>
+        </div>
+        <span class="level-chevron">▼</span>
+      </div>
+      <div class="level-content" id="level-2-content">
+        <button class="play-btn" onclick="startQuiz(2)">
+          <span>▶</span> Start Practice
+        </button>
+      </div>
+    </div>
+
+    <!-- Level 3: Tone Recall -->
+    <div class="level-section">
+      <div class="level-header" onclick="toggleLevel(3)">
+        <div class="level-info">
+          <div class="level-number">3</div>
+          <div>
+            <div class="level-title">Tone Recall</div>
+          </div>
+        </div>
+        <span class="level-chevron">▼</span>
+      </div>
+      <div class="level-content" id="level-3-content">
+        <button class="play-btn" onclick="startQuiz(3)">
+          <span>▶</span> Start Practice
+        </button>
+      </div>
+    </div>
+
+    <!-- Level 4: Characters -->
+    <div class="level-section">
+      <div class="level-header" onclick="toggleLevel(4)">
+        <div class="level-info">
+          <div class="level-number">4</div>
+          <div>
+            <div class="level-title">Characters</div>
+          </div>
+        </div>
+        <span class="level-chevron">▼</span>
+      </div>
+      <div class="level-content" id="level-4-content">
+        <button class="play-btn" onclick="startQuiz(4)">
+          <span>▶</span> Start Practice
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quiz Screen -->
+  <div id="quiz-screen" class="quiz-screen">
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <button class="back-btn" onclick="exitQuiz()">←</button>
+        <div class="quiz-progress">
+          <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill"></div>
+          </div>
+          <div class="progress-text" id="progress-text">1 / 17</div>
+        </div>
+        <div class="quiz-score" id="quiz-score">0</div>
+      </div>
+
+      <div class="question-area" id="question-area">
+        <!-- Question content injected here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Complete Screen -->
+  <div id="complete-screen" class="complete-screen">
+    <div class="complete-content">
+      <div class="complete-icon">🎉</div>
+      <h2 class="complete-title">Well Done!</h2>
+      <div class="complete-score">
+        <span id="final-score">0</span><span> / 17</span>
+      </div>
+      <p class="complete-message" id="complete-message">Keep practicing to improve!</p>
+      <div class="complete-btns">
+        <button class="retry-btn" onclick="retryQuiz()">Try Again</button>
+        <button class="home-btn" onclick="goHome()">Back to Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Face vocabulary data
+    const VOCABULARY = [
+      { pinyin: 'miànbù', character: '面部', english: 'face', tones: [4, 4] },
+      { pinyin: 'tóufà', character: '头发', english: 'hair', tones: [2, 4] },
+      { pinyin: 'pífū', character: '皮肤', english: 'skin', tones: [2, 1] },
+      { pinyin: 'qián\'é', character: '前额', english: 'forehead', tones: [2, 2] },
+      { pinyin: 'méimáo', character: '眉毛', english: 'eyebrow', tones: [2, 2] },
+      { pinyin: 'yǎnjīng', character: '眼睛', english: 'eye', tones: [3, 1] },
+      { pinyin: 'jiémáo', character: '睫毛', english: 'eyelash', tones: [2, 2] },
+      { pinyin: 'tàiyángxuè', character: '太阳穴', english: 'temple', tones: [4, 2, 2] },
+      { pinyin: 'ěrduǒ', character: '耳朵', english: 'ear', tones: [3, 3] },
+      { pinyin: 'bízi', character: '鼻子', english: 'nose', tones: [2, 0] },
+      { pinyin: 'bíkǒng', character: '鼻孔', english: 'nostril', tones: [2, 3] },
+      { pinyin: 'liǎnjiá', character: '脸颊', english: 'cheek', tones: [3, 2] },
+      { pinyin: 'zuǐ', character: '嘴', english: 'mouth', tones: [3] },
+      { pinyin: 'chún', character: '唇', english: 'lip', tones: [2] },
+      { pinyin: 'xiàba', character: '下巴', english: 'chin', tones: [4, 0] },
+      { pinyin: 'xià\'è', character: '下颚', english: 'jaw', tones: [4, 4] },
+      { pinyin: 'zhì', character: '痣', english: 'mole', tones: [4] }
+    ];
+
+    // Tone marks mapping
+    const TONE_MARKS = {
+      'a': ['ā', 'á', 'ǎ', 'à', 'a'],
+      'e': ['ē', 'é', 'ě', 'è', 'e'],
+      'i': ['ī', 'í', 'ǐ', 'ì', 'i'],
+      'o': ['ō', 'ó', 'ǒ', 'ò', 'o'],
+      'u': ['ū', 'ú', 'ǔ', 'ù', 'u'],
+      'ü': ['ǖ', 'ǘ', 'ǚ', 'ǜ', 'ü']
+    };
+
+    // State
+    let currentLevel = 1;
+    let currentQuestion = 0;
+    let score = 0;
+    let questions = [];
+    let stats = {
+      totalAnswered: 0,
+      totalCorrect: 0,
+      mastered: new Set()
+    };
+
+    // Load stats from localStorage
+    function loadStats() {
+      const saved = localStorage.getItem('faceVocabStats');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        stats.totalAnswered = parsed.totalAnswered || 0;
+        stats.totalCorrect = parsed.totalCorrect || 0;
+        stats.mastered = new Set(parsed.mastered || []);
+      }
+      updateStatsDisplay();
+    }
+
+    function saveStats() {
+      localStorage.setItem('faceVocabStats', JSON.stringify({
+        totalAnswered: stats.totalAnswered,
+        totalCorrect: stats.totalCorrect,
+        mastered: Array.from(stats.mastered)
+      }));
+    }
+
+    function updateStatsDisplay() {
+      document.getElementById('mastered-count').textContent = stats.mastered.size;
+      const accuracy = stats.totalAnswered > 0 
+        ? Math.round((stats.totalCorrect / stats.totalAnswered) * 100) 
+        : 0;
+      document.getElementById('accuracy-rate').textContent = accuracy + '%';
+    }
+
+    // Toggle level expansion
+    function toggleLevel(level) {
+      const content = document.getElementById(`level-${level}-content`);
+      const header = content.previousElementSibling;
+      
+      if (content.classList.contains('show')) {
+        content.classList.remove('show');
+        header.classList.remove('expanded');
+      } else {
+        // Close other levels
+        document.querySelectorAll('.level-content').forEach(c => c.classList.remove('show'));
+        document.querySelectorAll('.level-header').forEach(h => h.classList.remove('expanded'));
+        
+        content.classList.add('show');
+        header.classList.add('expanded');
+      }
+    }
+
+    // Remove tone marks from pinyin
+    function removeTones(pinyin) {
+      const replacements = {
+        'ā': 'a', 'á': 'a', 'ǎ': 'a', 'à': 'a',
+        'ē': 'e', 'é': 'e', 'ě': 'e', 'è': 'e',
+        'ī': 'i', 'í': 'i', 'ǐ': 'i', 'ì': 'i',
+        'ō': 'o', 'ó': 'o', 'ǒ': 'o', 'ò': 'o',
+        'ū': 'u', 'ú': 'u', 'ǔ': 'u', 'ù': 'u',
+        'ǖ': 'ü', 'ǘ': 'ü', 'ǚ': 'ü', 'ǜ': 'ü'
+      };
+      return pinyin.split('').map(c => replacements[c] || c).join('');
+    }
+
+    // Generate wrong tone variants
+    function generateToneVariants(word) {
+      const correct = word.pinyin;
+      const noTone = removeTones(correct);
+      const variants = [correct];
+      
+      // All possible toned versions for each vowel
+      const toneOptions = {
+        'a': ['ā', 'á', 'ǎ', 'à'],
+        'e': ['ē', 'é', 'ě', 'è'],
+        'i': ['ī', 'í', 'ǐ', 'ì'],
+        'o': ['ō', 'ó', 'ǒ', 'ò'],
+        'u': ['ū', 'ú', 'ǔ', 'ù'],
+        'ü': ['ǖ', 'ǘ', 'ǚ', 'ǜ']
+      };
+      
+      // Find all vowels in the word
+      const vowelPattern = /[aeiouü]/g;
+      const vowelsInWord = noTone.match(vowelPattern) || [];
+      
+      if (vowelsInWord.length === 0) {
+        // No vowels found, return correct with some dummy options
+        return [correct, correct, correct, correct];
+      }
+      
+      // Find the position of the main vowel to modify (first one for simplicity)
+      let mainVowelIndex = -1;
+      let mainVowel = '';
+      for (let i = 0; i < noTone.length; i++) {
+        if ('aeiouü'.includes(noTone[i])) {
+          mainVowelIndex = i;
+          mainVowel = noTone[i];
+          break;
+        }
+      }
+      
+      // Generate variants by changing the tone of the main vowel
+      let attempts = 0;
+      const maxAttempts = 20;
+      
+      while (variants.length < 4 && attempts < maxAttempts) {
+        attempts++;
+        const tones = toneOptions[mainVowel];
+        if (!tones) break;
+        
+        const randomTone = tones[Math.floor(Math.random() * tones.length)];
+        const variant = noTone.substring(0, mainVowelIndex) + randomTone + noTone.substring(mainVowelIndex + 1);
+        
+        if (variant !== correct && !variants.includes(variant)) {
+          variants.push(variant);
+        }
+      }
+      
+      // If we still don't have 4, fill with slight modifications
+      while (variants.length < 4) {
+        const tones = toneOptions[mainVowel] || ['a', 'e', 'i', 'o'];
+        const randomTone = tones[variants.length % tones.length];
+        const variant = noTone.substring(0, mainVowelIndex) + randomTone + noTone.substring(mainVowelIndex + 1);
+        if (!variants.includes(variant)) {
+          variants.push(variant);
+        } else {
+          // Fallback: just add the correct answer again (will be filtered visually)
+          variants.push(correct + variants.length);
+        }
+      }
+      
+      return shuffleArray(variants.slice(0, 4));
+    }
+
+    // Shuffle array
+    function shuffleArray(array) {
+      const shuffled = [...array];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    }
+
+    // Text-to-speech with iOS handling
+    let speechEnabled = false;
+    
+    function initSpeech() {
+      if ('speechSynthesis' in window) {
+        // iOS requires user interaction to enable speech
+        const utterance = new SpeechSynthesisUtterance('');
+        utterance.volume = 0;
+        window.speechSynthesis.speak(utterance);
+        speechEnabled = true;
+      }
+    }
+    
+    function speak(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'zh-CN';
+        utterance.rate = 0.8;
+        
+        // iOS fix: get voices and set Chinese voice if available
+        const voices = window.speechSynthesis.getVoices();
+        const chineseVoice = voices.find(v => v.lang.includes('zh'));
+        if (chineseVoice) {
+          utterance.voice = chineseVoice;
+        }
+        
+        window.speechSynthesis.speak(utterance);
+        return utterance;
+      }
+      return null;
+    }
+
+    // Start quiz
+    function startQuiz(level) {
+      // Initialize speech on first user interaction (iOS requirement)
+      if (!speechEnabled) {
+        initSpeech();
+      }
+      
+      currentLevel = level;
+      currentQuestion = 0;
+      score = 0;
+      questions = shuffleArray([...VOCABULARY]);
+      
+      document.getElementById('menu-screen').style.display = 'none';
+      document.getElementById('quiz-screen').classList.add('active');
+      
+      updateProgress();
+      showQuestion();
+    }
+
+    // Update progress display
+    function updateProgress() {
+      const percent = (currentQuestion / questions.length) * 100;
+      document.getElementById('progress-fill').style.width = percent + '%';
+      document.getElementById('progress-text').textContent = `${currentQuestion + 1} / ${questions.length}`;
+      document.getElementById('quiz-score').textContent = score;
+    }
+
+    // Show question based on level
+    function showQuestion() {
+      const word = questions[currentQuestion];
+      const area = document.getElementById('question-area');
+      area.innerHTML = '';
+      area.classList.add('fade-in');
+      
+      let html = '<div class="question-prompt">';
+      
+      switch(currentLevel) {
+        case 1: // Audio → Pinyin
+          html += `
+            <div class="prompt-label">Listen and choose the pinyin</div>
+            <button class="audio-btn" id="audio-btn" onclick="playAudio()">
+              <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+            </button>
+            <div class="tap-hint">Tap to play audio</div>
+          `;
+          break;
+          
+        case 2: // Pinyin → English
+          html += `
+            <div class="prompt-label">What does this mean?</div>
+            <div class="pinyin-display">${word.pinyin}</div>
+          `;
+          break;
+          
+        case 3: // Tone Recall
+          html += `
+            <div class="prompt-label">Select the correct tones</div>
+            <div class="pinyin-display no-tone">${removeTones(word.pinyin)}</div>
+          `;
+          break;
+          
+        case 4: // Characters (Audio → Character)
+          html += `
+            <div class="prompt-label">Listen and choose the character</div>
+            <button class="audio-btn" id="audio-btn" onclick="playAudio()">
+              <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+            </button>
+            <div class="tap-hint">Tap to play audio</div>
+          `;
+          break;
+      }
+      
+      html += '</div>';
+      
+      // Generate options
+      html += '<div class="options-grid">';
+      const options = generateOptions(word);
+      options.forEach((opt, i) => {
+        html += `<button class="option-btn" onclick="checkAnswer(${i})" data-correct="${opt.correct}">`;
+        switch(currentLevel) {
+          case 1:
+            html += `<div class="option-pinyin">${opt.pinyin}</div>`;
+            break;
+          case 2:
+            html += `<div class="option-english">${opt.english}</div>`;
+            break;
+          case 3:
+            html += `<div class="option-pinyin">${opt.pinyin}</div>`;
+            break;
+          case 4:
+            html += `<div class="option-character">${opt.character}</div>`;
+            break;
+        }
+        html += '</button>';
+      });
+      html += '</div>';
+      
+      html += '<div class="feedback" id="feedback"></div>';
+      
+      area.innerHTML = html;
+      
+      // Auto-play audio for levels 1 and 4 (immediate for mobile)
+      if (currentLevel === 1 || currentLevel === 4) {
+        setTimeout(() => playAudio(), 100);
+      }
+    }
+
+    // Generate answer options
+    function generateOptions(correctWord) {
+      if (currentLevel === 3) {
+        // Tone variants
+        const variants = generateToneVariants(correctWord);
+        return variants.map(v => ({
+          pinyin: v,
+          correct: v === correctWord.pinyin
+        }));
+      }
+      
+      // Get 3 random wrong answers
+      const wrong = shuffleArray(
+        VOCABULARY.filter(w => w.pinyin !== correctWord.pinyin)
+      ).slice(0, 3);
+      
+      const options = [
+        { ...correctWord, correct: true },
+        ...wrong.map(w => ({ ...w, correct: false }))
+      ];
+      
+      return shuffleArray(options);
+    }
+
+    // Play audio
+    function playAudio() {
+      const word = questions[currentQuestion];
+      const btn = document.getElementById('audio-btn');
+      if (btn) {
+        btn.classList.add('playing');
+        
+        // Small delay helps iOS speech synthesis
+        setTimeout(() => {
+          const utterance = speak(word.character);
+          if (utterance) {
+            utterance.onend = () => btn.classList.remove('playing');
+            utterance.onerror = () => btn.classList.remove('playing');
+          } else {
+            setTimeout(() => btn.classList.remove('playing'), 1000);
+          }
+        }, 50);
+      }
+    }
+
+    // Check answer
+    function checkAnswer(selectedIndex) {
+      const buttons = document.querySelectorAll('.option-btn');
+      const selected = buttons[selectedIndex];
+      const isCorrect = selected.dataset.correct === 'true';
+      const word = questions[currentQuestion];
+      
+      // Disable all buttons
+      buttons.forEach(btn => btn.disabled = true);
+      
+      // Update stats
+      stats.totalAnswered++;
+      if (isCorrect) {
+        stats.totalCorrect++;
+        score++;
+        document.getElementById('quiz-score').textContent = score;
+      }
+      saveStats();
+      updateStatsDisplay();
+      
+      // Show feedback
+      const feedback = document.getElementById('feedback');
+      
+      if (isCorrect) {
+        selected.classList.add('correct');
+        feedback.textContent = '✓ Correct!';
+        feedback.className = 'feedback show correct';
+        
+        // Play audio and auto-advance quickly
+        speak(word.character);
+        
+        setTimeout(() => {
+          currentQuestion++;
+          if (currentQuestion < questions.length) {
+            updateProgress();
+            showQuestion();
+          } else {
+            showComplete();
+          }
+        }, 600); // Fast auto-advance on correct
+        
+      } else {
+        selected.classList.add('wrong');
+        // Highlight correct answer
+        buttons.forEach(btn => {
+          if (btn.dataset.correct === 'true') {
+            btn.classList.add('correct');
+          }
+        });
+        feedback.textContent = `✗ ${word.pinyin} (${word.english})`;
+        feedback.className = 'feedback show wrong';
+        
+        // Play correct pronunciation
+        speak(word.character);
+        
+        // Longer delay on wrong to learn
+        setTimeout(() => {
+          currentQuestion++;
+          if (currentQuestion < questions.length) {
+            updateProgress();
+            showQuestion();
+          } else {
+            showComplete();
+          }
+        }, 2000);
+      }
+    }
+
+    // Show completion screen
+    function showComplete() {
+      document.getElementById('quiz-screen').classList.remove('active');
+      document.getElementById('complete-screen').classList.add('active');
+      document.getElementById('final-score').textContent = score;
+      
+      const percent = Math.round((score / questions.length) * 100);
+      let message = '';
+      if (percent === 100) {
+        message = 'Perfect! You\'ve mastered all words!';
+      } else if (percent >= 80) {
+        message = 'Excellent work! Keep it up!';
+      } else if (percent >= 60) {
+        message = 'Good progress! Practice makes perfect.';
+      } else {
+        message = 'Keep practicing! You\'ll get there.';
+      }
+      document.getElementById('complete-message').textContent = message;
+    }
+
+    // Retry quiz
+    function retryQuiz() {
+      document.getElementById('complete-screen').classList.remove('active');
+      startQuiz(currentLevel);
+    }
+
+    // Go back to home
+    function goHome() {
+      document.getElementById('complete-screen').classList.remove('active');
+      document.getElementById('quiz-screen').classList.remove('active');
+      document.getElementById('menu-screen').style.display = 'block';
+    }
+
+    // Exit quiz
+    function exitQuiz() {
+      document.getElementById('quiz-screen').classList.remove('active');
+      document.getElementById('menu-screen').style.display = 'block';
+    }
+
+    // Initialize
+    loadStats();
+    
+    // Preload voices for iOS
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.getVoices();
+      window.speechSynthesis.onvoiceschanged = () => {
+        window.speechSynthesis.getVoices();
+      };
+    }
+  </script>
+</body>
+</html>
