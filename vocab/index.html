@@ -243,11 +243,16 @@
     .level-chevron {
       color: var(--pink);
       transition: transform 0.3s ease;
-      font-size: 1.1rem;
+      font-size: 0.7rem;
+      border: solid var(--pink);
+      border-width: 0 2px 2px 0;
+      display: inline-block;
+      padding: 4px;
+      transform: rotate(45deg);
     }
 
     .level-header.expanded .level-chevron {
-      transform: rotate(180deg);
+      transform: rotate(-135deg);
     }
 
     .level-content {
@@ -336,6 +341,17 @@
       font-size: 1.2rem;
       cursor: pointer;
       transition: all 0.2s ease;
+      position: relative;
+    }
+    
+    .back-btn::before {
+      content: '';
+      border: solid var(--pink);
+      border-width: 0 2px 2px 0;
+      display: inline-block;
+      padding: 5px;
+      transform: rotate(135deg);
+      margin-left: 4px;
     }
 
     .back-btn:active {
@@ -568,6 +584,46 @@
       border: 1px solid rgba(232, 160, 160, 0.25);
     }
 
+    /* Character Display at Bottom (always visible for levels 1 & 2) */
+    .character-display-bottom {
+      text-align: center;
+      margin-top: 24px;
+      padding: 20px;
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 500;
+      color: var(--cream);
+      background: var(--card-gradient);
+      border-radius: 16px;
+      border: 1px solid var(--card-border);
+    }
+
+    /* Continue Button */
+    .continue-btn {
+      display: none;
+      width: 100%;
+      margin-top: 20px;
+      padding: 16px;
+      background: var(--pink-gradient);
+      border: none;
+      border-radius: 14px;
+      color: var(--bg);
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      touch-action: manipulation;
+    }
+    
+    .continue-btn.show {
+      display: block;
+    }
+    
+    .continue-btn:active {
+      transform: scale(0.98);
+    }
+
     /* Complete Screen */
     .complete-screen {
       display: none;
@@ -726,11 +782,11 @@
             <div class="level-title">Sound Recognition</div>
           </div>
         </div>
-        <span class="level-chevron">▼</span>
+        <span class="level-chevron"></span>
       </div>
       <div class="level-content" id="level-1-content">
         <button class="play-btn" onclick="startQuiz(1)">
-          <span>▶</span> Start Practice
+          Start Practice
         </button>
       </div>
     </div>
@@ -744,11 +800,11 @@
             <div class="level-title">Comprehension</div>
           </div>
         </div>
-        <span class="level-chevron">▼</span>
+        <span class="level-chevron"></span>
       </div>
       <div class="level-content" id="level-2-content">
         <button class="play-btn" onclick="startQuiz(2)">
-          <span>▶</span> Start Practice
+          Start Practice
         </button>
       </div>
     </div>
@@ -762,11 +818,11 @@
             <div class="level-title">Tone Recall</div>
           </div>
         </div>
-        <span class="level-chevron">▼</span>
+        <span class="level-chevron"></span>
       </div>
       <div class="level-content" id="level-3-content">
         <button class="play-btn" onclick="startQuiz(3)">
-          <span>▶</span> Start Practice
+          Start Practice
         </button>
       </div>
     </div>
@@ -780,11 +836,11 @@
             <div class="level-title">Characters</div>
           </div>
         </div>
-        <span class="level-chevron">▼</span>
+        <span class="level-chevron"></span>
       </div>
       <div class="level-content" id="level-4-content">
         <button class="play-btn" onclick="startQuiz(4)">
-          <span>▶</span> Start Practice
+          Start Practice
         </button>
       </div>
     </div>
@@ -794,7 +850,7 @@
   <div id="quiz-screen" class="quiz-screen">
     <div class="quiz-container">
       <div class="quiz-header">
-        <button class="back-btn" onclick="exitQuiz()">←</button>
+        <button class="back-btn" onclick="exitQuiz()"></button>
         <div class="quiz-progress">
           <div class="progress-bar">
             <div class="progress-fill" id="progress-fill"></div>
@@ -1145,6 +1201,14 @@
       
       html += '<div class="feedback" id="feedback"></div>';
       
+      // Continue button (hidden by default)
+      html += '<button class="continue-btn" id="continue-btn" onclick="nextQuestion()">Continue</button>';
+      
+      // Character always visible at bottom for levels 1 and 2
+      if (currentLevel === 1 || currentLevel === 2) {
+        html += `<div class="character-display-bottom">${word.character}</div>`;
+      }
+      
       area.innerHTML = html;
       
       // Auto-play audio for all levels
@@ -1234,7 +1298,7 @@
           } else {
             showComplete();
           }
-        }, 600); // Fast auto-advance on correct
+        }, 800);
         
       } else {
         selected.classList.add('wrong');
@@ -1250,16 +1314,22 @@
         // Play correct pronunciation
         speak(word.character);
         
-        // Longer delay on wrong to learn
-        setTimeout(() => {
-          currentQuestion++;
-          if (currentQuestion < questions.length) {
-            updateProgress();
-            showQuestion();
-          } else {
-            showComplete();
-          }
-        }, 2000);
+        // Show continue button instead of auto-advance
+        const continueBtn = document.getElementById('continue-btn');
+        if (continueBtn) {
+          continueBtn.classList.add('show');
+        }
+      }
+    }
+    
+    // Next question (called by continue button)
+    function nextQuestion() {
+      currentQuestion++;
+      if (currentQuestion < questions.length) {
+        updateProgress();
+        showQuestion();
+      } else {
+        showComplete();
       }
     }
 
