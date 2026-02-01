@@ -268,6 +268,48 @@
       display: block;
     }
 
+    /* Category Grid */
+    .category-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    
+    .category-card {
+      padding: 16px;
+      background: var(--card-gradient);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+      touch-action: manipulation;
+    }
+    
+    .category-card:active {
+      transform: scale(0.97);
+      border-color: rgba(248, 205, 214, 0.3);
+    }
+    
+    .category-chinese {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--pink-bright);
+      margin-bottom: 4px;
+    }
+    
+    .category-english {
+      font-size: 0.85rem;
+      color: var(--cream);
+      margin-bottom: 6px;
+    }
+    
+    .category-count {
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+
     /* Play Button in Content */
     .play-btn {
       width: 100%;
@@ -773,7 +815,7 @@
       </div>
     </div>
 
-    <!-- Level 1: Audio → Pinyin -->
+    <!-- Level 1: Sound Recognition -->
     <div class="level-section">
       <div class="level-header" onclick="toggleLevel(1)">
         <div class="level-info">
@@ -785,13 +827,11 @@
         <span class="level-chevron"></span>
       </div>
       <div class="level-content" id="level-1-content">
-        <button class="play-btn" onclick="startQuiz(1)">
-          Start Practice
-        </button>
+        <div class="category-grid" id="categories-1"></div>
       </div>
     </div>
 
-    <!-- Level 2: Pinyin → English -->
+    <!-- Level 2: Comprehension -->
     <div class="level-section">
       <div class="level-header" onclick="toggleLevel(2)">
         <div class="level-info">
@@ -803,9 +843,7 @@
         <span class="level-chevron"></span>
       </div>
       <div class="level-content" id="level-2-content">
-        <button class="play-btn" onclick="startQuiz(2)">
-          Start Practice
-        </button>
+        <div class="category-grid" id="categories-2"></div>
       </div>
     </div>
 
@@ -821,9 +859,7 @@
         <span class="level-chevron"></span>
       </div>
       <div class="level-content" id="level-3-content">
-        <button class="play-btn" onclick="startQuiz(3)">
-          Start Practice
-        </button>
+        <div class="category-grid" id="categories-3"></div>
       </div>
     </div>
 
@@ -839,9 +875,7 @@
         <span class="level-chevron"></span>
       </div>
       <div class="level-content" id="level-4-content">
-        <button class="play-btn" onclick="startQuiz(4)">
-          Start Practice
-        </button>
+        <div class="category-grid" id="categories-4"></div>
       </div>
     </div>
   </div>
@@ -883,26 +917,53 @@
   </div>
 
   <script>
-    // Face vocabulary data
-    const VOCABULARY = [
-      { pinyin: 'miànbù', character: '面部', english: 'face', tones: [4, 4] },
-      { pinyin: 'tóufà', character: '头发', english: 'hair', tones: [2, 4] },
-      { pinyin: 'pífū', character: '皮肤', english: 'skin', tones: [2, 1] },
-      { pinyin: 'qián\'é', character: '前额', english: 'forehead', tones: [2, 2] },
-      { pinyin: 'méimáo', character: '眉毛', english: 'eyebrow', tones: [2, 2] },
-      { pinyin: 'yǎnjīng', character: '眼睛', english: 'eye', tones: [3, 1] },
-      { pinyin: 'jiémáo', character: '睫毛', english: 'eyelash', tones: [2, 2] },
-      { pinyin: 'tàiyángxuè', character: '太阳穴', english: 'temple', tones: [4, 2, 2] },
-      { pinyin: 'ěrduǒ', character: '耳朵', english: 'ear', tones: [3, 3] },
-      { pinyin: 'bízi', character: '鼻子', english: 'nose', tones: [2, 0] },
-      { pinyin: 'bíkǒng', character: '鼻孔', english: 'nostril', tones: [2, 3] },
-      { pinyin: 'liǎnjiá', character: '脸颊', english: 'cheek', tones: [3, 2] },
-      { pinyin: 'zuǐ', character: '嘴', english: 'mouth', tones: [3] },
-      { pinyin: 'chún', character: '唇', english: 'lip', tones: [2] },
-      { pinyin: 'xiàba', character: '下巴', english: 'chin', tones: [4, 0] },
-      { pinyin: 'xià\'è', character: '下颚', english: 'jaw', tones: [4, 4] },
-      { pinyin: 'zhì', character: '痣', english: 'mole', tones: [4] }
-    ];
+    // Vocabulary data organized by category
+    const VOCABULARY = {
+      face: {
+        name: 'Face',
+        nameChinese: '面部',
+        words: [
+          { pinyin: 'miànbù', character: '面部', english: 'face' },
+          { pinyin: 'tóufà', character: '头发', english: 'hair' },
+          { pinyin: 'pífū', character: '皮肤', english: 'skin' },
+          { pinyin: 'qián\'é', character: '前额', english: 'forehead' },
+          { pinyin: 'méimáo', character: '眉毛', english: 'eyebrow' },
+          { pinyin: 'yǎnjīng', character: '眼睛', english: 'eye' },
+          { pinyin: 'jiémáo', character: '睫毛', english: 'eyelash' },
+          { pinyin: 'tàiyángxuè', character: '太阳穴', english: 'temple' },
+          { pinyin: 'ěrduǒ', character: '耳朵', english: 'ear' },
+          { pinyin: 'bízi', character: '鼻子', english: 'nose' },
+          { pinyin: 'bíkǒng', character: '鼻孔', english: 'nostril' },
+          { pinyin: 'liǎnjiá', character: '脸颊', english: 'cheek' },
+          { pinyin: 'zuǐ', character: '嘴', english: 'mouth' },
+          { pinyin: 'chún', character: '唇', english: 'lip' },
+          { pinyin: 'xiàba', character: '下巴', english: 'chin' },
+          { pinyin: 'xià\'è', character: '下颚', english: 'jaw' },
+          { pinyin: 'zhì', character: '痣', english: 'mole' }
+        ]
+      },
+      cooking: {
+        name: 'Cooking Verbs',
+        nameChinese: '烹饪',
+        words: [
+          { pinyin: 'xuēpí', character: '削皮', english: 'peel' },
+          { pinyin: 'qiēpiàn', character: '切片', english: 'slice' },
+          { pinyin: 'cāsuì', character: '擦碎', english: 'grate' },
+          { pinyin: 'zhùshuǐ', character: '注水', english: 'pour' },
+          { pinyin: 'jiǎobàn', character: '搅拌', english: 'mix' },
+          { pinyin: 'jiǎodǎ', character: '搅打', english: 'whisk' },
+          { pinyin: 'zhǔfèi', character: '煮沸', english: 'boil' },
+          { pinyin: 'jiān', character: '煎', english: 'fry' },
+          { pinyin: 'gǎn', character: '擀', english: 'roll' },
+          { pinyin: 'jiǎodòng', character: '搅动', english: 'stir' },
+          { pinyin: 'wénhuǒshāo', character: '文火烧', english: 'simmer' },
+          { pinyin: 'fèishuǐzhǔ', character: '沸水煮', english: 'poach' },
+          { pinyin: 'hōngzhì', character: '烘制', english: 'bake' },
+          { pinyin: 'kǎozhì', character: '烤制', english: 'roast' },
+          { pinyin: 'shāokǎo', character: '烧烤', english: 'grill' }
+        ]
+      }
+    };
 
     // Tone marks mapping
     const TONE_MARKS = {
@@ -916,6 +977,7 @@
 
     // State
     let currentLevel = 1;
+    let currentCategory = null;
     let currentQuestion = 0;
     let score = 0;
     let questions = [];
@@ -927,7 +989,7 @@
 
     // Load stats from localStorage
     function loadStats() {
-      const saved = localStorage.getItem('faceVocabStats');
+      const saved = localStorage.getItem('vocabStats');
       if (saved) {
         const parsed = JSON.parse(saved);
         stats.totalAnswered = parsed.totalAnswered || 0;
@@ -938,7 +1000,7 @@
     }
 
     function saveStats() {
-      localStorage.setItem('faceVocabStats', JSON.stringify({
+      localStorage.setItem('vocabStats', JSON.stringify({
         totalAnswered: stats.totalAnswered,
         totalCorrect: stats.totalCorrect,
         mastered: Array.from(stats.mastered)
@@ -946,6 +1008,8 @@
     }
 
     function updateStatsDisplay() {
+      const totalWords = Object.values(VOCABULARY).reduce((sum, cat) => sum + cat.words.length, 0);
+      document.getElementById('total-words').textContent = totalWords;
       document.getElementById('mastered-count').textContent = stats.mastered.size;
       const accuracy = stats.totalAnswered > 0 
         ? Math.round((stats.totalCorrect / stats.totalAnswered) * 100) 
@@ -968,7 +1032,28 @@
         
         content.classList.add('show');
         header.classList.add('expanded');
+        
+        // Render categories for this level
+        renderCategories(level);
       }
+    }
+    
+    // Render category cards for a level
+    function renderCategories(level) {
+      const container = document.getElementById(`categories-${level}`);
+      let html = '';
+      
+      for (const [key, category] of Object.entries(VOCABULARY)) {
+        html += `
+          <div class="category-card" onclick="startQuiz(${level}, '${key}')">
+            <div class="category-chinese">${category.nameChinese}</div>
+            <div class="category-english">${category.name}</div>
+            <div class="category-count">${category.words.length} words</div>
+          </div>
+        `;
+      }
+      
+      container.innerHTML = html;
     }
 
     // Remove tone marks from pinyin
@@ -1097,16 +1182,17 @@
     }
 
     // Start quiz
-    function startQuiz(level) {
+    function startQuiz(level, categoryKey) {
       // Initialize speech on first user interaction (iOS requirement)
       if (!speechEnabled) {
         initSpeech();
       }
       
       currentLevel = level;
+      currentCategory = categoryKey;
       currentQuestion = 0;
       score = 0;
-      questions = shuffleArray([...VOCABULARY]);
+      questions = shuffleArray([...VOCABULARY[categoryKey].words]);
       
       document.getElementById('menu-screen').style.display = 'none';
       document.getElementById('quiz-screen').classList.add('active');
@@ -1216,6 +1302,7 @@
     }
 
     // Generate answer options
+    // Generate answer options
     function generateOptions(correctWord) {
       if (currentLevel === 3) {
         // Tone variants
@@ -1226,9 +1313,10 @@
         }));
       }
       
-      // Get 3 random wrong answers
+      // Get 3 random wrong answers from the same category
+      const categoryWords = VOCABULARY[currentCategory].words;
       const wrong = shuffleArray(
-        VOCABULARY.filter(w => w.pinyin !== correctWord.pinyin)
+        categoryWords.filter(w => w.pinyin !== correctWord.pinyin)
       ).slice(0, 3);
       
       const options = [
@@ -1356,7 +1444,7 @@
     // Retry quiz
     function retryQuiz() {
       document.getElementById('complete-screen').classList.remove('active');
-      startQuiz(currentLevel);
+      startQuiz(currentLevel, currentCategory);
     }
 
     // Go back to home
